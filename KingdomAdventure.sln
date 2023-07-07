@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingdomAdventure", "KingdomAdventure.csproj", "{CBB36C64-C793-41F8-9075-BCECE148550D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBB36C64-C793-41F8-9075-BCECE148550D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB36C64-C793-41F8-9075-BCECE148550D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB36C64-C793-41F8-9075-BCECE148550D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB36C64-C793-41F8-9075-BCECE148550D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB847FEC-85EA-4A3F-B44F-EB428C6413D4}
+	EndGlobalSection
+EndGlobal

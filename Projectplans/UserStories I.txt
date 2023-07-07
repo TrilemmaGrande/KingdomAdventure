@@ -1,0 +1,41 @@
+------------------------------------------- START ------------------------------------------- 
+
+1. Beim Start der Website soll getestet werden, ob ein Spieler existiert.
+Ansonsten soll ein neuer Spieler erstellt werden, bei dem ich Namen und Attribute (ATK etc.)
+setzen kann.
+Der Submit Button führt auf die "Player" Übersicht, in der der Name, die angelegten Items und die angelegten
+Zauber angezeigt werden. 
+Außerdem wird hier die aktuelles Reputation und das Spielergold angezeigt.
+
+------------------------------------------- PLAYER ------------------------------------------- 
+
+2. Über den Button "Attributes" kommt man zur Attributsübersicht, bei denen man nach einem LVL UP
+die Attribute anpassen kann. 
+Für jedes Level bekommt man 2 Attributspunkte.
+
+3. Über den Button "Inventory" kommt man zum Inventar, hier sieht man alle bereits gesammelten Items in einer
+Tabelle.
+Man kann Items löschen, Items anlegen und Items benutzen.
+
+4. Über den Button "Spellbook" kommt zum zum Zauberbuch, hier sieht man alle Spells die man gelernt hat
+oder lernen kann.
+Man kann Spells lernen, aufleveln und ausrüsten, aber nicht aus dem Zauberbuch entfernen.
+
+------------------------------------------- KARTE -------------------------------------------
+
+5. Über die "Map" Navigation kommt man auf die Karte. 
+Hier gibt es nur 3 Buttons "Fight" "Quest" "Dungeon" zum testen.
+
+Über "Fight" wird automatisch ein Kampf generiert zwischen dem Spieler und einem random generierten Gegner.
+Nach dem Kampf erhält der Spieler ein random Item als Loot in das Inventar.
+
+Über "Quest" können Quests angenommen, angezeigt oder abgegeben werden.
+Der Loot wird in der Quest schon angezeigt.
+Eventuell ein Model für Quests erstellen?
+
+Über "Dungeon" wird automatisch ein Kampf generiert zwischen dem Spieler und einem vorher festgelegtem starken
+Gegner.
+Nach dem Kampf erhält der Spieler ein random Item als Loot in das Inventar.
+
+
+

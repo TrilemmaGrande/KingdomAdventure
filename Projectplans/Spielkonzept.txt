@@ -1,0 +1,92 @@
+Die Welt ist in verschiedene kleine Gebiete aufgeteilt.
+Der Spieler muss diese Gebiete "befreien" durch Quests, Dungeons und Endgegnerkämpfe (siehe TextAdventure).
+Sobald ein Gebiet befreit wurde, kann der Spieler mithilfe seiner Armee das Gebiet erobern.
+
+Es gibt zwei Bereiche: Die Map, über die der Spieler sich fortbewegt und Quests erfüllt, sowie die Stadt, über die die Armee organisiert wird.
+Die Stadt kann ausgebaut werden um die Armee zu vergrößern. Die Armee muss vergrößert werden um weitere Gebiete zu erobern.
+Die Gebäude der Stadt sind voneinander abhängig, es werden Gebäude benötigt die Ressourcen herstellen für weitere Gebäude.
+
+Spieler, Armee und Stadt sind voneinander abhängig.
+
+Reputation:
+Die Stadt kann ausgebaut werden, wenn der Spieler die Gebäude erforscht hat.
+Für das erforschen benötigt der Spieler Reputation.
+Reputation erlangt der Spieler durch Quests, Kämpfe usw. 
+
+Population:
+Um die Armee zu vergrößern, benötigt die Stadt Population.
+Die Population wird vergrößert, wenn die Stadt ausgebaut wird.
+
+Die Gebäude:
+Beim Ausbau der Stadt werden Gebäude frei, welche Equipment für den Spieler herstellen können.
+Außerdem gibt es Gebäude, die Truppen erstellen können für die Armee.
+
+Der Spieler muss also Reputation sammeln, um die Population zu erhöhen, um die Armee zu vergrößern, um das Spielgebiet zu erweitern.
+Durch die größere Stadt erhält der Spieler besseres Equipment um im neuen Gebiet stark genug zu sein.
+
+Statuswerte im Spiel:
+ATK (Attack = Gesamtschaden ohne Crit)
+DEF (Defensive = Grundverteidigung durch Equipment)
+END (Endurance, Lebenspunkte)
+STR (Strength, Nahkampfschaden)
+DEX (Dexterity, Fernkampfschaden)
+AGY (Agility = Ausweichen)
+INT (Intelligence = Magie Schaden, Magie Heilung)
+WIS (Wisdom = Geschwindigkeit Magie Angriffe)
+CRIT (Critical = kritischer Schaden: Nahkampf, Fernkampf)
+
+Armee:
+Bogenschützen (DEX, AGY)
+Krieger (STR,END)
+Magier (INT)
+Heiler (WIS)
+
+Aufstellung: Heal / Mage / Bow / Warrior / Enemy
+
+Ressourcen in der Stadt: 
+Food, Wood, Cloth, Iron, Stone, Jewelry, Gold
+
+Food:
+- mehr Food = mehr Population = größere Armee
+- Die Armee kann auf Angriffe / Quests geschickt werden und benötigt dafür Food
+
+Wood: 
+- Baumaterial Gebäude
+- Bögen für Bogenschützen
+
+Cloth:
+- Baumaterial Gebäude
+- Mäntel für Magier und Heiler
+
+Iron:
+- Material für Schmiede (Waffen, Rüstung)
+- Rüstung für Krieger
+
+Stone:
+- Baumaterial Gebäude
+
+Jewelry:
+- Herstellung Waffen/Rüstungs-upgrades
+
+Gold:
+- Baumaterial Gebäude
+- Währung
+
+
+Story:
+König XYZ ist mit der Armee außerhalb der Lande und böser Prinz XYZ startet eine Revolte.
+Der König kommt zurück und landet mit seiner Armee am Strand, um gegen die Armees des Prinzen zu kämpfen.
+Der Spieler ist Soldat in der Armee des Königs.
+Der König verliert und wird gefangen genommen, der Spieler wird in der Schlacht auf das Meer getrieben.
+Er wacht dann irgendwo an der anderen Seite des Landes am Strand auf und muss sich jetzt durchkämpfen,
+eine Stadt errichten und dann das Land zurückerobern und den König befreien.
+
+Am Anfang hat der Spieler noch freie Wahl, kann herumlaufen, Questen, Kämpfen und seine Stadt bauen (Zelte usw.).
+Später bekommt der Spieler mehr Aufmerksamkeit und wird nach und nach angegriffen, je größer die Stadt wird und je mehr Gebiete er erobert.
+Dafür muss der Spieler Verteidigungsanlagen für die Stadt bauen usw.
+
+Am Ende muss der Spieler dann gegen die Armee des Prinzen antreten und gegen den Prinzen selber.
+
+
+
+

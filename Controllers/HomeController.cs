@@ -1,4 +1,4 @@
-﻿using KingdomAdventure.Models;
+﻿using KingdomAdventure.Models.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

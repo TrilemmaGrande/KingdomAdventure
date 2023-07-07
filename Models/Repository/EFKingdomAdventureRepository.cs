@@ -1,4 +1,4 @@
-﻿namespace KingdomAdventure.Models
+﻿namespace KingdomAdventure.Models.Repository
 {
     public class EFKingdomAdventureRepository : IKingdomAdventureRepository
     {

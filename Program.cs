@@ -1,4 +1,4 @@
-using KingdomAdventure.Models;
+using KingdomAdventure.Models.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace KingdomAdventure

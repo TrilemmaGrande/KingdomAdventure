@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace KingdomAdventure.Models
+namespace KingdomAdventure.Models.Repository
 {
     public static class KingdomAdventureSeedData
     {

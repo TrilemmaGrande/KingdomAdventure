@@ -1,0 +1,124 @@
+
+------------------------------------------- MODELS------------------------------------------- 
+
+
+___________ Player ___________
+
+string - Name
+double - Gold
+int - Level
+double - Experience
+double - Lp
+double - LpMax
+double - Atk
+double - Def
+double - Agy
+double - Wis
+double - Int
+double - Crit
+Item? - Mainhand
+Item? - Offhand
+Item? - Head
+Item? - Shoulder
+Item? - Chest
+Item? - Trousers
+Item? - Feet
+
+
+___________ Inventory ___________
+
+List<Item>? - Items
+
+___________ Item ___________
+
+string - Name
+bool - Lootable
+int? - Level
+double - Value
+double? - Lp
+double? - LpMax
+double? - Atk
+double? - Def
+double? - Agy
+double? - Wis
+double? - Int
+double? - Crit
+list<Item>? - UpgradeSlot
+Enum - ItemType (= Weapon, Armor, Usable, QuestItem, Upgrade)
+Enum? - WeaponType (= Mainhand, Offhand)
+Enum? - ArmorType (= Head, Shoulder, Chest, Trousers, Feet)
+
+
+___________ Town ___________
+
+string - Name
+list<Building>? Buildings
+double? - Gold
+int? - Food
+int? - Wood
+int? - Cloth
+int? - Iron
+int? - Stone
+int? - Jewelry
+
+___________ Building ___________
+
+string - Name
+double - CostGold
+int - CostFood
+int - CostWood
+int - CostCloth
+int - CostIron
+int - CostStone
+int - CostJewelry
+
+int? - ConsumesFood
+int? - ConsumesWood
+int? - ConsumesCloth
+int? - ConsumesIron
+int? - ConsumesStone
+int? - ConsumesJewelr
+
+double? - ProduceGold
+int? - ProduceFood
+int? - ProduceWood
+int? - ProduceCloth
+int? - ProduceIron
+int? - ProduceStone
+int? - ProduceJewelry
+int? - produceSoldier
+
+___________ Army ___________
+
+bool - Enemy
+list<Soldier>? - Soldiers
+
+___________ Soldier___________
+
+bool - Enemy
+int - Level
+double? - Experience
+double? - Lp
+double? - LpMax
+double? - Atk
+double? - Def
+double? - Agy
+double? - Wis
+double? - Int
+double? - Crit
+Enum - SoldierType (= Archer, Warrior, Mage, Healer)
+
+
+___________ Mob ___________
+
+bool - Boss
+int - Level
+double? - Lp
+double? - LpMax
+double? - Atk
+double? - Def
+double? - Agy
+double? - Wis
+double? - Int
+double? - Crit
+

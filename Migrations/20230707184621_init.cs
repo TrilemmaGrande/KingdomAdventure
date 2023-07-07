@@ -48,7 +48,7 @@ namespace KingdomAdventure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UpgradeItem",
+                name: "UpgradeItems",
                 columns: table => new
                 {
                     UpgradeItemID = table.Column<int>(type: "int", nullable: false)
@@ -73,7 +73,7 @@ namespace KingdomAdventure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UpgradeItem", x => x.UpgradeItemID);
+                    table.PrimaryKey("PK_UpgradeItems", x => x.UpgradeItemID);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,24 +110,24 @@ namespace KingdomAdventure.Migrations
                 {
                     table.PrimaryKey("PK_Items", x => x.ItemID);
                     table.ForeignKey(
-                        name: "FK_Items_UpgradeItem_UpgradeItem1UpgradeItemID",
+                        name: "FK_Items_UpgradeItems_UpgradeItem1UpgradeItemID",
                         column: x => x.UpgradeItem1UpgradeItemID,
-                        principalTable: "UpgradeItem",
+                        principalTable: "UpgradeItems",
                         principalColumn: "UpgradeItemID");
                     table.ForeignKey(
-                        name: "FK_Items_UpgradeItem_UpgradeItem2UpgradeItemID",
+                        name: "FK_Items_UpgradeItems_UpgradeItem2UpgradeItemID",
                         column: x => x.UpgradeItem2UpgradeItemID,
-                        principalTable: "UpgradeItem",
+                        principalTable: "UpgradeItems",
                         principalColumn: "UpgradeItemID");
                     table.ForeignKey(
-                        name: "FK_Items_UpgradeItem_UpgradeItem3UpgradeItemID",
+                        name: "FK_Items_UpgradeItems_UpgradeItem3UpgradeItemID",
                         column: x => x.UpgradeItem3UpgradeItemID,
-                        principalTable: "UpgradeItem",
+                        principalTable: "UpgradeItems",
                         principalColumn: "UpgradeItemID");
                     table.ForeignKey(
-                        name: "FK_Items_UpgradeItem_UpgradeItem4UpgradeItemID",
+                        name: "FK_Items_UpgradeItems_UpgradeItem4UpgradeItemID",
                         column: x => x.UpgradeItem4UpgradeItemID,
-                        principalTable: "UpgradeItem",
+                        principalTable: "UpgradeItems",
                         principalColumn: "UpgradeItemID");
                 });
 
@@ -275,7 +275,7 @@ namespace KingdomAdventure.Migrations
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "UpgradeItem");
+                name: "UpgradeItems");
         }
     }
 }

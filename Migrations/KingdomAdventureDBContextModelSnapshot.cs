@@ -342,7 +342,7 @@ namespace KingdomAdventure.Migrations
 
                     b.HasKey("UpgradeItemID");
 
-                    b.ToTable("UpgradeItem");
+                    b.ToTable("UpgradeItems");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Item", b =>

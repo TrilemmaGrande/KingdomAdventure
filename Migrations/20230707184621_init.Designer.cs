@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230707184450_init")]
+    [Migration("20230707184621_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -345,7 +345,7 @@ namespace KingdomAdventure.Migrations
 
                     b.HasKey("UpgradeItemID");
 
-                    b.ToTable("UpgradeItem");
+                    b.ToTable("UpgradeItems");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Item", b =>

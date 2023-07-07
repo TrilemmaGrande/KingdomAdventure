@@ -15,7 +15,6 @@ namespace KingdomAdventure.Models.Repository
             if (dbContext.Database.GetPendingMigrations().Any())
             {
                 dbContext.Database.Migrate();
-
             }
         }
     }

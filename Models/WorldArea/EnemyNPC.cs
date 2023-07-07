@@ -2,6 +2,7 @@
 {
     public class EnemyNPC
     {
+        public int EnemyNPCID { get; set; }
         public bool Boss { get; set; }
         public string EnemyNPCName { get; set; }
         public int Level { get; set; }

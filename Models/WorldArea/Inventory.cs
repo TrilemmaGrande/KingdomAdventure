@@ -2,6 +2,7 @@
 {
     public class Inventory
     {
+        public int InventoryID { get; set; }
         List<Item> Items = new List<Item>();
     }
 }

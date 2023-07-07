@@ -1,4 +1,6 @@
-﻿namespace KingdomAdventure.Models.Repository
+﻿using KingdomAdventure.Models.WorldArea;
+
+namespace KingdomAdventure.Models.Repository
 {
     public class EFKingdomAdventureRepository : IKingdomAdventureRepository
     {
@@ -8,5 +10,9 @@
         {
             this.ctx = ctx;
         }
+        public IQueryable<Player> Player => ctx.Player;
+        public IQueryable<Inventory> Inventory => ctx.Inventory;
+        public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPCs;
+        public IQueryable<Item> Items => ctx.Items;
     }
 }

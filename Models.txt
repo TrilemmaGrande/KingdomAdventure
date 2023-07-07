@@ -12,6 +12,9 @@ double - Lp
 double - LpMax
 double - Atk
 double - Def
+double - Str
+double - End
+double - Dex
 double - Agy
 double - Wis
 double - Int
@@ -39,6 +42,9 @@ double? - Lp
 double? - LpMax
 double? - Atk
 double? - Def
+double? - Str
+double? - End
+double? - Dex
 double? - Agy
 double? - Wis
 double? - Int
@@ -102,6 +108,9 @@ double? - Lp
 double? - LpMax
 double? - Atk
 double? - Def
+double? - Str
+double? - End
+double? - Dex
 double? - Agy
 double? - Wis
 double? - Int
@@ -117,6 +126,9 @@ double? - Lp
 double? - LpMax
 double? - Atk
 double? - Def
+double? - Str
+double? - End
+double? - Dex
 double? - Agy
 double? - Wis
 double? - Int

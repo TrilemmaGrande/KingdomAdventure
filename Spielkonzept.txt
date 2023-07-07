@@ -25,16 +25,19 @@ Der Spieler muss also Reputation sammeln, um die Population zu erhöhen, um die 
 Durch die größere Stadt erhält der Spieler besseres Equipment um im neuen Gebiet stark genug zu sein.
 
 Statuswerte im Spiel:
-ATK (Attack = Grundschaden Nahkampf)
-DEF (Defensive = Grundverteidigung Nahkampf)
+ATK (Attack = Gesamtschaden ohne Crit)
+DEF (Defensive = Grundverteidigung durch Equipment)
+END (Endurance, Lebenspunkte)
+STR (Strength, Nahkampfschaden)
+DEX (Dexterity, Fernkampfschaden)
 AGY (Agility = Ausweichen)
 INT (Intelligence = Magie Schaden, Magie Heilung)
 WIS (Wisdom = Geschwindigkeit Magie Angriffe)
 CRIT (Critical = kritischer Schaden: Nahkampf, Fernkampf)
 
 Armee:
-Bogenschützen (CRIT, AGY)
-Krieger (ATK,DEF)
+Bogenschützen (DEX, AGY)
+Krieger (STR,END)
 Magier (INT)
 Heiler (WIS)
 

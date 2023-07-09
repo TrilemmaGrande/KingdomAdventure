@@ -48,40 +48,13 @@ namespace KingdomAdventure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UpgradeItems",
-                columns: table => new
-                {
-                    UpgradeItemID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PlayerGold = table.Column<double>(type: "float", nullable: true),
-                    Experience = table.Column<double>(type: "float", nullable: true),
-                    LP = table.Column<double>(type: "float", nullable: true),
-                    FullLP = table.Column<double>(type: "float", nullable: true),
-                    AtkMelee = table.Column<double>(type: "float", nullable: true),
-                    AtkPierce = table.Column<double>(type: "float", nullable: true),
-                    AtkMagic = table.Column<double>(type: "float", nullable: true),
-                    DefMelee = table.Column<double>(type: "float", nullable: true),
-                    DefPierce = table.Column<double>(type: "float", nullable: true),
-                    DefMagic = table.Column<double>(type: "float", nullable: true),
-                    Str = table.Column<double>(type: "float", nullable: true),
-                    End = table.Column<double>(type: "float", nullable: true),
-                    Dex = table.Column<double>(type: "float", nullable: true),
-                    Int = table.Column<double>(type: "float", nullable: true),
-                    Crit = table.Column<double>(type: "float", nullable: true),
-                    CritDmg = table.Column<double>(type: "float", nullable: true),
-                    ItemType = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UpgradeItems", x => x.UpgradeItemID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
                     ItemID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ItemValue = table.Column<double>(type: "float", nullable: true),
                     PlayerGold = table.Column<double>(type: "float", nullable: true),
                     Experience = table.Column<double>(type: "float", nullable: true),
                     LP = table.Column<double>(type: "float", nullable: true),
@@ -98,10 +71,6 @@ namespace KingdomAdventure.Migrations
                     Int = table.Column<double>(type: "float", nullable: true),
                     Crit = table.Column<double>(type: "float", nullable: true),
                     CritDmg = table.Column<double>(type: "float", nullable: true),
-                    UpgradeItem1UpgradeItemID = table.Column<int>(type: "int", nullable: true),
-                    UpgradeItem2UpgradeItemID = table.Column<int>(type: "int", nullable: true),
-                    UpgradeItem3UpgradeItemID = table.Column<int>(type: "int", nullable: true),
-                    UpgradeItem4UpgradeItemID = table.Column<int>(type: "int", nullable: true),
                     ItemType = table.Column<int>(type: "int", nullable: false),
                     WeaponType = table.Column<int>(type: "int", nullable: true),
                     ArmorType = table.Column<int>(type: "int", nullable: true)
@@ -109,26 +78,6 @@ namespace KingdomAdventure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Items", x => x.ItemID);
-                    table.ForeignKey(
-                        name: "FK_Items_UpgradeItems_UpgradeItem1UpgradeItemID",
-                        column: x => x.UpgradeItem1UpgradeItemID,
-                        principalTable: "UpgradeItems",
-                        principalColumn: "UpgradeItemID");
-                    table.ForeignKey(
-                        name: "FK_Items_UpgradeItems_UpgradeItem2UpgradeItemID",
-                        column: x => x.UpgradeItem2UpgradeItemID,
-                        principalTable: "UpgradeItems",
-                        principalColumn: "UpgradeItemID");
-                    table.ForeignKey(
-                        name: "FK_Items_UpgradeItems_UpgradeItem3UpgradeItemID",
-                        column: x => x.UpgradeItem3UpgradeItemID,
-                        principalTable: "UpgradeItems",
-                        principalColumn: "UpgradeItemID");
-                    table.ForeignKey(
-                        name: "FK_Items_UpgradeItems_UpgradeItem4UpgradeItemID",
-                        column: x => x.UpgradeItem4UpgradeItemID,
-                        principalTable: "UpgradeItems",
-                        principalColumn: "UpgradeItemID");
                 });
 
             migrationBuilder.CreateTable(
@@ -203,25 +152,42 @@ namespace KingdomAdventure.Migrations
                         principalColumn: "ItemID");
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_UpgradeItem1UpgradeItemID",
-                table: "Items",
-                column: "UpgradeItem1UpgradeItemID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_UpgradeItem2UpgradeItemID",
-                table: "Items",
-                column: "UpgradeItem2UpgradeItemID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_UpgradeItem3UpgradeItemID",
-                table: "Items",
-                column: "UpgradeItem3UpgradeItemID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_UpgradeItem4UpgradeItemID",
-                table: "Items",
-                column: "UpgradeItem4UpgradeItemID");
+            migrationBuilder.CreateTable(
+                name: "UpgradeItems",
+                columns: table => new
+                {
+                    UpgradeItemID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UpgradeItemName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpgradeItemValue = table.Column<double>(type: "float", nullable: true),
+                    PlayerGold = table.Column<double>(type: "float", nullable: true),
+                    Experience = table.Column<double>(type: "float", nullable: true),
+                    LP = table.Column<double>(type: "float", nullable: true),
+                    FullLP = table.Column<double>(type: "float", nullable: true),
+                    AtkMelee = table.Column<double>(type: "float", nullable: true),
+                    AtkPierce = table.Column<double>(type: "float", nullable: true),
+                    AtkMagic = table.Column<double>(type: "float", nullable: true),
+                    DefMelee = table.Column<double>(type: "float", nullable: true),
+                    DefPierce = table.Column<double>(type: "float", nullable: true),
+                    DefMagic = table.Column<double>(type: "float", nullable: true),
+                    Str = table.Column<double>(type: "float", nullable: true),
+                    End = table.Column<double>(type: "float", nullable: true),
+                    Dex = table.Column<double>(type: "float", nullable: true),
+                    Int = table.Column<double>(type: "float", nullable: true),
+                    Crit = table.Column<double>(type: "float", nullable: true),
+                    CritDmg = table.Column<double>(type: "float", nullable: true),
+                    ItemType = table.Column<int>(type: "int", nullable: false),
+                    ItemID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UpgradeItems", x => x.UpgradeItemID);
+                    table.ForeignKey(
+                        name: "FK_UpgradeItems_Items_ItemID",
+                        column: x => x.ItemID,
+                        principalTable: "Items",
+                        principalColumn: "ItemID");
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Player_ChestItemID",
@@ -257,6 +223,11 @@ namespace KingdomAdventure.Migrations
                 name: "IX_Player_TrousersItemID",
                 table: "Player",
                 column: "TrousersItemID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UpgradeItems_ItemID",
+                table: "UpgradeItems",
+                column: "ItemID");
         }
 
         /// <inheritdoc />
@@ -272,10 +243,10 @@ namespace KingdomAdventure.Migrations
                 name: "Player");
 
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "UpgradeItems");
 
             migrationBuilder.DropTable(
-                name: "UpgradeItems");
+                name: "Items");
         }
     }
 }

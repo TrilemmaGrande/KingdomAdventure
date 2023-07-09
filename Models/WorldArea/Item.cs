@@ -18,14 +18,16 @@ namespace KingdomAdventure.Models.WorldArea
     public enum ArmorType
     {
         Head, 
-        Shoulder,
+        Shoulders,
         Chest, 
-        Trousers,
+        Legs,
         Feet
     }
     public class Item
     {
         public int ItemID { get; set; }
+        public string? ItemName { get; set; }
+        public double? ItemValue { get; set; }
         public double? PlayerGold { get; set; }
         public double? Experience { get; set; }
         public double? LP { get; set; }
@@ -42,10 +44,7 @@ namespace KingdomAdventure.Models.WorldArea
         public double? Int { get; set; } // 1 Intelligence = 3 AtkMagic 
         public double? Crit { get; set; } // 1 Crit = 1% Chance for Crit
         public double? CritDmg { get; set; } // CritDmg = Dmg + (CritDmg * Dmg / 100)
-        public UpgradeItem? UpgradeItem1 { get; set; }
-        public UpgradeItem? UpgradeItem2 { get; set; }
-        public UpgradeItem? UpgradeItem3 { get; set; }
-        public UpgradeItem? UpgradeItem4 { get; set; }
+        public UpgradeItem[]? UpgradeSlots { get; set; }
         public ItemType ItemType { get; set; }
         public WeaponType? WeaponType { get; set; }
         public ArmorType? ArmorType { get; set; }

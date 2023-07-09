@@ -4,5 +4,6 @@
     {
         public int InventoryID { get; set; }
         List<Item> Items = new List<Item>();
+        List<UpgradeItem> UpgradeItems = new List<UpgradeItem>();
     }
 }

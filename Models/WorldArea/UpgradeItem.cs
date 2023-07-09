@@ -3,6 +3,8 @@
     public class UpgradeItem
     {
         public int UpgradeItemID { get; set; }
+        public string? UpgradeItemName { get; set; }
+        public double? UpgradeItemValue { get; set; }
         public double? PlayerGold { get; set; }
         public double? Experience { get; set; }
         public double? LP { get; set; }

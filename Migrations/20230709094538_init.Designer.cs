@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230707184621_init")]
+    [Migration("20230709094538_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -141,8 +141,15 @@ namespace KingdomAdventure.Migrations
                     b.Property<double?>("Int")
                         .HasColumnType("float");
 
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ItemType")
                         .HasColumnType("int");
+
+                    b.Property<double?>("ItemValue")
+                        .HasColumnType("float");
 
                     b.Property<double?>("LP")
                         .HasColumnType("float");
@@ -153,30 +160,10 @@ namespace KingdomAdventure.Migrations
                     b.Property<double?>("Str")
                         .HasColumnType("float");
 
-                    b.Property<int?>("UpgradeItem1UpgradeItemID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UpgradeItem2UpgradeItemID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UpgradeItem3UpgradeItemID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UpgradeItem4UpgradeItemID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("WeaponType")
                         .HasColumnType("int");
 
                     b.HasKey("ItemID");
-
-                    b.HasIndex("UpgradeItem1UpgradeItemID");
-
-                    b.HasIndex("UpgradeItem2UpgradeItemID");
-
-                    b.HasIndex("UpgradeItem3UpgradeItemID");
-
-                    b.HasIndex("UpgradeItem4UpgradeItemID");
 
                     b.ToTable("Items");
                 });
@@ -331,6 +318,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<double?>("Int")
                         .HasColumnType("float");
 
+                    b.Property<int?>("ItemID")
+                        .HasColumnType("int");
+
                     b.Property<int>("ItemType")
                         .HasColumnType("int");
 
@@ -343,36 +333,17 @@ namespace KingdomAdventure.Migrations
                     b.Property<double?>("Str")
                         .HasColumnType("float");
 
+                    b.Property<string>("UpgradeItemName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("UpgradeItemValue")
+                        .HasColumnType("float");
+
                     b.HasKey("UpgradeItemID");
 
+                    b.HasIndex("ItemID");
+
                     b.ToTable("UpgradeItems");
-                });
-
-            modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Item", b =>
-                {
-                    b.HasOne("KingdomAdventure.Models.WorldArea.UpgradeItem", "UpgradeItem1")
-                        .WithMany()
-                        .HasForeignKey("UpgradeItem1UpgradeItemID");
-
-                    b.HasOne("KingdomAdventure.Models.WorldArea.UpgradeItem", "UpgradeItem2")
-                        .WithMany()
-                        .HasForeignKey("UpgradeItem2UpgradeItemID");
-
-                    b.HasOne("KingdomAdventure.Models.WorldArea.UpgradeItem", "UpgradeItem3")
-                        .WithMany()
-                        .HasForeignKey("UpgradeItem3UpgradeItemID");
-
-                    b.HasOne("KingdomAdventure.Models.WorldArea.UpgradeItem", "UpgradeItem4")
-                        .WithMany()
-                        .HasForeignKey("UpgradeItem4UpgradeItemID");
-
-                    b.Navigation("UpgradeItem1");
-
-                    b.Navigation("UpgradeItem2");
-
-                    b.Navigation("UpgradeItem3");
-
-                    b.Navigation("UpgradeItem4");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Player", b =>
@@ -418,6 +389,18 @@ namespace KingdomAdventure.Migrations
                     b.Navigation("Shoulder");
 
                     b.Navigation("Trousers");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.WorldArea.UpgradeItem", b =>
+                {
+                    b.HasOne("KingdomAdventure.Models.WorldArea.Item", null)
+                        .WithMany("UpgradeSlots")
+                        .HasForeignKey("ItemID");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Item", b =>
+                {
+                    b.Navigation("UpgradeSlots");
                 });
 #pragma warning restore 612, 618
         }

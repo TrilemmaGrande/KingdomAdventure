@@ -12,9 +12,15 @@ namespace KingdomAdventure.Models.Repository
         }
         public IQueryable<Player> Players => ctx.Player;
         public IQueryable<Inventory> Inventories => ctx.Inventory;
-        public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPCs;
+        public IQueryable<InventoryItem> InventoryItems => ctx.InventoryItems;
         public IQueryable<Item> Items => ctx.Items;
         public IQueryable<UpgradeItem> UpgradeItems => ctx.UpgradeItems;
-        public IQueryable<Account> Accounts => ctx.Accounts;
+        public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPCs;
+
+        public void AddPlayer(Player player)
+        {
+            ctx.Player.Add(player);
+            ctx.SaveChanges();
+        }
     }
 }

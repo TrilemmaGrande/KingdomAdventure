@@ -36,18 +36,6 @@ namespace KingdomAdventure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory",
-                columns: table => new
-                {
-                    InventoryID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Inventory", x => x.InventoryID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
@@ -190,6 +178,68 @@ namespace KingdomAdventure.Migrations
                         principalColumn: "ItemID");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Inventory",
+                columns: table => new
+                {
+                    InventoryID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventory", x => x.InventoryID);
+                    table.ForeignKey(
+                        name: "FK_Inventory_Player_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "Player",
+                        principalColumn: "PlayerID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InventoryItems",
+                columns: table => new
+                {
+                    InventoryItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InventoryId = table.Column<int>(type: "int", nullable: false),
+                    ItemId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InventoryItems", x => x.InventoryItemId);
+                    table.ForeignKey(
+                        name: "FK_InventoryItems_Inventory_InventoryId",
+                        column: x => x.InventoryId,
+                        principalTable: "Inventory",
+                        principalColumn: "InventoryID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InventoryItems_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "ItemID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventory_PlayerId",
+                table: "Inventory",
+                column: "PlayerId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventoryItems_InventoryId",
+                table: "InventoryItems",
+                column: "InventoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventoryItems_ItemId",
+                table: "InventoryItems",
+                column: "ItemId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Player_ChestItemID",
                 table: "Player",
@@ -238,13 +288,16 @@ namespace KingdomAdventure.Migrations
                 name: "EnemyNPCs");
 
             migrationBuilder.DropTable(
+                name: "InventoryItems");
+
+            migrationBuilder.DropTable(
+                name: "UpgradeItems");
+
+            migrationBuilder.DropTable(
                 name: "Inventory");
 
             migrationBuilder.DropTable(
                 name: "Player");
-
-            migrationBuilder.DropTable(
-                name: "UpgradeItems");
 
             migrationBuilder.DropTable(
                 name: "Items");

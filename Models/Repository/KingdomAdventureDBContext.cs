@@ -10,9 +10,9 @@ namespace KingdomAdventure.Models.Repository
         }
         public DbSet<Player> Player { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<InventoryItem> InventoryItems { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<UpgradeItem> UpgradeItems { get; set; }
         public DbSet<EnemyNPC> EnemyNPCs { get; set; }
-        public DbSet<Account> Accounts { get; set; }
     }
 }

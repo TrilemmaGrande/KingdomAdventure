@@ -1,0 +1,14 @@
+﻿@model Player
+
+<div>
+    <form asp-action="CreateNewPlayer" method="post">
+        <input asp-for="PlayerName" placeholder="Player Name" />
+        <input type="hidden" asp-for="PlayerGold" value="10" />
+        <input type="hidden" asp-for="Level" value="1" />
+        <input type="hidden" asp-for="Experience" value="0" />
+        <input type="hidden" asp-for="CurrentLP" value="10" />
+        <input type="hidden" asp-for="FullLP" value="10" />
+        <button type="submit">Create Player</button>
+    </form>
+    <a asp-action="Index"> back </a>
+</div>

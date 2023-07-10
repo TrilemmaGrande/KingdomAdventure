@@ -3,8 +3,13 @@
     public class Inventory
     {
         public int InventoryID { get; set; }
-        public Account Account { get; set; }
-        List<Item> Items = new List<Item>();
+
+        // Foreign key
+        public int PlayerId { get; set; }
+
+        // Navigation property
+        public Player Player { get; set; }
+        public List<InventoryItem> Items { get; set; }
         List<UpgradeItem> UpgradeItems = new List<UpgradeItem>();
     }
 }

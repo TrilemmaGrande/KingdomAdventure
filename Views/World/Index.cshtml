@@ -1,7 +1,13 @@
 ﻿@{
     ViewData["Title"] = "World";
 }
+@model Player 
 
 <div class="text-center">
     <h1 class="display-4">Welcome To The Game</h1>
+    Name: @Model.PlayerName
+    Gold: @Model.PlayerGold
+    Level: @Model.Level
+    Exp: @Model.Experience
+    LP: @Model.CurrentLP / @Model.FullLP
 </div>

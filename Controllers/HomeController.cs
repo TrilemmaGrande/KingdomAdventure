@@ -1,5 +1,7 @@
 ﻿using KingdomAdventure.Models.Repository;
+using KingdomAdventure.Models.WorldArea;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace KingdomAdventure.Controllers
@@ -13,8 +15,19 @@ namespace KingdomAdventure.Controllers
         }
         public IActionResult Index()
         {
+            return View(repo.Players.OrderBy(i => i.PlayerID));
+        }
+        [HttpGet]
+        public IActionResult CreateNewPlayer()
+        {
             return View();
         }
+        [HttpPost]
+        public IActionResult CreateNewPlayer(Player player)
+        {
+            repo.AddPlayer(player);          
 
+            return RedirectToAction("Index","World", new { id = player.PlayerID });
+        }
     }
 }

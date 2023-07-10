@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\trilemma\source\repos\TrilemmaGrande\KingdomAdventure
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/Home/CreateNewPlayer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDcmVhdGVOZXdQbGF5ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

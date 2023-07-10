@@ -12,9 +12,9 @@ namespace KingdomAdventure.Controllers
         {
             this.repo = repo;
         }
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            return View();
+            return View(repo.Players.FirstOrDefault(i => i.PlayerID == id));
         }
     }
 }

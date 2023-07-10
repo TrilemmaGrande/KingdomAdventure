@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230710100114_init")]
+    [Migration("20230710193358_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -86,9 +86,42 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InventoryID"));
 
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("int");
+
                     b.HasKey("InventoryID");
 
+                    b.HasIndex("PlayerId")
+                        .IsUnique();
+
                     b.ToTable("Inventory");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.WorldArea.InventoryItem", b =>
+                {
+                    b.Property<int>("InventoryItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InventoryItemId"));
+
+                    b.Property<int>("InventoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("InventoryItemId");
+
+                    b.HasIndex("InventoryId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("InventoryItems");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Item", b =>
@@ -348,6 +381,36 @@ namespace KingdomAdventure.Migrations
                     b.ToTable("UpgradeItems");
                 });
 
+            modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Inventory", b =>
+                {
+                    b.HasOne("KingdomAdventure.Models.WorldArea.Player", "Player")
+                        .WithOne("Inventory")
+                        .HasForeignKey("KingdomAdventure.Models.WorldArea.Inventory", "PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.WorldArea.InventoryItem", b =>
+                {
+                    b.HasOne("KingdomAdventure.Models.WorldArea.Inventory", "Inventory")
+                        .WithMany("Items")
+                        .HasForeignKey("InventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KingdomAdventure.Models.WorldArea.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inventory");
+
+                    b.Navigation("Item");
+                });
+
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Player", b =>
                 {
                     b.HasOne("KingdomAdventure.Models.WorldArea.Item", "Chest")
@@ -400,9 +463,20 @@ namespace KingdomAdventure.Migrations
                         .HasForeignKey("ItemID");
                 });
 
+            modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Inventory", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Item", b =>
                 {
                     b.Navigation("UpgradeItems");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Player", b =>
+                {
+                    b.Navigation("Inventory")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

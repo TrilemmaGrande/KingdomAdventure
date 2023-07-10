@@ -1,7 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Login Area";
 }
+@model IQueryable<Player>
 
 <div class="text-center">
-    <h1 class="display-4">Welcome, choose your Player:</h1>
+    <h1 class="display-4">Welcome</h1>
+    <ul>
+        @foreach (var player in Model)
+        {
+            <li><a asp-action="Index" asp-controller="World" asp-route-id="@player.PlayerID">@player.PlayerName</a></li>
+        }
+    </ul>
+    <a asp-action="CreateNewPlayer">Create New Player</a>    
 </div>

@@ -1,4 +1,5 @@
-﻿using KingdomAdventure.Models.Repository;
+﻿using KingdomAdventure.Models;
+using KingdomAdventure.Models.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KingdomAdventure.Controllers
@@ -6,11 +7,12 @@ namespace KingdomAdventure.Controllers
     public class WorldController : Controller
     {
         private IKingdomAdventureRepository repo;
+
         public WorldController(IKingdomAdventureRepository repo)
         {
             this.repo = repo;
         }
-        public IActionResult Index()
+        public IActionResult Index(Account account)
         {
             return View();
         }

@@ -12,7 +12,7 @@ namespace KingdomAdventure.Controllers
         {
             this.repo = repo;
         }
-        public IActionResult Index(Account account)
+        public IActionResult Index()
         {
             return View();
         }

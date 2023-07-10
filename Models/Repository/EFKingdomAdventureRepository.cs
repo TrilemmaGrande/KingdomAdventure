@@ -10,10 +10,11 @@ namespace KingdomAdventure.Models.Repository
         {
             this.ctx = ctx;
         }
-        public IQueryable<Player> Player => ctx.Player;
+        public IQueryable<Player> Player => ctx.Player.Where(a => a.Account == );
         public IQueryable<Inventory> Inventory => ctx.Inventory;
         public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPCs;
         public IQueryable<Item> Items => ctx.Items;
         public IQueryable<UpgradeItem> UpgradeItems => ctx.UpgradeItems;
+        public IQueryable<Account> Accounts => ctx.Accounts;
     }
 }

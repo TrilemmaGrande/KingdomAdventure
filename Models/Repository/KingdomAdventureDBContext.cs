@@ -13,5 +13,6 @@ namespace KingdomAdventure.Models.Repository
         public DbSet<Item> Items { get; set; }
         public DbSet<UpgradeItem> UpgradeItems { get; set; }
         public DbSet<EnemyNPC> EnemyNPCs { get; set; }
+        public DbSet<Account> Accounts { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<EnemyNPC> EnemyNPCs { get; }
         public IQueryable<Item> Items { get; }
         public IQueryable<UpgradeItem> UpgradeItems { get; }
+        public IQueryable<Account> Accounts { get; }
     }
 }

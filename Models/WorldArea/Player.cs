@@ -3,6 +3,7 @@
     public class Player
     {
         public int PlayerID { get; set; }
+        public Account Account { get; set; }
         public string PlayerName { get; set; }
         public double PlayerGold { get; set; }
         public int Level { get; set; }
@@ -36,5 +37,10 @@
         public Item? Chest { get; set; }
         public Item? Trousers { get; set; }
         public Item? Feet { get; set; }
+
+        public Player()
+        {
+            PlayerName = Account.AccountName;
+        }
     }
 }

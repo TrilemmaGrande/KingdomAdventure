@@ -139,7 +139,6 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("ItemName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ItemType")
@@ -156,6 +155,9 @@ namespace KingdomAdventure.Migrations
 
                     b.Property<double?>("Str")
                         .HasColumnType("float");
+
+                    b.Property<int?>("UpgradeItemSlots")
+                        .HasColumnType("int");
 
                     b.Property<int?>("WeaponType")
                         .HasColumnType("int");
@@ -391,13 +393,13 @@ namespace KingdomAdventure.Migrations
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.UpgradeItem", b =>
                 {
                     b.HasOne("KingdomAdventure.Models.WorldArea.Item", null)
-                        .WithMany("UpgradeSlots")
+                        .WithMany("UpgradeItems")
                         .HasForeignKey("ItemID");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Item", b =>
                 {
-                    b.Navigation("UpgradeSlots");
+                    b.Navigation("UpgradeItems");
                 });
 #pragma warning restore 612, 618
         }

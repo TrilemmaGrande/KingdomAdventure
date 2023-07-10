@@ -44,7 +44,8 @@ namespace KingdomAdventure.Models.WorldArea
         public double? Int { get; set; } // 1 Intelligence = 3 AtkMagic 
         public double? Crit { get; set; } // 1 Crit = 1% Chance for Crit
         public double? CritDmg { get; set; } // CritDmg = Dmg + (CritDmg * Dmg / 100)
-        public UpgradeItem[]? UpgradeSlots { get; set; }
+        public int? UpgradeItemSlots { get; set; }
+        public List<UpgradeItem>? UpgradeItems { get; set; } = new List<UpgradeItem>();
         public ItemType ItemType { get; set; }
         public WeaponType? WeaponType { get; set; }
         public ArmorType? ArmorType { get; set; }

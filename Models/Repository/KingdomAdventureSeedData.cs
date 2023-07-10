@@ -30,65 +30,65 @@ namespace KingdomAdventure.Models.Repository
     }
     private static void GenerateMainHandWeapons(KingdomAdventureDBContext dbContext)
     {
-      dbContext.Items.AddRange(
-        new Item()
-        {
-          ItemName = "Rusty Sword",
-          ItemType = ItemType.Weapon,
-          WeaponType = WeaponType.Mainhand,
-          ItemValue = 2.5,
-          AtkMelee = 2
-        },
-        new Item()
-        {
-          ItemName = "Steel Sword",
-          ItemType = ItemType.Weapon,
-          WeaponType = WeaponType.Mainhand,
-          ItemValue = 5,
-          AtkMelee = 4,
-          Str = 1,
-          UpgradeSlots = new UpgradeItem[1]
-        },
-        new Item()
-        {
-          ItemName = "Silver Sword",
-          ItemType = ItemType.Weapon,
-          WeaponType = WeaponType.Mainhand,
-          ItemValue = 7,
-          AtkMelee = 6,
-          Str = 2,
-          //UpgradeSlots = new UpgradeItem[2]
-        },
-        new Item()
-        {
-          ItemName = "Gold Sword",
-          ItemType = ItemType.Weapon,
-          WeaponType = WeaponType.Mainhand,
-          ItemValue = 10,
-          AtkMelee = 8,
-          Str = 4,
-          //UpgradeSlots = new UpgradeItem[3]
-        },
-        new Item()
-        {
-          ItemName = "Unholy Staff",
-          ItemType = ItemType.Weapon,
-          WeaponType = WeaponType.Mainhand,
-          ItemValue = 10,
-          AtkMagic = 8,
-          Int = 4,
-          //UpgradeSlots = new UpgradeItem[3]
-        },
-        new Item()
-        {
-          ItemName = "Maple Bow",
-          ItemType = ItemType.Weapon,
-          WeaponType = WeaponType.Mainhand,
-          ItemValue = 4,
-          AtkPierce = 6,
-          Dex = 4,
-          //UpgradeSlots = new UpgradeItem[1]
-        });
+            dbContext.Items.AddRange(
+              new Item()
+              {
+                  ItemName = "Rusty Sword",
+                  ItemType = ItemType.Weapon,
+                  WeaponType = WeaponType.Mainhand,
+                  ItemValue = 2.5,
+                  AtkMelee = 2
+              },
+              new Item()
+              {
+                  ItemName = "Steel Sword",
+                  ItemType = ItemType.Weapon,
+                  WeaponType = WeaponType.Mainhand,
+                  ItemValue = 5,
+                  AtkMelee = 4,
+                  Str = 1,
+                  UpgradeItemSlots = 1
+              },
+              new Item()
+              {
+                  ItemName = "Silver Sword",
+                  ItemType = ItemType.Weapon,
+                  WeaponType = WeaponType.Mainhand,
+                  ItemValue = 7,
+                  AtkMelee = 6,
+                  Str = 2,
+                  UpgradeItemSlots = 2
+              },
+              new Item()
+              {
+                  ItemName = "Gold Sword",
+                  ItemType = ItemType.Weapon,
+                  WeaponType = WeaponType.Mainhand,
+                  ItemValue = 10,
+                  AtkMelee = 8,
+                  Str = 4,
+                  UpgradeItemSlots = 3
+              },
+              new Item()
+              {
+                  ItemName = "Unholy Staff",
+                  ItemType = ItemType.Weapon,
+                  WeaponType = WeaponType.Mainhand,
+                  ItemValue = 10,
+                  AtkMagic = 8,
+                  Int = 4,
+                  UpgradeItemSlots = 3
+              },
+              new Item()
+              {
+                  ItemName = "Maple Bow",
+                  ItemType = ItemType.Weapon,
+                  WeaponType = WeaponType.Mainhand,
+                  ItemValue = 4,
+                  AtkPierce = 6,
+                  Dex = 4,
+                  UpgradeItemSlots = 1
+              }) ;
       dbContext.SaveChanges();
     }
     private static void GenerateOffHandWeapons(KingdomAdventureDBContext dbContext)
@@ -139,7 +139,7 @@ namespace KingdomAdventure.Models.Repository
           ArmorType = ArmorType.Chest,
           ItemValue = 7,
           DefMelee = 5,
-          //UpgradeSlots = new UpgradeItem[1]
+          UpgradeItemSlots = 1
         },
         new Item()
         {
@@ -165,7 +165,7 @@ namespace KingdomAdventure.Models.Repository
           ItemValue = 2.5,
           DefMelee = 2,
           DefPierce = 1,
-          //UpgradeSlots = new UpgradeItem[1]
+            UpgradeItemSlots = 1
         },
         new Item()
         {
@@ -175,7 +175,7 @@ namespace KingdomAdventure.Models.Repository
           ItemValue = 5,
           DefMelee = 2,
           DefPierce = 1,
-          //UpgradeSlots = new UpgradeItem[1]
+            UpgradeItemSlots = 1
         },
         new Item()
         {
@@ -185,7 +185,7 @@ namespace KingdomAdventure.Models.Repository
           ItemValue = 7,
           DefMelee = 4,
           DefPierce = 4,
-          //UpgradeSlots = new UpgradeItem[2]
+            UpgradeItemSlots = 2
         },
         new Item()
         {

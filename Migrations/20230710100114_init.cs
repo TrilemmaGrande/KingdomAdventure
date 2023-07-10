@@ -53,7 +53,7 @@ namespace KingdomAdventure.Migrations
                 {
                     ItemID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ItemName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ItemValue = table.Column<double>(type: "float", nullable: true),
                     PlayerGold = table.Column<double>(type: "float", nullable: true),
                     Experience = table.Column<double>(type: "float", nullable: true),
@@ -71,6 +71,7 @@ namespace KingdomAdventure.Migrations
                     Int = table.Column<double>(type: "float", nullable: true),
                     Crit = table.Column<double>(type: "float", nullable: true),
                     CritDmg = table.Column<double>(type: "float", nullable: true),
+                    UpgradeItemSlots = table.Column<int>(type: "int", nullable: true),
                     ItemType = table.Column<int>(type: "int", nullable: false),
                     WeaponType = table.Column<int>(type: "int", nullable: true),
                     ArmorType = table.Column<int>(type: "int", nullable: true)

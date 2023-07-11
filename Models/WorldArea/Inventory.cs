@@ -9,7 +9,7 @@
 
         // Navigation property
         public Player Player { get; set; }
-        public List<InventoryItem> Items { get; set; }
+        public List<InventoryItem> Items { get; set; } = new List<InventoryItem>();
         List<UpgradeItem> UpgradeItems = new List<UpgradeItem>();
     }
 }

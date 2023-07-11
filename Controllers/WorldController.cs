@@ -1,6 +1,9 @@
 ﻿using KingdomAdventure.Models;
 using KingdomAdventure.Models.Repository;
+using KingdomAdventure.Models.WorldArea;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace KingdomAdventure.Controllers
 {
@@ -12,9 +15,47 @@ namespace KingdomAdventure.Controllers
         {
             this.repo = repo;
         }
-        public IActionResult Index(int id)
+        public IActionResult Index(int? id)
         {
-            return View(repo.Players.FirstOrDefault(i => i.PlayerID == id));
+            if (id.HasValue)
+            {
+                HttpContext.Session.SetInt32("id", (int)id);
+            }
+            return View(GetPlayer());
+        }
+        public IActionResult Inventory()
+        {
+            return View(GetPlayer().Inventory);
+        }
+        public IActionResult AddInventoryItem()
+        {
+            Random rand = new Random();
+
+            // Random Item from Item Table
+            var item = repo.Items.FirstOrDefault(i => i.ItemValue == Math.Round((rand.NextDouble() * 10.00),0));
+            if (item is null)
+            {
+                item = repo.Items.FirstOrDefault(i => i.ItemValue == 4); // Maple Bow
+            }
+            // Player Inventory
+            var inventory = GetPlayer().Inventory;
+
+            repo.AddInventoryItem(item, inventory);
+            return RedirectToAction("Inventory");
+        }
+        public IActionResult DeleteInventoryItem(int itemID)
+        {
+            var inventoryItem = GetPlayer().Inventory.Items.FirstOrDefault(i => i.InventoryItemId == itemID);
+            var inventory = GetPlayer().Inventory;
+            repo.DeleteInventoryItem(inventoryItem, inventory);
+            return RedirectToAction("Inventory");
+        }
+        private Player GetPlayer()
+        {
+            return repo.Players
+                        .Include(i => i.Inventory)
+                        .ThenInclude(ii => ii.Items)
+                        .FirstOrDefault(i => i.PlayerID == HttpContext.Session.GetInt32("id"));
         }
     }
 }

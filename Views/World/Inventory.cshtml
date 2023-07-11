@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "World";
+}
+@model Inventory
+
+    <table>
+        @foreach (var item in @Model.Items)
+        {
+        <tr>
+            <td>@item.Name</td><td><a asp-action="DeleteInventoryItem" asp-route-itemID="@item.InventoryItemId">remove Item</a></td>
+        </tr>
+        }
+    </table>
+    <a asp-action="AddInventoryItem">Add Random Item (test)</a>
+

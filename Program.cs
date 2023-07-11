@@ -11,6 +11,7 @@ namespace KingdomAdventure
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession();
 
             builder.Services.AddDbContext<KingdomAdventureDBContext>(options =>
             {
@@ -32,6 +33,7 @@ namespace KingdomAdventure
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 

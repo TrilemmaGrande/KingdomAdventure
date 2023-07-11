@@ -1,4 +1,5 @@
 ﻿using KingdomAdventure.Models.WorldArea;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KingdomAdventure.Models.Repository
 {
@@ -11,5 +12,7 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<UpgradeItem> UpgradeItems { get; }
         public IQueryable<EnemyNPC> EnemyNPCs { get; }
         public void AddPlayer(Player player);
+        public void AddInventoryItem(Item item, Inventory inventory);
+        public void DeleteInventoryItem(InventoryItem inventoryItem, Inventory inventory);
     }
 }

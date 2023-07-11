@@ -25,9 +25,10 @@ namespace KingdomAdventure.Controllers
         [HttpPost]
         public IActionResult CreateNewPlayer(Player player)
         {
-            repo.AddPlayer(player);          
+            repo.AddPlayer(player);
+            HttpContext.Session.SetInt32("id", player.PlayerID);
 
-            return RedirectToAction("Index","World", new { id = player.PlayerID });
+            return RedirectToAction("Index","World");
         }
     }
 }

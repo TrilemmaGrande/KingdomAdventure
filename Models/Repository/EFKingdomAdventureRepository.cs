@@ -23,6 +23,11 @@ namespace KingdomAdventure.Models.Repository
             ctx.Player.Add(player);
             ctx.SaveChanges();
         }
+        public void DeletePlayer(Player player)
+        {
+            ctx.Player.Remove(player);
+            ctx.SaveChanges();
+        }
         public void AddInventoryItem(Item item, Inventory inventory)
         {
             var inventoryItem = new InventoryItem

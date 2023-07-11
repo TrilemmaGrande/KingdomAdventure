@@ -30,5 +30,11 @@ namespace KingdomAdventure.Controllers
 
             return RedirectToAction("Index","World");
         }
+        public IActionResult DeletePlayer(int id)
+        {
+            Player player = repo.Players.FirstOrDefault(i => i.PlayerID == id);
+            repo.DeletePlayer(player);
+            return RedirectToAction("Index");
+        }
     }
 }

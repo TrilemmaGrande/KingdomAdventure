@@ -12,6 +12,7 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<UpgradeItem> UpgradeItems { get; }
         public IQueryable<EnemyNPC> EnemyNPCs { get; }
         public void AddPlayer(Player player);
+        public void DeletePlayer(Player player);
         public void AddInventoryItem(Item item, Inventory inventory);
         public void DeleteInventoryItem(InventoryItem inventoryItem, Inventory inventory);
     }

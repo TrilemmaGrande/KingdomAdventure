@@ -8,8 +8,11 @@
     <ul>
         @foreach (var player in Model)
         {
-            <li><a asp-action="Index" asp-controller="World" asp-route-id="@player.PlayerID">@player.PlayerName</a></li>
+            <li>
+                <a asp-action="Index" asp-controller="World" asp-route-id="@player.PlayerID">@player.PlayerName</a>
+                <a asp-action="DeletePlayer" asp-route-id="@player.PlayerID">Delete</a>
+            </li>
         }
     </ul>
-    <a asp-action="CreateNewPlayer">Create New Player</a>    
+    <a asp-action="CreateNewPlayer">Create New Player</a>
 </div>

@@ -17,11 +17,11 @@ namespace KingdomAdventure.Models.Repository
       {
         dbContext.Database.Migrate();
       }
-      if (!dbContext.UpgradeItems.Any())
+      if (!dbContext.UpgradeItem.Any())
       {
         GenerateUpgradeItems(dbContext);
       }
-      if (!dbContext.Items.Any())
+      if (!dbContext.Item.Any())
       {
         GenerateMainHandWeapons(dbContext);
         GenerateOffHandWeapons(dbContext);

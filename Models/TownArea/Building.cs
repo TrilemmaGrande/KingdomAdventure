@@ -7,6 +7,6 @@
         public int Level { get; set; }
         public Dictionary<Ressource,int> BuildingCost { get; set; }
         public Dictionary<Ressource,int> ProduceRessource { get; set; }
-        public Dictionary<Soldier,int> ProduceSoldier { get; set; }
+        public Dictionary<TownSoldier,int> ProduceSoldier { get; set; }
     }
 }

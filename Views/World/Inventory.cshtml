@@ -7,7 +7,7 @@
         @foreach (var item in @Model.Items)
         {
         <tr>
-            <td>@item.InventoryItemName</td><td><a asp-action="DeleteInventoryItem" asp-route-itemID="@item.InventoryItemID">remove Item</a></td>
+            <td>@item.Item.ItemName</td><td><a asp-action="DeleteInventoryItem" asp-route-itemID="@item.InventoryItemID">remove Item</a></td>
         </tr>
         }
     </table>

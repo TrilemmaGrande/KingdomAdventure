@@ -13,10 +13,10 @@ namespace KingdomAdventure.Models.Repository
         }
         public IQueryable<Player> Players => ctx.Player;
         public IQueryable<Inventory> Inventories => ctx.Inventory;
-        public IQueryable<InventoryItem> InventoryItems => ctx.InventoryItems;
-        public IQueryable<Item> Items => ctx.Items;
-        public IQueryable<UpgradeItem> UpgradeItems => ctx.UpgradeItems;
-        public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPCs;
+        public IQueryable<InventoryItem> InventoryItems => ctx.InventoryItem;
+        public IQueryable<Item> Items => ctx.Item;
+        public IQueryable<UpgradeItem> UpgradeItems => ctx.UpgradeItem;
+        public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPC;
 
         public void AddPlayer(Player player)
         {
@@ -33,8 +33,7 @@ namespace KingdomAdventure.Models.Repository
             var inventoryItem = new InventoryItem
             {
                 Item = item,
-                Inventory = inventory,
-                InventoryItemName = item.ItemName
+                Inventory = inventory
             };
             ctx.Inventory.FirstOrDefault(i => i.InventoryID == inventory.InventoryID).Items.Add(inventoryItem);
             ctx.SaveChanges();

@@ -3,7 +3,6 @@
     public class InventoryItem
     {
         public int InventoryItemID { get; set; }
-        public string InventoryItemName { get; set; }
 
         // Foreign key
         public int InventoryID { get; set; }

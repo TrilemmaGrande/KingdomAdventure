@@ -2,9 +2,9 @@
 
 namespace KingdomAdventure.Models.TownArea
 {
-    public class TownRessource
+    public class TownSoldier
     {
-        public int TownRessourceID { get; set; }
+        public int TownSoldierID { get; set; }
 
         // Foreign key
         public int TownID { get; set; }
@@ -13,9 +13,9 @@ namespace KingdomAdventure.Models.TownArea
         public Town Town { get; set; }
 
         // Foreign key
-        public int RessourceID { get; set; }
+        public int SoldierID { get; set; }
 
         // Navigation property
-        public Ressource Ressource { get; set; }
+        public Soldier Soldier { get; set; }
     }
 }

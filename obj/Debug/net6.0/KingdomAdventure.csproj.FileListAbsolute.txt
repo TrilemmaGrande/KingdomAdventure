@@ -173,3 +173,4 @@ C:\Users\test\OneDrive - BITLC Business IT Learning Center GmbH\Desktop\KingdomA
 C:\Users\test\OneDrive - BITLC Business IT Learning Center GmbH\Desktop\KingdomAdventure\obj\Debug\net6.0\KingdomAdventure.genruntimeconfig.cache
 C:\Users\test\OneDrive - BITLC Business IT Learning Center GmbH\Desktop\KingdomAdventure\obj\Debug\net6.0\ref\KingdomAdventure.dll
 C:\Users\trilemma\source\repos\TrilemmaGrande\KingdomAdventure\obj\Debug\net6.0\scopedcss\Views\World\_WorldLayout.cshtml.rz.scp.css
+C:\Users\trilemma\source\repos\TrilemmaGrande\KingdomAdventure\obj\Debug\net6.0\scopedcss\Views\Town\_TownLayout.cshtml.rz.scp.css

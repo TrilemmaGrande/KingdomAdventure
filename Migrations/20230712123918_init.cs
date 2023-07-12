@@ -11,7 +11,7 @@ namespace KingdomAdventure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "EnemyNPCs",
+                name: "EnemyNPC",
                 columns: table => new
                 {
                     EnemyNPCID = table.Column<int>(type: "int", nullable: false)
@@ -32,11 +32,11 @@ namespace KingdomAdventure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EnemyNPCs", x => x.EnemyNPCID);
+                    table.PrimaryKey("PK_EnemyNPC", x => x.EnemyNPCID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Items",
+                name: "Item",
                 columns: table => new
                 {
                     ItemID = table.Column<int>(type: "int", nullable: false)
@@ -66,7 +66,7 @@ namespace KingdomAdventure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Items", x => x.ItemID);
+                    table.PrimaryKey("PK_Item", x => x.ItemID);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,44 +105,44 @@ namespace KingdomAdventure.Migrations
                 {
                     table.PrimaryKey("PK_Player", x => x.PlayerID);
                     table.ForeignKey(
-                        name: "FK_Player_Items_ChestItemID",
+                        name: "FK_Player_Item_ChestItemID",
                         column: x => x.ChestItemID,
-                        principalTable: "Items",
+                        principalTable: "Item",
                         principalColumn: "ItemID");
                     table.ForeignKey(
-                        name: "FK_Player_Items_FeetItemID",
+                        name: "FK_Player_Item_FeetItemID",
                         column: x => x.FeetItemID,
-                        principalTable: "Items",
+                        principalTable: "Item",
                         principalColumn: "ItemID");
                     table.ForeignKey(
-                        name: "FK_Player_Items_HeadItemID",
+                        name: "FK_Player_Item_HeadItemID",
                         column: x => x.HeadItemID,
-                        principalTable: "Items",
+                        principalTable: "Item",
                         principalColumn: "ItemID");
                     table.ForeignKey(
-                        name: "FK_Player_Items_MainhandItemID",
+                        name: "FK_Player_Item_MainhandItemID",
                         column: x => x.MainhandItemID,
-                        principalTable: "Items",
+                        principalTable: "Item",
                         principalColumn: "ItemID");
                     table.ForeignKey(
-                        name: "FK_Player_Items_OffhandItemID",
+                        name: "FK_Player_Item_OffhandItemID",
                         column: x => x.OffhandItemID,
-                        principalTable: "Items",
+                        principalTable: "Item",
                         principalColumn: "ItemID");
                     table.ForeignKey(
-                        name: "FK_Player_Items_ShoulderItemID",
+                        name: "FK_Player_Item_ShoulderItemID",
                         column: x => x.ShoulderItemID,
-                        principalTable: "Items",
+                        principalTable: "Item",
                         principalColumn: "ItemID");
                     table.ForeignKey(
-                        name: "FK_Player_Items_TrousersItemID",
+                        name: "FK_Player_Item_TrousersItemID",
                         column: x => x.TrousersItemID,
-                        principalTable: "Items",
+                        principalTable: "Item",
                         principalColumn: "ItemID");
                 });
 
             migrationBuilder.CreateTable(
-                name: "UpgradeItems",
+                name: "UpgradeItem",
                 columns: table => new
                 {
                     UpgradeItemID = table.Column<int>(type: "int", nullable: false)
@@ -170,11 +170,11 @@ namespace KingdomAdventure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UpgradeItems", x => x.UpgradeItemID);
+                    table.PrimaryKey("PK_UpgradeItem", x => x.UpgradeItemID);
                     table.ForeignKey(
-                        name: "FK_UpgradeItems_Items_ItemID",
+                        name: "FK_UpgradeItem_Item_ItemID",
                         column: x => x.ItemID,
-                        principalTable: "Items",
+                        principalTable: "Item",
                         principalColumn: "ItemID");
                 });
 
@@ -184,61 +184,60 @@ namespace KingdomAdventure.Migrations
                 {
                     InventoryID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                    PlayerID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Inventory", x => x.InventoryID);
                     table.ForeignKey(
-                        name: "FK_Inventory_Player_PlayerId",
-                        column: x => x.PlayerId,
+                        name: "FK_Inventory_Player_PlayerID",
+                        column: x => x.PlayerID,
                         principalTable: "Player",
                         principalColumn: "PlayerID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "InventoryItems",
+                name: "InventoryItem",
                 columns: table => new
                 {
-                    InventoryItemId = table.Column<int>(type: "int", nullable: false)
+                    InventoryItemID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InventoryId = table.Column<int>(type: "int", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false)
+                    InventoryID = table.Column<int>(type: "int", nullable: false),
+                    ItemID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InventoryItems", x => x.InventoryItemId);
+                    table.PrimaryKey("PK_InventoryItem", x => x.InventoryItemID);
                     table.ForeignKey(
-                        name: "FK_InventoryItems_Inventory_InventoryId",
-                        column: x => x.InventoryId,
+                        name: "FK_InventoryItem_Inventory_InventoryID",
+                        column: x => x.InventoryID,
                         principalTable: "Inventory",
                         principalColumn: "InventoryID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InventoryItems_Items_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "Items",
+                        name: "FK_InventoryItem_Item_ItemID",
+                        column: x => x.ItemID,
+                        principalTable: "Item",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory_PlayerId",
+                name: "IX_Inventory_PlayerID",
                 table: "Inventory",
-                column: "PlayerId",
+                column: "PlayerID",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryItems_InventoryId",
-                table: "InventoryItems",
-                column: "InventoryId");
+                name: "IX_InventoryItem_InventoryID",
+                table: "InventoryItem",
+                column: "InventoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryItems_ItemId",
-                table: "InventoryItems",
-                column: "ItemId");
+                name: "IX_InventoryItem_ItemID",
+                table: "InventoryItem",
+                column: "ItemID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Player_ChestItemID",
@@ -276,8 +275,8 @@ namespace KingdomAdventure.Migrations
                 column: "TrousersItemID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpgradeItems_ItemID",
-                table: "UpgradeItems",
+                name: "IX_UpgradeItem_ItemID",
+                table: "UpgradeItem",
                 column: "ItemID");
         }
 
@@ -285,13 +284,13 @@ namespace KingdomAdventure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EnemyNPCs");
+                name: "EnemyNPC");
 
             migrationBuilder.DropTable(
-                name: "InventoryItems");
+                name: "InventoryItem");
 
             migrationBuilder.DropTable(
-                name: "UpgradeItems");
+                name: "UpgradeItem");
 
             migrationBuilder.DropTable(
                 name: "Inventory");
@@ -300,7 +299,7 @@ namespace KingdomAdventure.Migrations
                 name: "Player");
 
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "Item");
         }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230711122856_init")]
+    [Migration("20230712123918_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -75,7 +75,7 @@ namespace KingdomAdventure.Migrations
 
                     b.HasKey("EnemyNPCID");
 
-                    b.ToTable("EnemyNPCs");
+                    b.ToTable("EnemyNPC");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Inventory", b =>
@@ -86,12 +86,12 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InventoryID"));
 
-                    b.Property<int>("PlayerId")
+                    b.Property<int>("PlayerID")
                         .HasColumnType("int");
 
                     b.HasKey("InventoryID");
 
-                    b.HasIndex("PlayerId")
+                    b.HasIndex("PlayerID")
                         .IsUnique();
 
                     b.ToTable("Inventory");
@@ -99,29 +99,25 @@ namespace KingdomAdventure.Migrations
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.InventoryItem", b =>
                 {
-                    b.Property<int>("InventoryItemId")
+                    b.Property<int>("InventoryItemID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InventoryItemId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InventoryItemID"));
 
-                    b.Property<int>("InventoryId")
+                    b.Property<int>("InventoryID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ItemId")
+                    b.Property<int>("ItemID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("InventoryItemID");
 
-                    b.HasKey("InventoryItemId");
+                    b.HasIndex("InventoryID");
 
-                    b.HasIndex("InventoryId");
+                    b.HasIndex("ItemID");
 
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("InventoryItems");
+                    b.ToTable("InventoryItem");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Item", b =>
@@ -200,7 +196,7 @@ namespace KingdomAdventure.Migrations
 
                     b.HasKey("ItemID");
 
-                    b.ToTable("Items");
+                    b.ToTable("Item");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Player", b =>
@@ -378,14 +374,14 @@ namespace KingdomAdventure.Migrations
 
                     b.HasIndex("ItemID");
 
-                    b.ToTable("UpgradeItems");
+                    b.ToTable("UpgradeItem");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Inventory", b =>
                 {
                     b.HasOne("KingdomAdventure.Models.WorldArea.Player", "Player")
                         .WithOne("Inventory")
-                        .HasForeignKey("KingdomAdventure.Models.WorldArea.Inventory", "PlayerId")
+                        .HasForeignKey("KingdomAdventure.Models.WorldArea.Inventory", "PlayerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -396,13 +392,13 @@ namespace KingdomAdventure.Migrations
                 {
                     b.HasOne("KingdomAdventure.Models.WorldArea.Inventory", "Inventory")
                         .WithMany("Items")
-                        .HasForeignKey("InventoryId")
+                        .HasForeignKey("InventoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KingdomAdventure.Models.WorldArea.Item", "Item")
                         .WithMany()
-                        .HasForeignKey("ItemId")
+                        .HasForeignKey("ItemID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

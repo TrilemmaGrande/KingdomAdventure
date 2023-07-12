@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230712180800_init")]
+    [Migration("20230712185659_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -105,10 +105,16 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownID"));
 
+                    b.Property<int>("PlayerID")
+                        .HasColumnType("int");
+
                     b.Property<string>("TownName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TownID");
+
+                    b.HasIndex("PlayerID")
+                        .IsUnique();
 
                     b.ToTable("Town");
                 });
@@ -558,9 +564,6 @@ namespace KingdomAdventure.Migrations
                     b.Property<double>("Str")
                         .HasColumnType("float");
 
-                    b.Property<int>("TownID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TrousersItemID")
                         .HasColumnType("int");
 
@@ -577,8 +580,6 @@ namespace KingdomAdventure.Migrations
                     b.HasIndex("OffhandItemID");
 
                     b.HasIndex("ShoulderItemID");
-
-                    b.HasIndex("TownID");
 
                     b.HasIndex("TrousersItemID");
 
@@ -653,6 +654,17 @@ namespace KingdomAdventure.Migrations
                     b.HasKey("UpgradeID");
 
                     b.ToTable("Upgrade");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.Town", b =>
+                {
+                    b.HasOne("KingdomAdventure.Models.WorldArea.Player", "Player")
+                        .WithOne("Town")
+                        .HasForeignKey("KingdomAdventure.Models.TownArea.Town", "PlayerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuilding", b =>
@@ -845,12 +857,6 @@ namespace KingdomAdventure.Migrations
                         .WithMany()
                         .HasForeignKey("ShoulderItemID");
 
-                    b.HasOne("KingdomAdventure.Models.TownArea.Town", "Town")
-                        .WithMany()
-                        .HasForeignKey("TownID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("KingdomAdventure.Models.WorldArea.Item", "Trousers")
                         .WithMany()
                         .HasForeignKey("TrousersItemID");
@@ -866,8 +872,6 @@ namespace KingdomAdventure.Migrations
                     b.Navigation("Offhand");
 
                     b.Navigation("Shoulder");
-
-                    b.Navigation("Town");
 
                     b.Navigation("Trousers");
                 });
@@ -907,6 +911,9 @@ namespace KingdomAdventure.Migrations
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Player", b =>
                 {
                     b.Navigation("Inventory")
+                        .IsRequired();
+
+                    b.Navigation("Town")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

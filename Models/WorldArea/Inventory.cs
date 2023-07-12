@@ -10,6 +10,6 @@
         // Navigation property
         public Player Player { get; set; }
         public List<InventoryItem>? InventoryItems { get; set; } = new List<InventoryItem>();
-        public List<InventoryUpgrade>? InventoryUpgrades = new List<InventoryUpgrade>();
+        public List<InventoryUpgrade>? InventoryUpgrades { get; set; } = new List<InventoryUpgrade>();
     }
 }

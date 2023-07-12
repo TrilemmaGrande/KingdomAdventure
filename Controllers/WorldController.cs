@@ -54,7 +54,7 @@ namespace KingdomAdventure.Controllers
         {
             return repo.Players
                         .Include(i => i.Inventory).ThenInclude(ii => ii.InventoryItems).ThenInclude(iii => iii.Item)
-                        //.Include(i => i.Inventory).ThenInclude(ii => ii.UpgradeItems)
+                        .Include(i => i.Inventory).ThenInclude(ii => ii.InventoryUpgrades).ThenInclude(iii => iii.Upgrade)
                         .FirstOrDefault(p => p.PlayerID == HttpContext.Session.GetInt32("id"));
         }
     }

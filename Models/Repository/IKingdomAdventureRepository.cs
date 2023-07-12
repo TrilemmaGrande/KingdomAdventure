@@ -21,6 +21,7 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<Item> Items { get; }
         public IQueryable<Player> Players { get; }
         public IQueryable<Upgrade> Upgrades { get; }
+
         public void AddPlayer(Player player);
         public void DeletePlayer(Player player);
         public void AddInventoryItem(Item item, Inventory inventory);

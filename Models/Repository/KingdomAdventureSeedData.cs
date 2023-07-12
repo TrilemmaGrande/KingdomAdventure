@@ -17,7 +17,7 @@ namespace KingdomAdventure.Models.Repository
       {
         dbContext.Database.Migrate();
       }
-      if (!dbContext.UpgradeItem.Any())
+      if (!dbContext.Upgrade.Any())
       {
         GenerateUpgradeItems(dbContext);
       }
@@ -208,43 +208,43 @@ namespace KingdomAdventure.Models.Repository
     }
     private static void GenerateUpgradeItems(KingdomAdventureDBContext dbContext)
     {
-      dbContext.UpgradeItem.AddRange(
-        new InventoryUpgrade()
+      dbContext.Upgrade.AddRange(
+        new Upgrade()
         {
           UpgradeItemName = "Blob of CritDmg",
           UpgradeItemValue = 20,
           CritDmg = 5,
           ItemType = ItemType.Upgrade
         },
-        new InventoryUpgrade()
+        new Upgrade()
         {
           UpgradeItemName = "Blob of Crit",
           UpgradeItemValue = 20,
           Crit = 5,
           ItemType = ItemType.Upgrade
         },
-        new InventoryUpgrade()
+        new Upgrade()
         {
           UpgradeItemName = "Blob of End",
           UpgradeItemValue = 20,
           End = 5,
           ItemType = ItemType.Upgrade
         },
-        new InventoryUpgrade()
+        new Upgrade()
         {
           UpgradeItemName = "Blob of Dex",
           UpgradeItemValue = 20,
           Dex = 5,
           ItemType = ItemType.Upgrade
         },
-        new InventoryUpgrade()
+        new Upgrade()
         {
           UpgradeItemName = "Blob of Int",
           UpgradeItemValue = 20,
           Int = 5,
           ItemType = ItemType.Upgrade
         },
-        new InventoryUpgrade()
+        new Upgrade()
         {
           UpgradeItemName = "Blob of Str",
           UpgradeItemValue = 20,

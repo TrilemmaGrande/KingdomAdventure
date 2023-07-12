@@ -18,7 +18,8 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<Town> Towns => ctx.Town;
         public IQueryable<TownBuilding> TownBuildings => ctx.TownBuilding;
         public IQueryable<TownRessource> TownRessources => ctx.TownRessource;
-        public IQueryable<TownSoldier> TownSoldiers => ctx.TownSoldier;
+        public IQueryable<TownSoldierAttacking> TownSoldiersAttacking => ctx.TownSoldierAttacking;
+        public IQueryable<TownSoldierDefending> TownSoldiersDefending => ctx.TownSoldierDefending;
         public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPC;
         public IQueryable<Inventory> Inventories => ctx.Inventory;
         public IQueryable<InventoryItem> InventoryItems => ctx.InventoryItem;

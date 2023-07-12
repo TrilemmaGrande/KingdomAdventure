@@ -5,6 +5,7 @@ namespace KingdomAdventure.Models.TownArea
     public class TownBuilding
     {
         public int TownBuildingID { get; set; }
+        public int Amount { get; set; }
 
         // Foreign key
         public int TownID { get; set; }

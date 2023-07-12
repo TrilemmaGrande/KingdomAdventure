@@ -1,35 +1,56 @@
-﻿using KingdomAdventure.Models.WorldArea;
+﻿using KingdomAdventure.Models.TownArea;
+using KingdomAdventure.Models.WorldArea;
 using Microsoft.EntityFrameworkCore;
 
 namespace KingdomAdventure.Models.Repository
 {
-  public static class KingdomAdventureSeedData
-  {
-    public static void EnsurePopulated(IApplicationBuilder app)
+    public static class KingdomAdventureSeedData
     {
-      KingdomAdventureDBContext dbContext = app
-        .ApplicationServices
-        .CreateScope()
-        .ServiceProvider
-        .GetRequiredService<KingdomAdventureDBContext>();
+        public static void EnsurePopulated(IApplicationBuilder app)
+        {
+            KingdomAdventureDBContext dbContext = app
+              .ApplicationServices
+              .CreateScope()
+              .ServiceProvider
+              .GetRequiredService<KingdomAdventureDBContext>();
 
-      if (dbContext.Database.GetPendingMigrations().Any())
-      {
-        dbContext.Database.Migrate();
-      }
-      if (!dbContext.Upgrade.Any())
-      {
-        GenerateUpgradeItems(dbContext);
-      }
-      if (!dbContext.Item.Any())
-      {
-        GenerateMainHandWeapons(dbContext);
-        GenerateOffHandWeapons(dbContext);
-        GenerateArmor(dbContext);
-      }
-    }
-    private static void GenerateMainHandWeapons(KingdomAdventureDBContext dbContext)
-    {
+            if (dbContext.Database.GetPendingMigrations().Any())
+            {
+                dbContext.Database.Migrate();
+            }
+            if (!dbContext.Upgrade.Any())
+            {
+                GenerateUpgradeItems(dbContext);
+            }
+            if (!dbContext.Item.Any())
+            {
+                GenerateMainHandWeapons(dbContext);
+                GenerateOffHandWeapons(dbContext);
+                GenerateArmor(dbContext);
+            }
+            if (!dbContext.Ressource.Any())
+            {
+                GenerateRessources(dbContext);
+            }
+        }
+
+        private static void GenerateRessources(KingdomAdventureDBContext dbContext)
+        {
+            dbContext.Ressource.AddRange(
+                new Ressource()
+                {
+                    RessourceName = "Wood",
+                    RessourceValue = 1.0
+                },
+                new Ressource()
+                {
+                    RessourceName = "Stone",
+                    RessourceValue = 1.0
+                });
+        }
+
+        private static void GenerateMainHandWeapons(KingdomAdventureDBContext dbContext)
+        {
             dbContext.Item.AddRange(
               new Item()
               {
@@ -88,170 +109,170 @@ namespace KingdomAdventure.Models.Repository
                   AtkPierce = 6,
                   Dex = 4,
                   UpgradeItemSlots = 1
-              }) ;
-      dbContext.SaveChanges();
+              });
+            dbContext.SaveChanges();
+        }
+        private static void GenerateOffHandWeapons(KingdomAdventureDBContext dbContext)
+        {
+            dbContext.Item.AddRange(
+              new Item()
+              {
+                  ItemName = "Book of Intelligence",
+                  ItemType = ItemType.Weapon,
+                  WeaponType = WeaponType.Offhand,
+                  ItemValue = 15,
+                  Int = 10,
+              },
+              new Item()
+              {
+                  ItemName = "Rusty Shield",
+                  ItemType = ItemType.Weapon,
+                  WeaponType = WeaponType.Offhand,
+                  ItemValue = 2.5,
+                  DefMelee = 3,
+                  DefPierce = 5
+              });
+            dbContext.SaveChanges();
+        }
+        private static void GenerateArmor(KingdomAdventureDBContext dbContext)
+        {
+            dbContext.Item.AddRange(
+              new Item()
+              {
+                  ItemName = "Linen Helmet",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Head,
+                  ItemValue = 2.5,
+                  DefMelee = 3
+              },
+              new Item()
+              {
+                  ItemName = "Linen Shoulders",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Shoulders,
+                  ItemValue = 5,
+                  DefMelee = 2
+              },
+              new Item()
+              {
+                  ItemName = "Linen Chest",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Chest,
+                  ItemValue = 7,
+                  DefMelee = 5,
+                  UpgradeItemSlots = 1
+              },
+              new Item()
+              {
+                  ItemName = "Linen Legs",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Legs,
+                  ItemValue = 10,
+                  DefMelee = 2
+              },
+              new Item()
+              {
+                  ItemName = "Linen Feet",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Feet,
+                  ItemValue = 4,
+                  DefMelee = 1
+              },
+              new Item()
+              {
+                  ItemName = "Leather Helmet",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Head,
+                  ItemValue = 2.5,
+                  DefMelee = 2,
+                  DefPierce = 1,
+                  UpgradeItemSlots = 1
+              },
+              new Item()
+              {
+                  ItemName = "Leather Shoulders",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Shoulders,
+                  ItemValue = 5,
+                  DefMelee = 2,
+                  DefPierce = 1,
+                  UpgradeItemSlots = 1
+              },
+              new Item()
+              {
+                  ItemName = "Leather Chest",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Chest,
+                  ItemValue = 7,
+                  DefMelee = 4,
+                  DefPierce = 4,
+                  UpgradeItemSlots = 2
+              },
+              new Item()
+              {
+                  ItemName = "Leather Legs",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Legs,
+                  ItemValue = 10,
+                  DefMelee = 3,
+                  DefPierce = 2,
+              },
+              new Item()
+              {
+                  ItemName = "Leather Feet",
+                  ItemType = ItemType.Armor,
+                  ArmorType = ArmorType.Feet,
+                  ItemValue = 4,
+                  DefMelee = 2,
+              });
+            dbContext.SaveChanges();
+        }
+        private static void GenerateUpgradeItems(KingdomAdventureDBContext dbContext)
+        {
+            dbContext.Upgrade.AddRange(
+              new Upgrade()
+              {
+                  UpgradeItemName = "Blob of CritDmg",
+                  UpgradeItemValue = 20,
+                  CritDmg = 5,
+                  ItemType = ItemType.Upgrade
+              },
+              new Upgrade()
+              {
+                  UpgradeItemName = "Blob of Crit",
+                  UpgradeItemValue = 20,
+                  Crit = 5,
+                  ItemType = ItemType.Upgrade
+              },
+              new Upgrade()
+              {
+                  UpgradeItemName = "Blob of End",
+                  UpgradeItemValue = 20,
+                  End = 5,
+                  ItemType = ItemType.Upgrade
+              },
+              new Upgrade()
+              {
+                  UpgradeItemName = "Blob of Dex",
+                  UpgradeItemValue = 20,
+                  Dex = 5,
+                  ItemType = ItemType.Upgrade
+              },
+              new Upgrade()
+              {
+                  UpgradeItemName = "Blob of Int",
+                  UpgradeItemValue = 20,
+                  Int = 5,
+                  ItemType = ItemType.Upgrade
+              },
+              new Upgrade()
+              {
+                  UpgradeItemName = "Blob of Str",
+                  UpgradeItemValue = 20,
+                  Str = 5,
+                  ItemType = ItemType.Upgrade
+              });
+            dbContext.SaveChanges();
+        }
     }
-    private static void GenerateOffHandWeapons(KingdomAdventureDBContext dbContext)
-    {
-      dbContext.Item.AddRange(
-        new Item()
-        {
-          ItemName = "Book of Intelligence",
-          ItemType = ItemType.Weapon,
-          WeaponType = WeaponType.Offhand,
-          ItemValue = 15,
-          Int = 10,
-        },
-        new Item()
-        {
-          ItemName = "Rusty Shield",
-          ItemType = ItemType.Weapon,
-          WeaponType = WeaponType.Offhand,
-          ItemValue = 2.5,
-          DefMelee = 3,
-          DefPierce = 5
-        });
-      dbContext.SaveChanges();
-    }
-    private static void GenerateArmor(KingdomAdventureDBContext dbContext)
-    {
-      dbContext.Item.AddRange(
-        new Item()
-        {
-          ItemName = "Linen Helmet",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Head,
-          ItemValue = 2.5,
-          DefMelee = 3
-        },
-        new Item()
-        {
-          ItemName = "Linen Shoulders",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Shoulders,
-          ItemValue = 5,
-          DefMelee = 2
-        },
-        new Item()
-        {
-          ItemName = "Linen Chest",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Chest,
-          ItemValue = 7,
-          DefMelee = 5,
-          UpgradeItemSlots = 1
-        },
-        new Item()
-        {
-          ItemName = "Linen Legs",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Legs,
-          ItemValue = 10,
-          DefMelee = 2
-        },
-        new Item()
-        {
-          ItemName = "Linen Feet",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Feet,
-          ItemValue = 4,
-          DefMelee = 1
-        },
-        new Item()
-        {
-          ItemName = "Leather Helmet",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Head,
-          ItemValue = 2.5,
-          DefMelee = 2,
-          DefPierce = 1,
-            UpgradeItemSlots = 1
-        },
-        new Item()
-        {
-          ItemName = "Leather Shoulders",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Shoulders,
-          ItemValue = 5,
-          DefMelee = 2,
-          DefPierce = 1,
-            UpgradeItemSlots = 1
-        },
-        new Item()
-        {
-          ItemName = "Leather Chest",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Chest,
-          ItemValue = 7,
-          DefMelee = 4,
-          DefPierce = 4,
-            UpgradeItemSlots = 2
-        },
-        new Item()
-        {
-          ItemName = "Leather Legs",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Legs,
-          ItemValue = 10,
-          DefMelee = 3,
-          DefPierce = 2,
-        },
-        new Item()
-        {
-          ItemName = "Leather Feet",
-          ItemType = ItemType.Armor,
-          ArmorType = ArmorType.Feet,
-          ItemValue = 4,
-          DefMelee = 2,
-        });
-      dbContext.SaveChanges();
-    }
-    private static void GenerateUpgradeItems(KingdomAdventureDBContext dbContext)
-    {
-      dbContext.Upgrade.AddRange(
-        new Upgrade()
-        {
-          UpgradeItemName = "Blob of CritDmg",
-          UpgradeItemValue = 20,
-          CritDmg = 5,
-          ItemType = ItemType.Upgrade
-        },
-        new Upgrade()
-        {
-          UpgradeItemName = "Blob of Crit",
-          UpgradeItemValue = 20,
-          Crit = 5,
-          ItemType = ItemType.Upgrade
-        },
-        new Upgrade()
-        {
-          UpgradeItemName = "Blob of End",
-          UpgradeItemValue = 20,
-          End = 5,
-          ItemType = ItemType.Upgrade
-        },
-        new Upgrade()
-        {
-          UpgradeItemName = "Blob of Dex",
-          UpgradeItemValue = 20,
-          Dex = 5,
-          ItemType = ItemType.Upgrade
-        },
-        new Upgrade()
-        {
-          UpgradeItemName = "Blob of Int",
-          UpgradeItemValue = 20,
-          Int = 5,
-          ItemType = ItemType.Upgrade
-        },
-        new Upgrade()
-        {
-          UpgradeItemName = "Blob of Str",
-          UpgradeItemValue = 20,
-          Str = 5,
-          ItemType = ItemType.Upgrade
-        });
-      dbContext.SaveChanges();
-    }
-  }
 }

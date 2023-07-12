@@ -15,7 +15,8 @@ namespace KingdomAdventure.Models.Repository
         public DbSet<Town> Town { get; set; }
         public DbSet<TownBuilding> TownBuilding { get; set; }
         public DbSet<TownRessource> TownRessource { get; set; }
-        public DbSet<TownSoldier> TownSoldier { get; set; }
+        public DbSet<TownSoldierAttacking> TownSoldierAttacking { get; set; }
+        public DbSet<TownSoldierDefending> TownSoldierDefending { get; set; }
         public DbSet<EnemyNPC> EnemyNPC { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
         public DbSet<InventoryItem> InventoryItem { get; set; }

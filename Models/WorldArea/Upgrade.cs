@@ -2,7 +2,7 @@
 {
     public class Upgrade
     {
-        public int UpgradeItemID { get; set; }
+        public int UpgradeID { get; set; }
         public string? UpgradeItemName { get; set; }
         public double? UpgradeItemValue { get; set; }
         public double? PlayerGold { get; set; }

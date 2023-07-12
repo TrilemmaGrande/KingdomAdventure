@@ -1,7 +1,35 @@
 ﻿@{
     ViewData["Title"] = "Town Area";
 }
+@model Town
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to Town</h1>
+    <h1 class="display-4">
+        Welcome to
+        @if (Model.TownName is null)
+        {
+            @:Town
+        }
+        else
+        {
+            @Model.TownName
+        }
+    </h1>
+    @if (Model.TownName is null)
+    {
+        <a asp-action="CreateNewTown">Create Town</a>
+    }
+    else
+    {
+        <h4>Ressources:</h4>
+        @foreach (var item in Model.TownRessources)
+        {
+            @:<p>@item.Ressource.RessourceName @item.Amount</p>
+        }
+        <h4>Buildings:</h4>
+        @foreach (var item in Model.TownBuildings)
+        {
+            @:<p>@item.Building.BuildingName</p>
+        }
+    }
 </div>

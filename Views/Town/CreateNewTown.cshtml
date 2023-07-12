@@ -1,0 +1,8 @@
+﻿@model Town
+<div>
+    <form asp-action="CreateNewTown" method="post">
+        <input asp-for="TownName" placeholder="Town Name" />
+        <button type="submit">Create Town</button>
+    </form>
+    <a asp-action="Index"> back </a>
+</div>

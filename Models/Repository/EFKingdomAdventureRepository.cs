@@ -54,5 +54,9 @@ namespace KingdomAdventure.Models.Repository
             ctx.Inventory.FirstOrDefault(i => i.InventoryID == inventory.InventoryID).InventoryItems.Remove(inventoryItem);
             ctx.SaveChanges();
         }
+        public void SaveRepo()
+        {
+            ctx.SaveChanges();
+        }
     }
 }

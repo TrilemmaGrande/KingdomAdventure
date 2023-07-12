@@ -27,5 +27,6 @@ namespace KingdomAdventure.Models.Repository
         public void DeletePlayer(Player player);
         public void AddInventoryItem(Item item, Inventory inventory);
         public void DeleteInventoryItem(InventoryItem inventoryItem, Inventory inventory);
+        public void SaveRepo();
     }
 }

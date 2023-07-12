@@ -15,9 +15,20 @@ namespace KingdomAdventure.Controllers
             this.repo = repo;
         }
         public IActionResult Index()
+        {         
+            return View(GetTown());
+        }
+        [HttpGet]
+        public IActionResult CreateNewTown()
         {
-            GetTown();
             return View();
+        }
+        [HttpPost]
+        public IActionResult CreateNewTown(Town town)
+        {
+            GetTown().TownName = town.TownName;
+            repo.SaveRepo();
+            return RedirectToAction("Index");
         }
         private Town GetTown()
         {

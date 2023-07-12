@@ -6,7 +6,6 @@ namespace KingdomAdventure.Models.TownArea
     {
         public int BuildingID { get; set; }
         public string? BuildingName { get; set; }
-        public int? Level { get; set; }
         public List<TownRessource>? BuildingCost { get; set; } = new List<TownRessource>();
         public List<TownRessource>? ProduceRessource { get; set; } = new List<TownRessource>();
         public List<TownSoldierAttacking>? ProduceSoldierAttacking { get; set; } = new List<TownSoldierAttacking>();

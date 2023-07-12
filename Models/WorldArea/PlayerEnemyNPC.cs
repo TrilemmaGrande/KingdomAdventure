@@ -3,6 +3,8 @@
     public class PlayerEnemyNPC
     {
         public int PlayerEnemyNPCID { get; set; }
+        public int? Level { get; set; }
+        public double? CurrentLP { get; set; }
 
         // Foreign key
         public int PlayerID { get; set; }

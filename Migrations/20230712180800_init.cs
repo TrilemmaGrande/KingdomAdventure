@@ -16,8 +16,7 @@ namespace KingdomAdventure.Migrations
                 {
                     BuildingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Level = table.Column<int>(type: "int", nullable: true)
+                    BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,8 +31,6 @@ namespace KingdomAdventure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Boss = table.Column<bool>(type: "bit", nullable: false),
                     EnemyNPCName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Level = table.Column<int>(type: "int", nullable: false),
-                    CurrentLP = table.Column<double>(type: "float", nullable: false),
                     FullLP = table.Column<double>(type: "float", nullable: false),
                     AtkMelee = table.Column<double>(type: "float", nullable: true),
                     AtkPierce = table.Column<double>(type: "float", nullable: true),
@@ -104,9 +101,6 @@ namespace KingdomAdventure.Migrations
                     SoldierID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SoldierName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Level = table.Column<int>(type: "int", nullable: true),
-                    Experience = table.Column<double>(type: "float", nullable: true),
-                    CurrentLP = table.Column<double>(type: "float", nullable: true),
                     FullLP = table.Column<double>(type: "float", nullable: true),
                     AtkMelee = table.Column<double>(type: "float", nullable: true),
                     AtkPierce = table.Column<double>(type: "float", nullable: true),
@@ -250,6 +244,7 @@ namespace KingdomAdventure.Migrations
                     TownBuildingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<int>(type: "int", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false),
                     TownID = table.Column<int>(type: "int", nullable: false),
                     BuildingID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -315,6 +310,9 @@ namespace KingdomAdventure.Migrations
                 {
                     TownSoldierAttackingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Level = table.Column<int>(type: "int", nullable: true),
+                    Experience = table.Column<double>(type: "float", nullable: true),
+                    CurrentLP = table.Column<double>(type: "float", nullable: true),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     TownID = table.Column<int>(type: "int", nullable: false),
                     SoldierID = table.Column<int>(type: "int", nullable: false),
@@ -348,6 +346,9 @@ namespace KingdomAdventure.Migrations
                 {
                     TownSoldierDefendingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Level = table.Column<int>(type: "int", nullable: true),
+                    Experience = table.Column<double>(type: "float", nullable: true),
+                    CurrentLP = table.Column<double>(type: "float", nullable: true),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     TownID = table.Column<int>(type: "int", nullable: false),
                     SoldierID = table.Column<int>(type: "int", nullable: false),

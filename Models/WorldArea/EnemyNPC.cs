@@ -5,8 +5,6 @@
         public int EnemyNPCID { get; set; }
         public bool Boss { get; set; }
         public string EnemyNPCName { get; set; }
-        public int Level { get; set; }
-        public double CurrentLP { get; set; }
         public double FullLP { get; set; }
         public double? AtkMelee { get; set; }
         public double? AtkPierce { get; set; }

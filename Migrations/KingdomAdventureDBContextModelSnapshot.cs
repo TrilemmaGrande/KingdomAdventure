@@ -33,9 +33,6 @@ namespace KingdomAdventure.Migrations
                     b.Property<string>("BuildingName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Level")
-                        .HasColumnType("int");
-
                     b.HasKey("BuildingID");
 
                     b.ToTable("Building");
@@ -77,9 +74,6 @@ namespace KingdomAdventure.Migrations
                     b.Property<double?>("AtkPierce")
                         .HasColumnType("float");
 
-                    b.Property<double?>("CurrentLP")
-                        .HasColumnType("float");
-
                     b.Property<double?>("DefMagic")
                         .HasColumnType("float");
 
@@ -89,14 +83,8 @@ namespace KingdomAdventure.Migrations
                     b.Property<double?>("DefPierce")
                         .HasColumnType("float");
 
-                    b.Property<double?>("Experience")
-                        .HasColumnType("float");
-
                     b.Property<double?>("FullLP")
                         .HasColumnType("float");
-
-                    b.Property<int?>("Level")
-                        .HasColumnType("int");
 
                     b.Property<string>("SoldierName")
                         .HasColumnType("nvarchar(max)");
@@ -134,6 +122,9 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("BuildingID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Level")
                         .HasColumnType("int");
 
                     b.Property<int>("TownID")
@@ -198,6 +189,15 @@ namespace KingdomAdventure.Migrations
                     b.Property<int?>("BuildingID")
                         .HasColumnType("int");
 
+                    b.Property<double?>("CurrentLP")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Experience")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("Level")
+                        .HasColumnType("int");
+
                     b.Property<int>("SoldierID")
                         .HasColumnType("int");
 
@@ -227,6 +227,15 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BuildingID")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("CurrentLP")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Experience")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("Level")
                         .HasColumnType("int");
 
                     b.Property<int>("SoldierID")
@@ -272,9 +281,6 @@ namespace KingdomAdventure.Migrations
                     b.Property<double?>("CritDmg")
                         .HasColumnType("float");
 
-                    b.Property<double>("CurrentLP")
-                        .HasColumnType("float");
-
                     b.Property<double?>("DefMagic")
                         .HasColumnType("float");
 
@@ -290,9 +296,6 @@ namespace KingdomAdventure.Migrations
 
                     b.Property<double>("FullLP")
                         .HasColumnType("float");
-
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
 
                     b.HasKey("EnemyNPCID");
 

@@ -1,4 +1,5 @@
-﻿using KingdomAdventure.Models.WorldArea;
+﻿using KingdomAdventure.Models.TownArea;
+using KingdomAdventure.Models.WorldArea;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KingdomAdventure.Models.Repository
@@ -11,12 +12,21 @@ namespace KingdomAdventure.Models.Repository
         {
             this.ctx = ctx;
         }
-        public IQueryable<Player> Players => ctx.Player;
+        public IQueryable<Building> Buildings => ctx.Building;
+        public IQueryable<Ressource> Ressources => ctx.Ressource;
+        public IQueryable<Soldier> Soldiers => ctx.Soldier;
+        public IQueryable<Town> Towns => ctx.Town;
+        public IQueryable<TownBuilding> TownBuildings => ctx.TownBuilding;
+        public IQueryable<TownRessource> TownRessources => ctx.TownRessource;
+        public IQueryable<TownSoldier> TownSoldiers => ctx.TownSoldier;
+        public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPC;
         public IQueryable<Inventory> Inventories => ctx.Inventory;
         public IQueryable<InventoryItem> InventoryItems => ctx.InventoryItem;
+        public IQueryable<InventoryItemUpgrade> InventoryItemUpgrades => ctx.InventoryItemUpgrade;
+        public IQueryable<InventoryUpgrade> InventoryUpgrades => ctx.InventoryUpgrade;
         public IQueryable<Item> Items => ctx.Item;
-        public IQueryable<UpgradeItem> UpgradeItems => ctx.UpgradeItem;
-        public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPC;
+        public IQueryable<Player> Players => ctx.Player;
+        public IQueryable<Upgrade> Upgrades => ctx.Upgrade;
 
         public void AddPlayer(Player player)
         {
@@ -35,12 +45,12 @@ namespace KingdomAdventure.Models.Repository
                 Item = item,
                 Inventory = inventory
             };
-            ctx.Inventory.FirstOrDefault(i => i.InventoryID == inventory.InventoryID).Items.Add(inventoryItem);
+            ctx.Inventory.FirstOrDefault(i => i.InventoryID == inventory.InventoryID).InventoryItems.Add(inventoryItem);
             ctx.SaveChanges();
         }
         public void DeleteInventoryItem(InventoryItem inventoryItem, Inventory inventory)
         {            
-            ctx.Inventory.FirstOrDefault(i => i.InventoryID == inventory.InventoryID).Items.Remove(inventoryItem);
+            ctx.Inventory.FirstOrDefault(i => i.InventoryID == inventory.InventoryID).InventoryItems.Remove(inventoryItem);
             ctx.SaveChanges();
         }
     }

@@ -209,42 +209,42 @@ namespace KingdomAdventure.Models.Repository
     private static void GenerateUpgradeItems(KingdomAdventureDBContext dbContext)
     {
       dbContext.UpgradeItem.AddRange(
-        new UpgradeItem()
+        new InventoryUpgrade()
         {
           UpgradeItemName = "Blob of CritDmg",
           UpgradeItemValue = 20,
           CritDmg = 5,
           ItemType = ItemType.Upgrade
         },
-        new UpgradeItem()
+        new InventoryUpgrade()
         {
           UpgradeItemName = "Blob of Crit",
           UpgradeItemValue = 20,
           Crit = 5,
           ItemType = ItemType.Upgrade
         },
-        new UpgradeItem()
+        new InventoryUpgrade()
         {
           UpgradeItemName = "Blob of End",
           UpgradeItemValue = 20,
           End = 5,
           ItemType = ItemType.Upgrade
         },
-        new UpgradeItem()
+        new InventoryUpgrade()
         {
           UpgradeItemName = "Blob of Dex",
           UpgradeItemValue = 20,
           Dex = 5,
           ItemType = ItemType.Upgrade
         },
-        new UpgradeItem()
+        new InventoryUpgrade()
         {
           UpgradeItemName = "Blob of Int",
           UpgradeItemValue = 20,
           Int = 5,
           ItemType = ItemType.Upgrade
         },
-        new UpgradeItem()
+        new InventoryUpgrade()
         {
           UpgradeItemName = "Blob of Str",
           UpgradeItemValue = 20,

@@ -1,6 +1,6 @@
 ﻿namespace KingdomAdventure.Models.WorldArea
 {
-    public class UpgradeItem
+    public class Upgrade
     {
         public int UpgradeItemID { get; set; }
         public string? UpgradeItemName { get; set; }

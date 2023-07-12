@@ -45,7 +45,7 @@ namespace KingdomAdventure.Controllers
         }
         public IActionResult DeleteInventoryItem(int itemID)
         {
-            var inventoryItem = GetPlayer().Inventory.Items.FirstOrDefault(i => i.InventoryItemID == itemID);
+            var inventoryItem = GetPlayer().Inventory.InventoryItems.FirstOrDefault(i => i.InventoryItemID == itemID);
             var inventory = GetPlayer().Inventory;
             repo.DeleteInventoryItem(inventoryItem, inventory);
             return RedirectToAction("Inventory");
@@ -53,9 +53,9 @@ namespace KingdomAdventure.Controllers
         private Player GetPlayer()
         {
             return repo.Players
-                        .Include(i => i.Inventory)
-                        .ThenInclude(ii => ii.Items)
-                        .FirstOrDefault(i => i.PlayerID == HttpContext.Session.GetInt32("id"));
+                        .Include(i => i.Inventory).ThenInclude(ii => ii.InventoryItems).ThenInclude(iii => iii.Item)
+                        //.Include(i => i.Inventory).ThenInclude(ii => ii.UpgradeItems)
+                        .FirstOrDefault(p => p.PlayerID == HttpContext.Session.GetInt32("id"));
         }
     }
 }

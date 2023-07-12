@@ -34,7 +34,7 @@ namespace KingdomAdventure.Models.Repository
             {
                 Item = item,
                 Inventory = inventory,
-                Name = item.ItemName
+                InventoryItemName = item.ItemName
             };
             ctx.Inventory.FirstOrDefault(i => i.InventoryID == inventory.InventoryID).Items.Add(inventoryItem);
             ctx.SaveChanges();

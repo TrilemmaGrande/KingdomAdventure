@@ -3,7 +3,6 @@
     public class Player
     {
         public int PlayerID { get; set; }
-        public Inventory Inventory { get; set; } = new Inventory();
         public string PlayerName { get; set; }
         public double PlayerGold { get; set; }
         public int Level { get; set; }
@@ -30,6 +29,7 @@
         public double CritDmg { get; set; } // CritDmg = Dmg + (CritDmg * Dmg / 100)
         private double CapCritDmg { get; } = 50;
 
+        public Inventory Inventory { get; set; } = new Inventory();
         public Item? Mainhand { get; set; }
         public Item? Offhand { get; set; }
         public Item? Head { get; set; }

@@ -5,7 +5,7 @@
         public int InventoryID { get; set; }
 
         // Foreign key
-        public int PlayerId { get; set; }
+        public int PlayerID { get; set; }
 
         // Navigation property
         public Player Player { get; set; }

@@ -2,17 +2,17 @@
 {
     public class InventoryItem
     {
-        public int InventoryItemId { get; set; }
-        public string Name { get; set; }
+        public int InventoryItemID { get; set; }
+        public string InventoryItemName { get; set; }
 
         // Foreign key
-        public int InventoryId { get; set; }
+        public int InventoryID { get; set; }
 
         // Navigation property
         public Inventory Inventory { get; set; }
 
         // Foreign key
-        public int ItemId { get; set; }
+        public int ItemID { get; set; }
 
         // Navigation property
         public Item Item { get; set; }

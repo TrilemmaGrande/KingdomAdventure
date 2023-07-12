@@ -2,7 +2,9 @@
 {
     public class Town
     {
+        public int TownID { get; set; }
         public string TownName { get; set; }
-        public List<TownBuilding> TownBuildings = new List<TownBuilding>()
+        public Dictionary<TownBuilding,int> TownBuildings { get; set; }
+        public Dictionary<TownRessource,int> TownRessources { get; set; }
     }
 }

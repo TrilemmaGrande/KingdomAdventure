@@ -30,7 +30,7 @@ namespace KingdomAdventure.Models.Repository
     }
     private static void GenerateMainHandWeapons(KingdomAdventureDBContext dbContext)
     {
-            dbContext.Items.AddRange(
+            dbContext.Item.AddRange(
               new Item()
               {
                   ItemName = "Rusty Sword",
@@ -93,7 +93,7 @@ namespace KingdomAdventure.Models.Repository
     }
     private static void GenerateOffHandWeapons(KingdomAdventureDBContext dbContext)
     {
-      dbContext.Items.AddRange(
+      dbContext.Item.AddRange(
         new Item()
         {
           ItemName = "Book of Intelligence",
@@ -115,7 +115,7 @@ namespace KingdomAdventure.Models.Repository
     }
     private static void GenerateArmor(KingdomAdventureDBContext dbContext)
     {
-      dbContext.Items.AddRange(
+      dbContext.Item.AddRange(
         new Item()
         {
           ItemName = "Linen Helmet",
@@ -208,7 +208,7 @@ namespace KingdomAdventure.Models.Repository
     }
     private static void GenerateUpgradeItems(KingdomAdventureDBContext dbContext)
     {
-      dbContext.UpgradeItems.AddRange(
+      dbContext.UpgradeItem.AddRange(
         new UpgradeItem()
         {
           UpgradeItemName = "Blob of CritDmg",

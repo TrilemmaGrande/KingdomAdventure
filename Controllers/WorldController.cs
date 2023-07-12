@@ -45,7 +45,7 @@ namespace KingdomAdventure.Controllers
         }
         public IActionResult DeleteInventoryItem(int itemID)
         {
-            var inventoryItem = GetPlayer().Inventory.Items.FirstOrDefault(i => i.InventoryItemId == itemID);
+            var inventoryItem = GetPlayer().Inventory.Items.FirstOrDefault(i => i.InventoryItemID == itemID);
             var inventory = GetPlayer().Inventory;
             repo.DeleteInventoryItem(inventoryItem, inventory);
             return RedirectToAction("Inventory");

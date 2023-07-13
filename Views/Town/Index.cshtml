@@ -22,51 +22,83 @@
     else
     {
         <h4>Ressources:</h4>
-        @foreach (var item in Model.TownRessources)
-        {
-            @:<p>@item.Ressource.RessourceName @item.Amount</p>
-        }
+
+        <table>
+            <tr style="border:solid">
+                @foreach (var dataset in Model.TownRessources)
+                {
+                    <td style="border:solid">@dataset.Ressource.RessourceName @dataset.Amount</td>
+
+                }
+            </tr>
+        </table>
+
+        <br />
         <h4>Buildings in Town:</h4>
-        @foreach (var item in Model.TownBuildings)
+        @foreach (var dataset in Model.TownBuildings.Where(a => a.Amount > 0))
         {
-            @:<p>@item.Building.BuildingName - @item.Amount</p>
-
-
-
-
+            @:------------------------------------------- <br />
+            <h5>@dataset.Building.BuildingName @dataset.Amount </h5>
+            <br />
             @:Produces:
-            foreach (var productionRessource in item.Building.ProducingRessources)
+            <br />
+            foreach (var productionRessource in dataset.Building.ProducingRessources)
             {
-                @:<p>: @productionRessource.Ressource.RessourceName @productionRessource.Amount</p>
+                @:<p>@productionRessource.Amount @productionRessource.Ressource.RessourceName</p>
             }
+            <br />
             @:Consumes:
-            foreach (var consumingRessources in item.Building.ConsumingRessources)
+            <br />
+            if (dataset.Building.ConsumingRessources.Count > 0)
             {
-                @:<p>@consumingRessources.Ressource.RessourceName @consumingRessources.Amount</p>
+
+                foreach (var consumingRessources in dataset.Building.ConsumingRessources)
+                {
+                    @:<p>@consumingRessources.Amount @consumingRessources.Ressource.RessourceName </p>
+                }
             }
+            else
+            {
+                @:<p>nothing</p>
+            }
+            <br />
+
         }
+
         <h4>Buildings in Game:</h4>
-        @foreach (var building in ViewBag.Buildings)
+        @foreach (var dataset in Model.TownBuildings.Where(a => a.Amount == 0))
         {
-            @:<p>@building.BuildingName</p>
-
-
+            @:------------------------------------------- <br />
+            @:<h5>@dataset.Building.BuildingName</h5>
+            <br />
             @:Can Produce:
-            foreach (var productionRessource in building.ProducingRessources)
+            <br />
+            foreach (var productionRessource in dataset.Building.ProducingRessources)
             {
-                @:<p>: @productionRessource.Ressource.RessourceName @productionRessource.Amount</p>
+                @:<p>@productionRessource.Amount @productionRessource.Ressource.RessourceName</p>
             }
+            <br />
             @:Will Consume:
-            foreach (var consumingRessources in building.ConsumingRessources)
+            <br />
+            if (dataset.Building.ConsumingRessources.Count > 0)
             {
-                @:<p>@consumingRessources.Ressource.RessourceName @consumingRessources.Amount</p>
+                foreach (var consumingRessources in dataset.Building.ConsumingRessources)
+                {
+                    @:<p>@consumingRessources.Amount @consumingRessources.Ressource.RessourceName</p>
+                }
             }
+            else
+            {
+                @:<p>nothing</p>
+            }
+            <br />
             @:Ressources needed to build:
-            foreach (var ressourceCosts in building.BuildingRessourcesCosts)
+            <br />
+            foreach (var ressourceCosts in dataset.Building.BuildingRessourcesCosts)
             {
-                @:<p> @ressourceCosts.Ressource.RessourceName @ressourceCosts.Amount</p>
+                @:<p>@ressourceCosts.Amount @ressourceCosts.Ressource.RessourceName</p>
             }
-
+            <br />
         }
     }
 </div>

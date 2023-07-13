@@ -16,7 +16,6 @@ namespace KingdomAdventure.Controllers
         }
         public IActionResult Index()
         {
-            GenerateViewBagBuildings();
             return View(GetTown());
         }
         [HttpGet]
@@ -41,10 +40,6 @@ namespace KingdomAdventure.Controllers
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingSoldiers)                
                         .Include(i => i.TownSoldiers).ThenInclude(ii => ii.Soldier)
                         .FirstOrDefault(p => p.PlayerID == HttpContext.Session.GetInt32("id"));
-        }
-        private void GenerateViewBagBuildings()
-        {
-            ViewBag.Buildings = repo.Buildings;
         }
     }
 }

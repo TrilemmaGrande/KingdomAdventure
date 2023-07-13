@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230713104016_init")]
+    [Migration("20230713123914_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -151,16 +151,11 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("SoldierID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TownID")
-                        .HasColumnType("int");
-
                     b.HasKey("BuildingSoldierProducingID");
 
                     b.HasIndex("BuildingID");
 
                     b.HasIndex("SoldierID");
-
-                    b.HasIndex("TownID");
 
                     b.ToTable("BuildingSoldierProducing");
                 });
@@ -825,10 +820,6 @@ namespace KingdomAdventure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KingdomAdventure.Models.TownArea.Town", null)
-                        .WithMany("TownSoldiersAttacking")
-                        .HasForeignKey("TownID");
-
                     b.Navigation("Building");
 
                     b.Navigation("Soldier");
@@ -892,7 +883,7 @@ namespace KingdomAdventure.Migrations
                         .IsRequired();
 
                     b.HasOne("KingdomAdventure.Models.TownArea.Town", "Town")
-                        .WithMany("TownSoldiersDefending")
+                        .WithMany("TownSoldiers")
                         .HasForeignKey("TownID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1055,9 +1046,7 @@ namespace KingdomAdventure.Migrations
 
                     b.Navigation("TownRessources");
 
-                    b.Navigation("TownSoldiersAttacking");
-
-                    b.Navigation("TownSoldiersDefending");
+                    b.Navigation("TownSoldiers");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Inventory", b =>

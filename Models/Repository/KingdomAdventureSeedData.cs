@@ -73,7 +73,7 @@ namespace KingdomAdventure.Models.Repository
                      new Building()
                      {
                          BuildingName = "House",
-                        Workplaces = 0
+                         Workplaces = 0
                      },
                    new Building()
                    {
@@ -81,7 +81,7 @@ namespace KingdomAdventure.Models.Repository
                        Workplaces = 0
                    }
                 );
-      
+            dbContext.SaveChanges();
             dbContext.BuildingRessourceCost.AddRange(
                 new BuildingRessourceCost()
                 {
@@ -126,7 +126,6 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 5
                     }
                     );
-  
             dbContext.BuildingRessourceProducing.AddRange(
               new BuildingRessourceProducing()
               {
@@ -174,7 +173,34 @@ namespace KingdomAdventure.Models.Repository
                       Amount = 1
                   }
               );
-           
+            dbContext.SaveChanges();
+            foreach (var producingRessource in dbContext.BuildingRessourceProducing)
+            {
+                var building = dbContext.Building
+                    .FirstOrDefault(i => i.BuildingID == producingRessource.BuildingID);
+                if (building is not null)
+                {
+                    building.ProducingRessources.Add(producingRessource);
+                }
+            }
+            foreach (var consumingRessource in dbContext.BuildingRessourceConsuming)
+            {
+                var building = dbContext.Building
+                    .FirstOrDefault(i => i.BuildingID == consumingRessource.BuildingID);
+                if (building is not null)
+                {
+                    building.ConsumingRessources.Add(consumingRessource);
+                }
+            }
+            foreach (var ressourceCost in dbContext.BuildingRessourceCost)
+            {
+                var building = dbContext.Building
+                    .FirstOrDefault(i => i.BuildingID == ressourceCost.BuildingID);
+                if (building is not null)
+                {
+                    building.BuildingRessourcesCosts.Add(ressourceCost);
+                }
+            }
             dbContext.SaveChanges();
         }
         private static void GenerateSoldiers(KingdomAdventureDBContext dbContext)

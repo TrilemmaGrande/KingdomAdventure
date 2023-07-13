@@ -26,10 +26,47 @@
         {
             @:<p>@item.Ressource.RessourceName @item.Amount</p>
         }
-        <h4>Buildings:</h4>
+        <h4>Buildings in Town:</h4>
         @foreach (var item in Model.TownBuildings)
         {
-            @:<p>@item.Building.BuildingName</p>
+            @:<p>@item.Building.BuildingName - @item.Amount</p>
+
+
+
+
+            @:Produces:
+            foreach (var productionRessource in item.Building.ProducingRessources)
+            {
+                @:<p>: @productionRessource.Ressource.RessourceName @productionRessource.Amount</p>
+            }
+            @:Consumes:
+            foreach (var consumingRessources in item.Building.ConsumingRessources)
+            {
+                @:<p>@consumingRessources.Ressource.RessourceName @consumingRessources.Amount</p>
+            }
+        }
+        <h4>Buildings in Game:</h4>
+        @foreach (var building in ViewBag.Buildings)
+        {
+            @:<p>@building.BuildingName</p>
+
+
+            @:Can Produce:
+            foreach (var productionRessource in building.ProducingRessources)
+            {
+                @:<p>: @productionRessource.Ressource.RessourceName @productionRessource.Amount</p>
+            }
+            @:Will Consume:
+            foreach (var consumingRessources in building.ConsumingRessources)
+            {
+                @:<p>@consumingRessources.Ressource.RessourceName @consumingRessources.Amount</p>
+            }
+            @:Ressources needed to build:
+            foreach (var ressourceCosts in building.BuildingRessourcesCosts)
+            {
+                @:<p> @ressourceCosts.Ressource.RessourceName @ressourceCosts.Amount</p>
+            }
+
         }
     }
 </div>

@@ -88,5 +88,17 @@ namespace KingdomAdventure.Models.Repository
             town.TownBuildings.FirstOrDefault(n => n.Building.BuildingName == "Tent").Amount = 1;
             ctx.SaveChanges();
         }
+
+        public void AddBuilding(Town town, int id)
+        {
+            var building = town.TownBuildings.FirstOrDefault(n => n.BuildingID == id);
+                building.Amount += 1;
+            foreach (var ressource in building.Building.BuildingRessourcesCosts)
+            {
+                town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=
+                    ressource.Amount;
+            }
+            ctx.SaveChanges();
+        }
     }
 }

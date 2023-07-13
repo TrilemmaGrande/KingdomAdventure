@@ -30,6 +30,11 @@ namespace KingdomAdventure.Controllers
             repo.CreateTownValues(GetTown());
             return RedirectToAction("Index");
         }
+        public IActionResult AddBuilding(int id)
+        {
+            repo.AddBuilding(GetTown(), id);
+            return RedirectToAction("Index");
+        }
         private Town GetTown()
         {
             return repo.Towns

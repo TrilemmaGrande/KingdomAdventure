@@ -26,6 +26,17 @@
         {
             @:------------------------------------------- <br />
             <h5>@dataset.Building.BuildingName @dataset.Amount </h5>
+            foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
+            {
+                if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
+                {
+                    break;
+                }
+                else
+                {
+                    <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
+                }
+            }
             <br />
             @:Produces:
             <br />
@@ -65,7 +76,7 @@
                 }
                 else
                 {
-                <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
+                    <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
                 }
             }
             <br />

@@ -71,7 +71,7 @@ namespace KingdomAdventure.Models.Repository
                     {
                         Town = town,
                         Ressource = item,
-                        Amount = item.RessourceName == "Wood" ? 5 : 0
+                        Amount = item.RessourceName == "Wood" ? 10 : 0
                     });
             }
             foreach (var building in Buildings)
@@ -85,18 +85,46 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 0
                     });
             }
-            town.TownBuildings.FirstOrDefault(n => n.Building.BuildingName == "Tent").Amount = 1;
+            var firstBuildingID = town.TownBuildings.FirstOrDefault(n => n.Building.BuildingName == "Tent").BuildingID;
+            AddBuilding(town, firstBuildingID);
             ctx.SaveChanges();
         }
-
+        public void IncrementRessources(Town town)
+        {
+            DateTime currentTime = DateTime.UtcNow;
+            TimeSpan timeElapsed = currentTime - town.LastUpdated;
+            int incrementAmount = (int)timeElapsed.TotalMinutes;
+            var producingBuildings = town.TownBuildings.Where(i => i.Amount > 0);
+            foreach (var producingBuilding in producingBuildings)
+            {
+                foreach (var producedRessource in producingBuilding.Building.ProducingRessources)
+                {
+                    if (!producedRessource.ProduceOnce)
+                    {
+                        town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount +=
+                            (producedRessource.Amount * producingBuilding.Amount * incrementAmount);
+                    }
+                }                
+            }
+            town.LastUpdated = DateTime.UtcNow;
+            ctx.SaveChanges();
+        }
         public void AddBuilding(Town town, int id)
         {
             var building = town.TownBuildings.FirstOrDefault(n => n.BuildingID == id);
-                building.Amount += 1;
+            building.Amount += 1;
             foreach (var ressource in building.Building.BuildingRessourcesCosts)
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=
                     ressource.Amount;
+            }
+            foreach (var ressource in building.Building.ProducingRessources)
+            {
+                if (ressource.ProduceOnce)
+                {
+                    town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount +=
+                        ressource.Amount;
+                }
             }
             ctx.SaveChanges();
         }

@@ -16,6 +16,7 @@ namespace KingdomAdventure.Controllers
         }
         public IActionResult Index()
         {
+            repo.IncrementRessources(GetTown());
             return View(GetTown());
         }
         [HttpGet]

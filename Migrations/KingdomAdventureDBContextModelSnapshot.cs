@@ -221,6 +221,9 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownID"));
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("PlayerID")
                         .HasColumnType("int");
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230713124548_init")]
+    [Migration("20230713185318_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -223,6 +223,9 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownID"));
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PlayerID")
                         .HasColumnType("int");

@@ -66,20 +66,21 @@ namespace KingdomAdventure.Models.Repository
             foreach (var item in Ressources)
             {
                 town.TownRessources.Add(
+
                     new TownRessource()
                     {
                         Town = town,
                         Ressource = item,
-                        Amount = 0
+                        Amount = item.RessourceName == "Wood" ? 5 : 0
                     });
             }
-            foreach (var item in Buildings)
+            foreach (var building in Buildings)
             {
                 town.TownBuildings.Add(
                     new TownBuilding()
                     {
                         Town = town,
-                        Building = item,
+                        Building = building,
                         Level = 1,
                         Amount = 0
                     });

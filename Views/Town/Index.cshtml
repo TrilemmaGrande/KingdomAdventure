@@ -21,19 +21,6 @@
     }
     else
     {
-        <h4>Ressources:</h4>
-
-        <table>
-            <tr style="border:solid">
-                @foreach (var dataset in Model.TownRessources)
-                {
-                    <td style="border:solid">@dataset.Ressource.RessourceName @dataset.Amount</td>
-
-                }
-            </tr>
-        </table>
-
-        <br />
         <h4>Buildings in Town:</h4>
         @foreach (var dataset in Model.TownBuildings.Where(a => a.Amount > 0))
         {

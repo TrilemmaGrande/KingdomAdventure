@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230713123914_init")]
+    [Migration("20230713124548_init")]
     partial class init
     {
         /// <inheritdoc />

@@ -6,9 +6,10 @@ namespace KingdomAdventure.Models.TownArea
     {
         public int BuildingID { get; set; }
         public string? BuildingName { get; set; }
-        public List<TownRessource>? BuildingCost { get; set; } = new List<TownRessource>();
-        public List<TownRessource>? ProduceRessource { get; set; } = new List<TownRessource>();
-        public List<TownSoldierAttacking>? ProduceSoldierAttacking { get; set; } = new List<TownSoldierAttacking>();
-        public List<TownSoldierDefending>? ProduceSoldierDefending { get; set; } = new List<TownSoldierDefending>();
+        public int? Workplaces { get; set; }
+        public List<BuildingRessourceConsuming>? ConsumingRessources { get; set; } = new List<BuildingRessourceConsuming>();
+        public List<BuildingRessourceProducing>? ProducingRessources { get; set; } = new List<BuildingRessourceProducing>();
+        public List<BuildingSoldierProducing>? ProducingSoldiers { get; set; } = new List<BuildingSoldierProducing>();
+        public List<BuildingRessourceCost>? BuildingRessourcesCosts { get; set; } = new List<BuildingRessourceCost>();
     }
 }

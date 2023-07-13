@@ -15,7 +15,6 @@ namespace KingdomAdventure.Models.TownArea
         public string? TownName { get; set; }
         public List<TownBuilding>? TownBuildings { get; set; } = new List<TownBuilding>();
         public List<TownRessource>? TownRessources { get; set; } = new List<TownRessource>();
-        public List<TownSoldierAttacking>? TownSoldiersAttacking { get; set; } = new List<TownSoldierAttacking>();
-        public List<TownSoldierDefending>? TownSoldiersDefending { get; set; } = new List<TownSoldierDefending>();
+        public List<TownSoldier>? TownSoldiers { get; set; } = new List<TownSoldier>();
     }
 }

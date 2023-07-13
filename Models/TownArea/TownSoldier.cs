@@ -2,9 +2,9 @@
 
 namespace KingdomAdventure.Models.TownArea
 {
-    public class TownSoldierDefending
+    public class TownSoldier
     {
-        public int TownSoldierDefendingID { get; set; }
+        public int TownSoldierID { get; set; }
         public int? Level { get; set; }
         public double? Experience { get; set; }
         public double? CurrentLP { get; set; }

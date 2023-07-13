@@ -1,6 +1,7 @@
 ﻿using KingdomAdventure.Models.TownArea;
 using KingdomAdventure.Models.WorldArea;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace KingdomAdventure.Models.Repository
 {
@@ -13,13 +14,16 @@ namespace KingdomAdventure.Models.Repository
             this.ctx = ctx;
         }
         public IQueryable<Building> Buildings => ctx.Building;
+        public IQueryable<BuildingRessourceConsuming> BuildingRessourceConsumings => ctx.BuildingRessourceConsuming;
+        public IQueryable<BuildingRessourceCost> BuildingRessourceCosts => ctx.BuildingRessourceCost;
+        public IQueryable<BuildingRessourceProducing> BuildingRessourceProducings => ctx.BuildingRessourceProducing;
+        public IQueryable<BuildingSoldierProducing> BuildingSoldierProducings => ctx.BuildingSoldierProducing;
         public IQueryable<Ressource> Ressources => ctx.Ressource;
         public IQueryable<Soldier> Soldiers => ctx.Soldier;
         public IQueryable<Town> Towns => ctx.Town;
         public IQueryable<TownBuilding> TownBuildings => ctx.TownBuilding;
         public IQueryable<TownRessource> TownRessources => ctx.TownRessource;
-        public IQueryable<TownSoldierAttacking> TownSoldiersAttacking => ctx.TownSoldierAttacking;
-        public IQueryable<TownSoldierDefending> TownSoldiersDefending => ctx.TownSoldierDefending;
+        public IQueryable<TownSoldier> TownSoldiers => ctx.TownSoldier;
         public IQueryable<EnemyNPC> EnemyNPCs => ctx.EnemyNPC;
         public IQueryable<Inventory> Inventories => ctx.Inventory;
         public IQueryable<InventoryItem> InventoryItems => ctx.InventoryItem;
@@ -27,7 +31,9 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<InventoryUpgrade> InventoryUpgrades => ctx.InventoryUpgrade;
         public IQueryable<Item> Items => ctx.Item;
         public IQueryable<Player> Players => ctx.Player;
+        public IQueryable<PlayerEnemyNPC> PlayerEnemyNPCs => ctx.PlayerEnemyNPC;
         public IQueryable<Upgrade> Upgrades => ctx.Upgrade;
+
 
         public void AddPlayer(Player player)
         {
@@ -50,12 +56,35 @@ namespace KingdomAdventure.Models.Repository
             ctx.SaveChanges();
         }
         public void DeleteInventoryItem(InventoryItem inventoryItem, Inventory inventory)
-        {            
+        {
             ctx.Inventory.FirstOrDefault(i => i.InventoryID == inventory.InventoryID).InventoryItems.Remove(inventoryItem);
             ctx.SaveChanges();
         }
-        public void SaveRepo()
+
+        public void CreateTownValues(Town town)
         {
+            foreach (var item in Ressources)
+            {
+                town.TownRessources.Add(
+                    new TownRessource()
+                    {
+                        Town = town,
+                        Ressource = item,
+                        Amount = 0
+                    });
+            }
+            foreach (var item in Buildings)
+            {
+                town.TownBuildings.Add(
+                    new TownBuilding()
+                    {
+                        Town = town,
+                        Building = item,
+                        Level = 1,
+                        Amount = 0
+                    });
+            }
+            town.TownBuildings.FirstOrDefault(n => n.Building.BuildingName == "Tent").Amount = 1;
             ctx.SaveChanges();
         }
     }

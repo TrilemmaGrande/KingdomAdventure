@@ -281,6 +281,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<double>("ProducedBetweenInterval")
+                        .HasColumnType("float");
+
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
 

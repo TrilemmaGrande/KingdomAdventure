@@ -1,6 +1,7 @@
 ﻿using KingdomAdventure.Models.TownArea;
 using KingdomAdventure.Models.WorldArea;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using System.Collections.Generic;
 
 namespace KingdomAdventure.Models.Repository
@@ -90,7 +91,7 @@ namespace KingdomAdventure.Models.Repository
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Storage").Amount = 10;
 
             ctx.SaveChanges();
-            
+
         }
         public void IncrementRessources(Town town)
         {
@@ -98,40 +99,67 @@ namespace KingdomAdventure.Models.Repository
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
             int timeElapsedInSeconds = (int)timeElapsed.TotalSeconds;
             var producingBuildings = town.TownBuildings.Where(i => i.Amount > 0);
-
             //increase Ressources in Town for every producing Building
             foreach (var producingBuilding in producingBuildings)
             {
                 foreach (var producedRessource in producingBuilding.Building.ProducingRessources)
                 {
-                    double producedInSeconds = (double)producedRessource.Amount / 60 * (double)producingBuilding.Amount;
-                    Math.Floor(producedInSeconds);
                     if (!producedRessource.ProduceOnce)
                     {
-                        int oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount;
-                        int storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount;
-                        int newTownRessourceValue = oldTownRessourceValue + (int)(producedInSeconds * timeElapsedInSeconds);
-                        if (newTownRessourceValue < storageValue)
+                        double producedInSeconds = (double)producedRessource.Amount / 60 * (double)producingBuilding.Amount;
+                        double producedInLastInterval = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval;
+                        double producedInInterval = producedInSeconds * timeElapsedInSeconds;
+                      
+                        if (Math.Floor(producedInInterval + producedInLastInterval) < 1)
                         {
-                            town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount = newTownRessourceValue;
+                            town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval
+                                += producedInInterval;
                         }
                         else
                         {
-                            town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount = storageValue;
-                        }                        
+                            town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval
+                                = producedInInterval - Math.Floor(producedInInterval + producedInLastInterval);
+
+                            int oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount;
+                            int storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount;
+                            int newTownRessourceValue = oldTownRessourceValue + (int)Math.Floor(producedInInterval + producedInLastInterval);
+                            if (newTownRessourceValue < storageValue)
+                            {
+                                town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount = newTownRessourceValue;
+                            }
+                            else
+                            {
+                                town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount = storageValue;
+                            }
+                        }
                     }
-                }                
+                }
             }
-
-            //decrease Food in Town for every Person
-            int peopleInTown = town.PopulationUsed;
-            double decreasedInSecond = (double)peopleInTown / 60;
-            Math.Floor(decreasedInSecond);
-            int newFoodValue = (int)decreasedInSecond * timeElapsedInSeconds;
-            town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount = newFoodValue;
-
+            DecrementRessources(town, timeElapsedInSeconds);
             town.LastUpdated = DateTime.UtcNow;
             ctx.SaveChanges();
+        }
+        public void DecrementRessources(Town town, int timeElapsedInSeconds)
+        {
+            //decrease Food in Town for every Person
+            int peopleInTown = town.PopulationUsed;
+            double FoodOfLastInterval = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").ProducedBetweenInterval;
+            double decreasedInSecond = (double)peopleInTown / 60;
+            double decreasedInInterval = decreasedInSecond * timeElapsedInSeconds;
+
+            if (Math.Floor(decreasedInInterval - FoodOfLastInterval) < 1)
+            {
+                town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").ProducedBetweenInterval
+                    -= decreasedInInterval;
+            }
+            else
+            {
+                town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").ProducedBetweenInterval
+                    -= decreasedInInterval - Math.Floor(decreasedInInterval - FoodOfLastInterval);
+                int oldFoodValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount;
+                int newFoodValue = oldFoodValue - (int)Math.Floor(decreasedInInterval - FoodOfLastInterval);
+                town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount = newFoodValue;
+            }
         }
         public void AddBuilding(Town town, int id)
         {

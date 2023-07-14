@@ -5,7 +5,8 @@ namespace KingdomAdventure.Models.TownArea
     public class TownRessource
     {
         public int TownRessourceID { get; set; }
-        public int Amount { get; set; }   
+        public int Amount { get; set; }
+        public double ProducedBetweenInterval { get; set; } = 0.0;
         // Foreign key
         public int TownID { get; set; }
 

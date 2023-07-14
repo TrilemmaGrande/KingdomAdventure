@@ -40,10 +40,10 @@ namespace KingdomAdventure.Controllers
         {
             return repo.Towns
                         .Include(i => i.TownRessources).ThenInclude(ii => ii.Ressource)
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.BuildingRessourcesCosts)                
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ConsumingRessources)                
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingRessources)                
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingSoldiers)                
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.BuildingRessourcesCosts)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ConsumingRessources)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingRessources)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingSoldiers)
                         .Include(i => i.TownSoldiers).ThenInclude(ii => ii.Soldier)
                         .FirstOrDefault(p => p.PlayerID == HttpContext.Session.GetInt32("id"));
         }

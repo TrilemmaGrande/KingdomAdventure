@@ -26,11 +26,17 @@
                             {
                                 if (dataset.Ressource.RessourceName == "PopulationMax")
                                 {
-                                    <li class="nav-item nav-link"> @dataset.Ressource.RessourceName @Model.PopulationUsed / @dataset.Amount </li>
+                                    <li class="nav-item nav-link">
+                                        @dataset.Ressource.RessourceName @Model.PopulationUsed /
+                                        @dataset.Amount
+                                    </li>
                                 }
                                 else
                                 {
-                                <li class="nav-item nav-link"> @dataset.Ressource.RessourceName @dataset.Amount </li>
+                                    <li class="nav-item nav-link">
+                                        @dataset.Ressource.RessourceName @dataset.Amount /
+                                        @Model.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount
+                                    </li>
                                 }
                             }
                         }

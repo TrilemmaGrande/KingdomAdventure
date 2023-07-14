@@ -87,6 +87,8 @@ namespace KingdomAdventure.Models.Repository
             }
             town.TownBuildings.FirstOrDefault(n => n.Building.BuildingName == "Tent").Amount = 1;
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "PopulationMax").Amount = 1;
+            town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Storage").Amount = 10;
+
             ctx.SaveChanges();
             
         }
@@ -104,8 +106,17 @@ namespace KingdomAdventure.Models.Repository
                     Math.Floor(producedInSeconds);
                     if (!producedRessource.ProduceOnce)
                     {
-                        town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount +=
-                            (int)(producedInSeconds * incrementAmount);
+                        var oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount;
+                        var storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount;
+                        var newTownRessourceValue = oldTownRessourceValue + (int)(producedInSeconds * incrementAmount);
+                        if (newTownRessourceValue < storageValue)
+                        {
+                            oldTownRessourceValue = newTownRessourceValue;
+                        }
+                        else
+                        {
+                            oldTownRessourceValue = storageValue;
+                        }
                     }
                 }                
             }

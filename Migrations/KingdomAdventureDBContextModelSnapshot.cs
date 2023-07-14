@@ -33,7 +33,7 @@ namespace KingdomAdventure.Migrations
                     b.Property<string>("BuildingName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Workplaces")
+                    b.Property<int>("Population")
                         .HasColumnType("int");
 
                     b.HasKey("BuildingID");
@@ -227,11 +227,11 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerID")
                         .HasColumnType("int");
 
+                    b.Property<int>("PopulationUsed")
+                        .HasColumnType("int");
+
                     b.Property<string>("TownName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Population")
-                        .HasColumnType("int");
 
                     b.HasKey("TownID");
 

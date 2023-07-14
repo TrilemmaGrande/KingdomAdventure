@@ -48,37 +48,37 @@ namespace KingdomAdventure.Models.Repository
                 new Building()
                 {
                     BuildingName = "Lumber",
-                    Workplaces = 1
+                    Population = 1
                 },
                  new Building()
                  {
                      BuildingName = "Storage",
-                     Workplaces = 1
+                     Population = 1
                  },
                   new Building()
                   {
                       BuildingName = "Hunting Lodge",
-                      Workplaces = 1
+                      Population = 1
                   },
                    new Building()
                    {
                        BuildingName = "Quarry",
-                       Workplaces = 2
+                       Population = 2
                    },
                     new Building()
                     {
                         BuildingName = "Windmill",
-                        Workplaces = 3
+                        Population = 3
                     },
                      new Building()
                      {
                          BuildingName = "House",
-                         Workplaces = 0
+                         Population = 0
                      },
                    new Building()
                    {
                        BuildingName = "Tent",
-                       Workplaces = 0
+                       Population = 0
                    }
                 );
             dbContext.SaveChanges();

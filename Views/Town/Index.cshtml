@@ -28,12 +28,12 @@
             <h5>@dataset.Building.BuildingName @dataset.Amount </h5>
             foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
             {
-                if (dataset.Building.Workplaces < Model.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "PopulationMax").Amount)
+                if (dataset.Building.Population < Model.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "PopulationMax").Amount
+                    - Model.PopulationUsed)
                 {
                     break;
                 }
-                if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount
-                    - Model.Population)
+                if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
                 {
                     break;
                 }
@@ -67,7 +67,7 @@
             <br />
             @:Population:
             <br />
-            @:<p>@dataset.Building.Workplaces</p>
+            @:<p>@dataset.Building.Population</p>
 
 
             <br />
@@ -81,8 +81,8 @@
             @:<h5>@dataset.Building.BuildingName</h5>
             foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
             {
-                if (dataset.Building.Workplaces < Model.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "PopulationMax").Amount
-                    - Model.Population)
+                if (dataset.Building.Population < Model.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "PopulationMax").Amount
+                    - Model.PopulationUsed)
                 {
                     break;
                 }
@@ -124,9 +124,9 @@
                 @:<p>@ressourceCosts.Amount @ressourceCosts.Ressource.RessourceName</p>
             }
             <br />
-            @:Place in Population needed:
+            @:Place in Population :
             <br />
-            @:<p>@dataset.Building.Workplaces</p>
+            @:<p>@dataset.Building.Population</p>
 
 
             <br />

@@ -24,9 +24,9 @@
                         {
                             @foreach (var dataset in Model.TownRessources)
                             {
-                                if (dataset.Ressource.RessourceName == "Population")
+                                if (dataset.Ressource.RessourceName == "PopulationMax")
                                 {
-                                    <li class="nav-item nav-link"> @dataset.Ressource.RessourceName @Model.WorkplacesUsed / @dataset.Amount </li>
+                                    <li class="nav-item nav-link"> @dataset.Ressource.RessourceName @Model.Population / @dataset.Amount </li>
                                 }
                                 else
                                 {

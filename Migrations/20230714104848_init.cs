@@ -386,7 +386,7 @@ namespace KingdomAdventure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PlayerID = table.Column<int>(type: "int", nullable: false),
                     TownName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WorkplacesUsed = table.Column<int>(type: "int", nullable: false),
+                    Population = table.Column<int>(type: "int", nullable: false),
                     LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

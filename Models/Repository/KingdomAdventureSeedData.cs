@@ -161,14 +161,14 @@ namespace KingdomAdventure.Models.Repository
                  new BuildingRessourceProducing()
                  {
                      Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "House"),
-                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Population"),
+                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "PopulationMax"),
                      ProduceOnce = true,
                      Amount = 5
                  },
                   new BuildingRessourceProducing()
                   {
                       Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Tent"),
-                      Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Population"),
+                      Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "PopulationMax"),
                       ProduceOnce = true,
                       Amount = 1
                   }
@@ -236,7 +236,7 @@ namespace KingdomAdventure.Models.Repository
             dbContext.Ressource.AddRange(
                   new Ressource()
                   {
-                      RessourceName = "Population",
+                      RessourceName = "PopulationMax",
                       RessourceValue = 0
                   },
                    new Ressource()

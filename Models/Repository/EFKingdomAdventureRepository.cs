@@ -127,7 +127,7 @@ namespace KingdomAdventure.Models.Repository
                         ressource.Amount;
                 }
             }
-            town.WorkplacesUsed += building.Building.Workplaces;
+            town.Population += building.Building.Workplaces;
             ctx.SaveChanges();
         }
     }

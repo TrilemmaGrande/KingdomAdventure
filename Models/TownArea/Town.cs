@@ -13,7 +13,7 @@ namespace KingdomAdventure.Models.TownArea
         public Player Player { get; set; }
 
         public string? TownName { get; set; }
-        public int WorkplacesUsed { get; set; }
+        public int Population { get; set; }
         public DateTime LastUpdated { get; set; } 
         public List<TownBuilding>? TownBuildings { get; set; } = new List<TownBuilding>();
         public List<TownRessource>? TownRessources { get; set; } = new List<TownRessource>();

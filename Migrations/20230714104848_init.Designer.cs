@@ -233,7 +233,7 @@ namespace KingdomAdventure.Migrations
                     b.Property<string>("TownName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WorkplacesUsed")
+                    b.Property<int>("Population")
                         .HasColumnType("int");
 
                     b.HasKey("TownID");

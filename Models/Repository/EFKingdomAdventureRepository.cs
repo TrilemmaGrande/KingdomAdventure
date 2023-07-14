@@ -106,16 +106,16 @@ namespace KingdomAdventure.Models.Repository
                     Math.Floor(producedInSeconds);
                     if (!producedRessource.ProduceOnce)
                     {
-                        var oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount;
-                        var storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount;
-                        var newTownRessourceValue = oldTownRessourceValue + (int)(producedInSeconds * incrementAmount);
+                        int oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount;
+                        int storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount;
+                        int newTownRessourceValue = oldTownRessourceValue + (int)(producedInSeconds * incrementAmount);
                         if (newTownRessourceValue < storageValue)
                         {
-                            oldTownRessourceValue = newTownRessourceValue;
+                            town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount = newTownRessourceValue;
                         }
                         else
                         {
-                            oldTownRessourceValue = storageValue;
+                            town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount = storageValue;
                         }
                     }
                 }                

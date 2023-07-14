@@ -53,7 +53,7 @@ namespace KingdomAdventure.Models.Repository
                  new Building()
                  {
                      BuildingName = "Storage",
-                     Population = 1
+                     Population = 0
                  },
                   new Building()
                   {
@@ -111,7 +111,7 @@ namespace KingdomAdventure.Models.Repository
                     {
                         Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Storage"),
                         Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Wood"),
-                        Amount = 20
+                        Amount = 10
                     },
                    new BuildingRessourceCost()
                    {
@@ -156,7 +156,7 @@ namespace KingdomAdventure.Models.Repository
                         Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Storage"),
                         Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Storage"),
                         ProduceOnce = true,
-                        Amount = 20
+                        Amount = 10
                     },
                  new BuildingRessourceProducing()
                  {

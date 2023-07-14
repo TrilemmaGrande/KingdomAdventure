@@ -16,7 +16,11 @@ namespace KingdomAdventure.Controllers
         }
         public IActionResult Index()
         {
-            repo.IncrementRessources(GetTown());
+            if (GetTown().TownName is not null)
+            {
+                repo.IncrementRessources(GetTown());
+            }
+
             return View(GetTown());
         }
         [HttpGet]

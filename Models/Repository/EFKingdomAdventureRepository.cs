@@ -72,7 +72,8 @@ namespace KingdomAdventure.Models.Repository
                     {
                         Town = town,
                         Ressource = item,
-                        Amount = item.RessourceName == "Wood" ? 5 : 0
+                        Amount = 0,
+                        ProducedBetweenInterval = 0
                     });
             }
             foreach (var building in Buildings)
@@ -89,6 +90,7 @@ namespace KingdomAdventure.Models.Repository
             town.TownBuildings.FirstOrDefault(n => n.Building.BuildingName == "Tent").Amount = 1;
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "PopulationMax").Amount = 1;
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Storage").Amount = 10;
+            town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Wood").Amount = 10;
 
             ctx.SaveChanges();
 

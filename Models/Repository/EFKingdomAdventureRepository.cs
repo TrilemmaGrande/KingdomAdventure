@@ -94,16 +94,18 @@ namespace KingdomAdventure.Models.Repository
         {
             DateTime currentTime = DateTime.UtcNow;
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
-            int incrementAmount = (int)timeElapsed.TotalMinutes;
+            int incrementAmount = (int)timeElapsed.TotalSeconds;
             var producingBuildings = town.TownBuildings.Where(i => i.Amount > 0);
             foreach (var producingBuilding in producingBuildings)
             {
                 foreach (var producedRessource in producingBuilding.Building.ProducingRessources)
                 {
+                    double producedInSeconds = (double)producedRessource.Amount / 60 * (double)producingBuilding.Amount;
+                    Math.Floor(producedInSeconds);
                     if (!producedRessource.ProduceOnce)
                     {
                         town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount +=
-                            (producedRessource.Amount * producingBuilding.Amount * incrementAmount);
+                            (int)(producedInSeconds * incrementAmount);
                     }
                 }                
             }

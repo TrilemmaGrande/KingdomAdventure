@@ -131,7 +131,7 @@ namespace KingdomAdventure.Models.Repository
               {
                   Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Lumber"),
                   Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Wood"),
-                  Amount = 1
+                  Amount = 30
               },
                 new BuildingRessourceProducing()
                 {

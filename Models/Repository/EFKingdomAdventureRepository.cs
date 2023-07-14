@@ -96,8 +96,10 @@ namespace KingdomAdventure.Models.Repository
         {
             DateTime currentTime = DateTime.UtcNow;
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
-            int incrementAmount = (int)timeElapsed.TotalSeconds;
+            int timeElapsedInSeconds = (int)timeElapsed.TotalSeconds;
             var producingBuildings = town.TownBuildings.Where(i => i.Amount > 0);
+
+            //increase Ressources in Town for every producing Building
             foreach (var producingBuilding in producingBuildings)
             {
                 foreach (var producedRessource in producingBuilding.Building.ProducingRessources)
@@ -108,7 +110,7 @@ namespace KingdomAdventure.Models.Repository
                     {
                         int oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount;
                         int storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount;
-                        int newTownRessourceValue = oldTownRessourceValue + (int)(producedInSeconds * incrementAmount);
+                        int newTownRessourceValue = oldTownRessourceValue + (int)(producedInSeconds * timeElapsedInSeconds);
                         if (newTownRessourceValue < storageValue)
                         {
                             town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount = newTownRessourceValue;
@@ -116,15 +118,24 @@ namespace KingdomAdventure.Models.Repository
                         else
                         {
                             town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount = storageValue;
-                        }
+                        }                        
                     }
                 }                
             }
+
+            //decrease Food in Town for every Person
+            int peopleInTown = town.PopulationUsed;
+            double decreasedInSecond = (double)peopleInTown / 60;
+            Math.Floor(decreasedInSecond);
+            int newFoodValue = (int)decreasedInSecond * timeElapsedInSeconds;
+            town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount = newFoodValue;
+
             town.LastUpdated = DateTime.UtcNow;
             ctx.SaveChanges();
         }
         public void AddBuilding(Town town, int id)
         {
+            IncrementRessources(town);
             var building = town.TownBuildings.FirstOrDefault(n => n.BuildingID == id);
             building.Amount += 1;
             foreach (var ressource in building.Building.BuildingRessourcesCosts)

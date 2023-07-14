@@ -48,12 +48,12 @@ namespace KingdomAdventure.Models.Repository
                 new Building()
                 {
                     BuildingName = "Lumber",
-                    Workplaces = 2
+                    Workplaces = 1
                 },
                  new Building()
                  {
                      BuildingName = "Storage",
-                     Workplaces = 2
+                     Workplaces = 1
                  },
                   new Building()
                   {

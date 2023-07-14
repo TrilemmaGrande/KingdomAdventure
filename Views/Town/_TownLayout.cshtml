@@ -20,13 +20,20 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                            @if (Model is not null)
-                            {                                
-                                @foreach (var dataset in Model.TownRessources)
+                        @if (Model is not null)
+                        {
+                            @foreach (var dataset in Model.TownRessources)
+                            {
+                                if (dataset.Ressource.RessourceName == "Population")
                                 {
-                                    <li class="nav-item nav-link"> @dataset.Ressource.RessourceName @dataset.Amount </li>
+                                    <li class="nav-item nav-link"> @dataset.Ressource.RessourceName @Model.WorkplacesUsed / @dataset.Amount </li>
+                                }
+                                else
+                                {
+                                <li class="nav-item nav-link"> @dataset.Ressource.RessourceName @dataset.Amount </li>
                                 }
                             }
+                        }
                     </ul>
                 </div>
             </div>

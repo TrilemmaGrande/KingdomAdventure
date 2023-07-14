@@ -93,20 +93,26 @@ namespace KingdomAdventure.Models.Repository
                   {
                       Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Hunting Lodge"),
                       Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Wood"),
-                      Amount = 20
+                      Amount = 15
                   },
                    new BuildingRessourceCost()
                    {
                        Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Quarry"),
                        Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Wood"),
-                       Amount = 5
+                       Amount = 20
                    },
                    new BuildingRessourceCost()
                    {
                        Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Windmill"),
                        Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Wood"),
-                       Amount = 5
+                       Amount = 15
                    },
+                     new BuildingRessourceCost()
+                     {
+                         Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Windmill"),
+                         Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Stone"),
+                         Amount = 10
+                     },
                     new BuildingRessourceCost()
                     {
                         Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Storage"),
@@ -123,7 +129,7 @@ namespace KingdomAdventure.Models.Repository
                     {
                         Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Tent"),
                         Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Wood"),
-                        Amount = 5
+                        Amount = 10
                     }
                     );
             dbContext.BuildingRessourceProducing.AddRange(

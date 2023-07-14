@@ -109,10 +109,10 @@ namespace KingdomAdventure.Models.Repository
                     if (!producedRessource.ProduceOnce)
                     {
                         double producedInSeconds = (double)producedRessource.Amount / 60 * (double)producingBuilding.Amount;
-                        double producedInLastInterval = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval;
+                        double restOfLastInterval = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval;
                         double producedInInterval = producedInSeconds * timeElapsedInSeconds;
                       
-                        if (Math.Floor(producedInInterval + producedInLastInterval) < 1)
+                        if (Math.Floor(producedInInterval + restOfLastInterval) < 1)
                         {
                             town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval
                                 += producedInInterval;
@@ -120,11 +120,11 @@ namespace KingdomAdventure.Models.Repository
                         else
                         {
                             town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval
-                                = producedInInterval - Math.Floor(producedInInterval + producedInLastInterval);
+                                = producedInInterval + restOfLastInterval - Math.Floor(producedInInterval + restOfLastInterval);
 
                             int oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount;
                             int storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount;
-                            int newTownRessourceValue = oldTownRessourceValue + (int)Math.Floor(producedInInterval + producedInLastInterval);
+                            int newTownRessourceValue = oldTownRessourceValue + (int)Math.Floor(producedInInterval + restOfLastInterval);
                             if (newTownRessourceValue < storageValue)
                             {
                                 town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).Amount = newTownRessourceValue;
@@ -145,21 +145,22 @@ namespace KingdomAdventure.Models.Repository
         {
             //decrease Food in Town for every Person
             int peopleInTown = town.PopulationUsed;
-            double FoodOfLastInterval = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").ProducedBetweenInterval;
-            double decreasedInSecond = (double)peopleInTown / 60;
-            double decreasedInInterval = decreasedInSecond * timeElapsedInSeconds;
+            double restOfLastInterval = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").ProducedBetweenInterval;
+            double consumedInSecond = (double)peopleInTown / 60;
+            double consumedInInterval = consumedInSecond * timeElapsedInSeconds;
 
-            if (Math.Floor(decreasedInInterval - FoodOfLastInterval) < 1)
+            if (Math.Floor(consumedInInterval - restOfLastInterval) < 1)
             {
                 town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").ProducedBetweenInterval
-                    -= decreasedInInterval;
+                    -= consumedInInterval;
             }
             else
             {
                 town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").ProducedBetweenInterval
-                    -= decreasedInInterval - Math.Floor(decreasedInInterval - FoodOfLastInterval);
+                    = consumedInInterval - restOfLastInterval - Math.Floor(consumedInInterval - restOfLastInterval);
+
                 int oldFoodValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount;
-                int newFoodValue = oldFoodValue - (int)Math.Floor(decreasedInInterval - FoodOfLastInterval);
+                int newFoodValue = oldFoodValue - (int)Math.Floor(consumedInInterval - restOfLastInterval);
                 town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount = newFoodValue;
             }
         }

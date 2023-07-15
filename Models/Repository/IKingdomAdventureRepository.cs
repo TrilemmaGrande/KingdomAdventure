@@ -33,7 +33,7 @@ namespace KingdomAdventure.Models.Repository
         public void DeleteInventoryItem(InventoryItem inventoryItem, Inventory inventory);
         public void CreateTownValues(Town town);
         public void IncrementRessources(Town town);
-        public void DecrementRessources(Town town, int timeElapsedInSeconds);
+        public void DecrementRessources(Town town);
         public void AddBuilding(Town town, int id);
     }
 }

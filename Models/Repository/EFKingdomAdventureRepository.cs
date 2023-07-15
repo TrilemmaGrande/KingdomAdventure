@@ -97,20 +97,22 @@ namespace KingdomAdventure.Models.Repository
         }
         public void IncrementRessources(Town town)
         {
-            DateTime currentTime = DateTime.UtcNow;
-            TimeSpan timeElapsed = currentTime - town.LastUpdated;
-            int timeElapsedInSeconds = (int)timeElapsed.TotalSeconds;
+       
             var producingBuildings = town.TownBuildings.Where(i => i.Amount > 0);
             //increase Ressources in Town for every producing Building
             foreach (var producingBuilding in producingBuildings)
             {
                 foreach (var producedRessource in producingBuilding.Building.ProducingRessources)
                 {
+                    DateTime currentTime = DateTime.UtcNow;
+                    TimeSpan timeElapsed = currentTime - town.LastUpdated;
+                    double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
+                    const int minuteToMilSeconds = 60000;
                     if (!producedRessource.ProduceOnce)
                     {
-                        double producedInSeconds = (double)producedRessource.Amount / 60 * (double)producingBuilding.Amount;
+                        double producedInMilSeconds = (double)producedRessource.Amount / minuteToMilSeconds * (double)producingBuilding.Amount;
                         double restOfLastInterval = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval;
-                        double producedInInterval = producedInSeconds * timeElapsedInSeconds;
+                        double producedInInterval = producedInMilSeconds * timeElapsedInMilSeconds;
                       
                         if (Math.Floor(producedInInterval + restOfLastInterval) < 1)
                         {
@@ -137,17 +139,21 @@ namespace KingdomAdventure.Models.Repository
                     }
                 }
             }
-            DecrementRessources(town, timeElapsedInSeconds);
+            DecrementRessources(town);
             town.LastUpdated = DateTime.UtcNow;
             ctx.SaveChanges();
         }
-        public void DecrementRessources(Town town, int timeElapsedInSeconds)
+        public void DecrementRessources(Town town)
         {
             //decrease Food in Town for every Person
+            DateTime currentTime = DateTime.UtcNow;
+            TimeSpan timeElapsed = currentTime - town.LastUpdated;
+            double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
+            const int minuteToMilSeconds = 60000;
             int peopleInTown = town.PopulationUsed;
             double restOfLastInterval = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").ProducedBetweenInterval;
-            double consumedInSecond = (double)peopleInTown / 60;
-            double consumedInInterval = consumedInSecond * timeElapsedInSeconds;
+            double consumedInMilSecond = (double)peopleInTown / minuteToMilSeconds;
+            double consumedInInterval = consumedInMilSecond * timeElapsedInMilSeconds;
 
             if (Math.Floor(consumedInInterval - restOfLastInterval) < 1)
             {

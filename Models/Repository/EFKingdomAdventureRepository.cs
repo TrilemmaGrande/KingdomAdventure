@@ -98,8 +98,9 @@ namespace KingdomAdventure.Models.Repository
         public void IncrementRessources(Town town)
         {
        
+            // Increase Ressources in Town every Millisecond for every producing Building
+
             var producingBuildings = town.TownBuildings.Where(i => i.Amount > 0);
-            //increase Ressources in Town for every producing Building
             foreach (var producingBuilding in producingBuildings)
             {
                 foreach (var producedRessource in producingBuilding.Building.ProducingRessources)
@@ -145,7 +146,9 @@ namespace KingdomAdventure.Models.Repository
         }
         public void DecrementRessources(Town town)
         {
-            //decrease Food in Town for every Person
+
+            // Decrease Food in Town every Millisecond for every Person
+
             DateTime currentTime = DateTime.UtcNow;
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
             double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;

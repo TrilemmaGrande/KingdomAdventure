@@ -28,16 +28,22 @@
             <h5>@dataset.Building.BuildingName @dataset.Amount </h5>
 
 
+            bool buttonSwitch = false;
             foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
             {
                 if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
                 {
+                    buttonSwitch = false;
                     break;
                 }
                 else
                 {
-                    <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
+                    buttonSwitch = true;
                 }
+            }
+            if (buttonSwitch)
+            {
+                <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
             }
             if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
             {
@@ -89,22 +95,22 @@
 
 
 
-
-
-
-
-
-
+            bool buttonSwitch = false;
             foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
             {
                 if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
                 {
+                    buttonSwitch = false;
                     break;
                 }
                 else
                 {
-                    <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
+                    buttonSwitch = true;
                 }
+            }
+            if (buttonSwitch)
+            {
+                <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
             }
 
             <br />

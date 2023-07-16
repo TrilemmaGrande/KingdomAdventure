@@ -93,6 +93,7 @@ namespace KingdomAdventure.Models.Repository
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Storage").Amount = 20;
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Wood").Amount = 15;
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Food").Amount = 20;
+            town.PopulationNotWorking = 2;
 
             ctx.SaveChanges();
 
@@ -130,6 +131,7 @@ namespace KingdomAdventure.Models.Repository
                     {
                         town.TownRessources.FirstOrDefault(i => i.RessourceID == consumedRessource.RessourceID).ProducedBetweenInterval
                             = consumedInInterval - restOfLastInterval - Math.Floor(consumedInInterval - restOfLastInterval);
+
                         int oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == consumedRessource.RessourceID).Amount;
                         int storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount;
                         int newTownRessourceValue = oldTownRessourceValue - (int)Math.Floor(consumedInInterval - restOfLastInterval);
@@ -257,17 +259,26 @@ namespace KingdomAdventure.Models.Repository
 
                 int oldFoodValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount;
                 int newFoodValue = oldFoodValue - (int)Math.Floor(consumedInInterval - restOfLastInterval);
+                if (newFoodValue > 0)
+                {
                 town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount = newFoodValue;
+                }
+                else
+                {
+                    town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount = 0;
+                }
                 // Make Workers to NotWorking if no Food
-                int workingPopulationWithoutFood = workingPopulation - newFoodValue;
+                int workingPopulationWithoutFood = workingPopulation - town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount;
                 if (workingPopulationWithoutFood > 0)
                 {
-                    foreach (var building in town.TownBuildings.Where(a => a.Amount > 0).Where(w => w.Workers > 0))
+                    foreach (var building in town.TownBuildings.Where(a => a.Amount > 0))
                     {
                         while (building.Workers > 0 && workingPopulationWithoutFood > 0)
                         {
                             town.PopulationNotWorking++;
                             workingPopulationWithoutFood--;
+                            town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount--;
+                            building.Workers--;
                         }
                     }
                 }

@@ -48,37 +48,37 @@ namespace KingdomAdventure.Models.Repository
                 new Building()
                 {
                     BuildingName = "Lumber",
-                    Population = 1
+                    WorkersMaxTemplate = 1
                 },
                  new Building()
                  {
                      BuildingName = "Storage",
-                     Population = 0
+                     WorkersMaxTemplate = 0
                  },
                   new Building()
                   {
                       BuildingName = "Hunting Lodge",
-                      Population = 1
+                      WorkersMaxTemplate = 1
                   },
                    new Building()
                    {
                        BuildingName = "Quarry",
-                       Population = 2
+                       WorkersMaxTemplate = 2
                    },
                     new Building()
                     {
                         BuildingName = "Windmill",
-                        Population = 3
+                        WorkersMaxTemplate = 3
                     },
                      new Building()
                      {
                          BuildingName = "House",
-                         Population = 0
+                         WorkersMaxTemplate = 0
                      },
                    new Building()
                    {
                        BuildingName = "Tent",
-                       Population = 0
+                       WorkersMaxTemplate = 0
                    }
                 );
             dbContext.SaveChanges();
@@ -89,11 +89,17 @@ namespace KingdomAdventure.Models.Repository
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Wood"),
                     Amount = 5
                 },
+                 new BuildingRessourceCost()
+                 {
+                     Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Lumber"),
+                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Food"),
+                     Amount = 5
+                 },
                   new BuildingRessourceCost()
                   {
                       Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Hunting Lodge"),
                       Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "Wood"),
-                      Amount = 15
+                      Amount = 10
                   },
                    new BuildingRessourceCost()
                    {
@@ -176,7 +182,7 @@ namespace KingdomAdventure.Models.Repository
                       Building = dbContext.Building.FirstOrDefault(n => n.BuildingName == "Tent"),
                       Ressource = dbContext.Ressource.FirstOrDefault(r => r.RessourceName == "PopulationMax"),
                       ProduceOnce = true,
-                      Amount = 1
+                      Amount = 2
                   }
               );
             dbContext.SaveChanges();

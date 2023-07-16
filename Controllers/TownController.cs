@@ -18,7 +18,7 @@ namespace KingdomAdventure.Controllers
         {
             if (GetTown().TownName is not null)
             {
-                repo.IncrementRessources(GetTown());
+                repo.UpdateRessources(GetTown());
             }
 
             return View(GetTown());
@@ -38,6 +38,16 @@ namespace KingdomAdventure.Controllers
         public IActionResult AddBuilding(int id)
         {
             repo.AddBuilding(GetTown(), id);
+            return RedirectToAction("Index");
+        }
+        public IActionResult AddWorkerToBuilding(int id) 
+        {
+            repo.AddWorkerToBuilding(GetTown(), id);
+            return RedirectToAction("Index");
+        }
+        public IActionResult SubWorkerFromBuilding(int id)
+        {
+            repo.SubWorkerFromBuilding(GetTown(), id);
             return RedirectToAction("Index");
         }
         private Town GetTown()

@@ -33,12 +33,43 @@ namespace KingdomAdventure.Migrations
                     b.Property<string>("BuildingName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Population")
+                    b.Property<int>("WorkersMaxTemplate")
                         .HasColumnType("int");
 
                     b.HasKey("BuildingID");
 
                     b.ToTable("Building");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.BuildingRessourceConsumed", b =>
+                {
+                    b.Property<int>("BuildingRessourceConsumedID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuildingRessourceConsumedID"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BuildingID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RessourceID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TownBuildingID")
+                        .HasColumnType("int");
+
+                    b.HasKey("BuildingRessourceConsumedID");
+
+                    b.HasIndex("BuildingID");
+
+                    b.HasIndex("RessourceID");
+
+                    b.HasIndex("TownBuildingID");
+
+                    b.ToTable("BuildingRessourceConsumed");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.BuildingRessourceConsuming", b =>
@@ -227,7 +258,7 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PopulationUsed")
+                    b.Property<int>("PopulationNotWorking")
                         .HasColumnType("int");
 
                     b.Property<string>("TownName")
@@ -259,6 +290,12 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("TownID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Workers")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkersMax")
                         .HasColumnType("int");
 
                     b.HasKey("TownBuildingID");
@@ -755,6 +792,29 @@ namespace KingdomAdventure.Migrations
                     b.ToTable("Upgrade");
                 });
 
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.BuildingRessourceConsumed", b =>
+                {
+                    b.HasOne("KingdomAdventure.Models.TownArea.Building", "Building")
+                        .WithMany()
+                        .HasForeignKey("BuildingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KingdomAdventure.Models.TownArea.Ressource", "Ressource")
+                        .WithMany()
+                        .HasForeignKey("RessourceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KingdomAdventure.Models.TownArea.TownBuilding", null)
+                        .WithMany("RessourcesConsumed")
+                        .HasForeignKey("TownBuildingID");
+
+                    b.Navigation("Building");
+
+                    b.Navigation("Ressource");
+                });
+
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.BuildingRessourceConsuming", b =>
                 {
                     b.HasOne("KingdomAdventure.Models.TownArea.Building", "Building")
@@ -1053,6 +1113,11 @@ namespace KingdomAdventure.Migrations
                     b.Navigation("TownRessources");
 
                     b.Navigation("TownSoldiers");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuilding", b =>
+                {
+                    b.Navigation("RessourcesConsumed");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Inventory", b =>

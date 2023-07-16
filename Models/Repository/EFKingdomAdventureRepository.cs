@@ -1,6 +1,7 @@
 ﻿using KingdomAdventure.Models.TownArea;
 using KingdomAdventure.Models.WorldArea;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using System.Collections.Generic;
 
@@ -76,19 +77,16 @@ namespace KingdomAdventure.Models.Repository
                         ProducedBetweenInterval = 0
                     });
             }
-            foreach (var building in Buildings)
-            {
-                town.TownBuildings.Add(
-                    new TownBuilding()
-                    {
-                        Town = town,
-                        Building = building,
-                        Level = 1,
-                        WorkersMax = building.WorkersMaxTemplate,
-                        Amount = 0
-                    });
-            }
-            town.TownBuildings.FirstOrDefault(n => n.Building.BuildingName == "Tent").Amount = 1;
+            var firstBuilding = Buildings.FirstOrDefault(n => n.BuildingName == "Tent");
+            town.TownBuildings.Add(
+                new TownBuilding()
+                {
+                    Town = town,
+                    Building = firstBuilding,
+                    Level = 1,
+                    WorkersMax = firstBuilding.WorkersMaxTemplate
+                });
+
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "PopulationMax").Amount = 2;
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Storage").Amount = 20;
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Wood").Amount = 15;
@@ -108,7 +106,7 @@ namespace KingdomAdventure.Models.Repository
         }
         public void ConsumeRessources(Town town)
         {
-            var consumingBuildings = town.TownBuildings.Where(i => i.Amount > 0);
+            var consumingBuildings = town.TownBuildings;
             foreach (var consumingBuilding in consumingBuildings)
             {
                 foreach (var consumedRessource in consumingBuilding.Building.ConsumingRessources)
@@ -118,7 +116,7 @@ namespace KingdomAdventure.Models.Repository
                     double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
                     const int minuteToMilSeconds = 60000;
 
-                    double consumedInMilSeconds = (double)consumedRessource.Amount / minuteToMilSeconds * (double)consumingBuilding.Amount;
+                    double consumedInMilSeconds = (double)consumedRessource.Amount / minuteToMilSeconds;
                     double restOfLastInterval = town.TownRessources.FirstOrDefault(i => i.RessourceID == consumedRessource.RessourceID).ProducedBetweenInterval;
                     double consumedInInterval = consumedInMilSeconds * timeElapsedInMilSeconds;
 
@@ -160,7 +158,7 @@ namespace KingdomAdventure.Models.Repository
         {
             // Increase Ressources in Town every Millisecond for every producing Building
 
-            var producingBuildings = town.TownBuildings.Where(i => i.Amount > 0);
+            var producingBuildings = town.TownBuildings;
             foreach (var producingBuilding in producingBuildings)
             {
                 foreach (var producedRessource in producingBuilding.Building.ProducingRessources)
@@ -174,7 +172,6 @@ namespace KingdomAdventure.Models.Repository
 
                         double producedInMilSeconds = (double)producedRessource.Amount
                             / minuteToMilSeconds
-                            * (double)producingBuilding.Amount
                             * (double)producingBuilding.Workers;
 
                         double restOfLastInterval = town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval;
@@ -231,7 +228,7 @@ namespace KingdomAdventure.Models.Repository
                 }
             }
         }
-       
+
         public void WorkersConsumeFood(Town town)
         {
 
@@ -261,7 +258,7 @@ namespace KingdomAdventure.Models.Repository
                 int newFoodValue = oldFoodValue - (int)Math.Floor(consumedInInterval - restOfLastInterval);
                 if (newFoodValue > 0)
                 {
-                town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount = newFoodValue;
+                    town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount = newFoodValue;
                 }
                 else
                 {
@@ -271,7 +268,7 @@ namespace KingdomAdventure.Models.Repository
                 int workingPopulationWithoutFood = workingPopulation - town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount;
                 if (workingPopulationWithoutFood > 0)
                 {
-                    foreach (var building in town.TownBuildings.Where(a => a.Amount > 0))
+                    foreach (var building in town.TownBuildings)
                     {
                         while (building.Workers > 0 && workingPopulationWithoutFood > 0)
                         {
@@ -289,14 +286,21 @@ namespace KingdomAdventure.Models.Repository
         public void AddBuilding(Town town, int id)
         {
             UpdateRessources(town);
-            var building = town.TownBuildings.FirstOrDefault(n => n.BuildingID == id);
-            building.Amount += 1;
-            foreach (var ressource in building.Building.BuildingRessourcesCosts)
+            var building = Buildings.FirstOrDefault(n => n.BuildingID == id);
+            town.TownBuildings.Add(
+               new TownBuilding()
+               {
+                   Town = town,
+                   Building = building,
+                   Level = 1,
+                   WorkersMax = building.WorkersMaxTemplate
+               });
+            foreach (var ressource in building.BuildingRessourcesCosts)
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=
                     ressource.Amount;
             }
-            foreach (var ressource in building.Building.ProducingRessources)
+            foreach (var ressource in building.ProducingRessources)
             {
                 if (ressource.ProduceOnce)
                 {
@@ -310,7 +314,7 @@ namespace KingdomAdventure.Models.Repository
         public void UpdatePopulationNotWorking(Town town)
         {
             int workingPopulation = 0;
-            foreach (var building in town.TownBuildings.Where(i => i.Amount > 0))
+            foreach (var building in town.TownBuildings)
             {
                 workingPopulation += building.Workers;
             }

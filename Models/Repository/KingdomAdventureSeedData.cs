@@ -29,10 +29,6 @@ namespace KingdomAdventure.Models.Repository
                 GenerateOffHandWeapons(dbContext);
                 GenerateArmor(dbContext);
             }
-            if (!dbContext.Ressource.Any())
-            {
-                GenerateRessources(dbContext);
-            }
             if (!dbContext.Soldier.Any())
             {
                 GenerateSoldiers(dbContext);
@@ -40,6 +36,10 @@ namespace KingdomAdventure.Models.Repository
             if (!dbContext.Building.Any())
             {
                 GenerateBuildings(dbContext);
+            }
+            if (!dbContext.Ressource.Any())
+            {
+                GenerateRessources(dbContext);
             }
         }
         private static void GenerateBuildings(KingdomAdventureDBContext dbContext)

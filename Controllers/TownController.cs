@@ -20,7 +20,11 @@ namespace KingdomAdventure.Controllers
             {
                 repo.UpdateRessources(GetTown());
             }
-
+            ViewBag.Buildings = repo.Buildings
+                .Include(i => i.BuildingRessourcesCosts).ThenInclude(ii => ii.Ressource)
+                .Include(i => i.ConsumingRessources).ThenInclude(ii => ii.Ressource)
+                .Include(i => i.ProducingRessources).ThenInclude(ii => ii.Ressource)
+                .Include(i => i.ProducingSoldiers).ThenInclude(ii => ii.Soldier);
             return View(GetTown());
         }
         [HttpGet]

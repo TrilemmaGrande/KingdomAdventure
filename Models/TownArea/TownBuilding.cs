@@ -5,7 +5,6 @@ namespace KingdomAdventure.Models.TownArea
     public class TownBuilding
     {
         public int TownBuildingID { get; set; }
-        public int Amount { get; set; } = 0;
         public int WorkersMax { get; set; }
         public int Workers { get; set; } = 0;
         public int Level { get; set; } = 1;

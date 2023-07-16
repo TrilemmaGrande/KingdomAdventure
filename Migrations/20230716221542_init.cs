@@ -464,7 +464,6 @@ namespace KingdomAdventure.Migrations
                 {
                     TownBuildingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<int>(type: "int", nullable: false),
                     WorkersMax = table.Column<int>(type: "int", nullable: false),
                     Workers = table.Column<int>(type: "int", nullable: false),
                     Level = table.Column<int>(type: "int", nullable: false),

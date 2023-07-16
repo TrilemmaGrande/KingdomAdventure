@@ -280,9 +280,6 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownBuildingID"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
                     b.Property<int>("BuildingID")
                         .HasColumnType("int");
 

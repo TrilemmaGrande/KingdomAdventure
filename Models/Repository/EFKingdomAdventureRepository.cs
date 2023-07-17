@@ -178,22 +178,22 @@ namespace KingdomAdventure.Models.Repository
                         double producedInInterval = producedInMilSeconds * timeElapsedInMilSeconds;
 
                         // test if Building consumed all ressources for producing
-                        bool ressourcesAvailableInBuilding = false;
-                        foreach (var consumingRessource in producingBuilding.Building.ConsumingRessources)
-                        {
-                            var consumedRessource = producingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID);
-                            if (consumingRessource.Amount > consumedRessource.Amount)
-                            {
-                                ressourcesAvailableInBuilding = false;
-                                break;
-                            }
-                            else
-                            {
-                                ressourcesAvailableInBuilding = true;
-                            }
-                        }
-                        if (ressourcesAvailableInBuilding || producingBuilding.RessourcesConsumed is null)
-                        {
+                        //bool ressourcesAvailableInBuilding = false;
+                        //foreach (var consumingRessource in producingBuilding.Building.ConsumingRessources)
+                        //{
+                        //    var consumedRessource = producingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID);
+                        //    if (consumingRessource.Amount > consumedRessource.Amount)
+                        //    {
+                        //        ressourcesAvailableInBuilding = false;
+                        //        break;
+                        //    }
+                        //    else
+                        //    {
+                        //        ressourcesAvailableInBuilding = true;
+                        //    }
+                        //}
+                        //if (ressourcesAvailableInBuilding || producingBuilding.RessourcesConsumed is null)
+                        //{
                             if (Math.Floor(producedInInterval + restOfLastInterval) < 1)
                             {
                                 town.TownRessources.FirstOrDefault(i => i.RessourceID == producedRessource.RessourceID).ProducedBetweenInterval
@@ -222,7 +222,7 @@ namespace KingdomAdventure.Models.Repository
                                         consumedRessource.Amount = 0;
                                     }
                                 }
-                            }
+                            //}
                         }
                     }
                 }

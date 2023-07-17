@@ -192,7 +192,7 @@ namespace KingdomAdventure.Models.Repository
                                 ressourcesAvailableInBuilding = true;
                             }
                         }
-                        if (ressourcesAvailableInBuilding)
+                        if (ressourcesAvailableInBuilding || producingBuilding.RessourcesConsumed is null)
                         {
                             if (Math.Floor(producedInInterval + restOfLastInterval) < 1)
                             {

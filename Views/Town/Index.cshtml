@@ -47,11 +47,11 @@
             }
             if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
             {
-                <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.BuildingID">Add Worker</a>
+                <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID">Add Worker</a>
             }
             if (dataset.Workers > 0)
             {
-                <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.BuildingID">Sub Worker</a>
+                <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.TownBuildingID">Sub Worker</a>
             }
 
             <br />

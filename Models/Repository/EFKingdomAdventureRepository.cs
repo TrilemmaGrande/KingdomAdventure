@@ -274,7 +274,10 @@ namespace KingdomAdventure.Models.Repository
                         {
                             town.PopulationNotWorking++;
                             workingPopulationWithoutFood--;
-                            town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount--;
+                            if (town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount > 0)
+                            {
+                                town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount--;
+                            }
                             building.Workers--;
                         }
                     }
@@ -322,13 +325,13 @@ namespace KingdomAdventure.Models.Repository
         }
         public void AddWorkerToBuilding(Town town, int id)
         {
-            town.TownBuildings.FirstOrDefault(i => i.BuildingID == id).Workers++;
+            town.TownBuildings.FirstOrDefault(i => i.TownBuildingID == id).Workers++;
             UpdatePopulationNotWorking(town);
             ctx.SaveChanges();
         }
         public void SubWorkerFromBuilding(Town town, int id)
         {
-            town.TownBuildings.FirstOrDefault(i => i.BuildingID == id).Workers--;
+            town.TownBuildings.FirstOrDefault(i => i.TownBuildingID == id).Workers--;
             UpdatePopulationNotWorking(town);
             ctx.SaveChanges();
         }

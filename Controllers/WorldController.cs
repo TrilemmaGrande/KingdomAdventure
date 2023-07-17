@@ -25,7 +25,7 @@ namespace KingdomAdventure.Controllers
         }
         public IActionResult Inventory()
         {
-            return View(GetPlayer().Inventory);
+            return View(GetPlayer());
         }
         public IActionResult AddInventoryItem()
         {

@@ -1,10 +1,10 @@
 ﻿@{
     ViewData["Title"] = "World";
 }
-@model Inventory
+@model Player
 
     <table>
-        @foreach (var item in @Model.InventoryItems)
+        @foreach (var item in @Model.Inventory.InventoryItems)
         {
         <tr>
             <td>@item.Item.ItemName</td><td><a asp-action="DeleteInventoryItem" asp-route-itemID="@item.InventoryItemID">remove Item</a></td>

@@ -9,6 +9,7 @@ namespace KingdomAdventure.Models.TownArea
         public int Workers { get; set; } = 0;
         public int Level { get; set; } = 1;
         public List<BuildingRessourceConsumed>? RessourcesConsumed { get; set; } = new List<BuildingRessourceConsumed>();
+        public List<BuildingRessourceProduced>? RessourcesProduced { get; set; } = new List<BuildingRessourceProduced>();
 
         // Foreign key
         public int TownID { get; set; }

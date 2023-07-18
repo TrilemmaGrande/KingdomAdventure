@@ -8,8 +8,10 @@ namespace KingdomAdventure.Models.Repository
     {
         public IQueryable<Building> Buildings { get; }
         public IQueryable<BuildingRessourceConsuming> BuildingRessourceConsumings { get; }
+        public IQueryable<BuildingRessourceConsuming> BuildingRessourceConsumed { get; }
         public IQueryable<BuildingRessourceCost> BuildingRessourceCosts { get; }
         public IQueryable<BuildingRessourceProducing> BuildingRessourceProducings { get; }
+        public IQueryable<BuildingRessourceProducing> BuildingRessourceProduced { get; }
         public IQueryable<BuildingSoldierProducing> BuildingSoldierProducings { get; }
         public IQueryable<Ressource> Ressources { get; }
         public IQueryable<Soldier> Soldiers { get; }

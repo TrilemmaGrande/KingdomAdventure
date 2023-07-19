@@ -242,7 +242,7 @@ namespace KingdomAdventure.Models.Repository
                         foreach (var consumingRessource in producingBuilding.Building.ConsumingRessources)
                         {
                             var consumedRessource = producingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID);
-                            if (consumingRessource.Amount > consumedRessource.Amount)
+                            if (consumingRessource.Amount > consumedRessource.Amount && consumingRessource is not null)
                             {
                                 ressourcesAvailableInBuilding = false;
                                 break;
@@ -346,7 +346,7 @@ namespace KingdomAdventure.Models.Repository
                 restOfLastInterval = 0;
                 consumedInInterval = oldFoodValue;
             }
-            if (Math.Floor(consumedInInterval - restOfLastInterval) < 1)
+            if (Math.Floor(consumedInInterval + restOfLastInterval) < 1)
             {
                 town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").ConsumedBetweenInterval
                     += consumedInInterval;
@@ -394,6 +394,7 @@ namespace KingdomAdventure.Models.Repository
                 WorkersMax = building.WorkersMaxTemplate
             };
             town.TownBuildings.Add(townBuilding);
+            ctx.SaveChanges();
             foreach (var ressource in BuildingRessourceProducings.Where(i => i.Building.BuildingID == id))
             {
                 townBuilding.RessourcesConsumed.Add(
@@ -414,7 +415,6 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 0
                     });
             }
-        
             foreach (var ressource in building.BuildingRessourcesCosts)
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=

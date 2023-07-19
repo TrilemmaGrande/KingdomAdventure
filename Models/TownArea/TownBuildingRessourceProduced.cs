@@ -1,14 +1,14 @@
 ﻿namespace KingdomAdventure.Models.TownArea
 {
-    public class BuildingRessourceProduced
+    public class TownBuildingRessourceProduced
     {
-        public int BuildingRessourceProducedID { get; set; }
-        public int Amount { get; set; }
+        public int TownBuildingRessourceProducedID { get; set; }
+        public int Amount { get; set; } = 0;
         // Foreign key
-        public int BuildingID { get; set; }
+        public int TownBuildingID { get; set; }
 
         // Navigation property
-        public Building Building { get; set; }
+        public TownBuilding TownBuilding { get; set; }
 
         // Foreign key
         public int RessourceID { get; set; }

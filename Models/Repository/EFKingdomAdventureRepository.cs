@@ -81,16 +81,36 @@ namespace KingdomAdventure.Models.Repository
                         ProducedBetweenInterval = 0
                     });
             }
-            var firstBuilding = Buildings.FirstOrDefault(n => n.BuildingName == "Tent");
-            town.TownBuildings.Add(
-                new TownBuilding()
-                {
-                    Town = town,
-                    Building = firstBuilding,
-                    Level = 1,
-                    WorkersMax = firstBuilding.WorkersMaxTemplate
-                });
+            var tent = Buildings.FirstOrDefault(n => n.BuildingName == "Tent");
+            TownBuilding firstBuilding = new TownBuilding()
+            {
+                Town = town,
+                Building = tent,
+                Level = 1,
+                WorkersMax = tent.WorkersMaxTemplate
 
+            };
+            town.TownBuildings.Add(firstBuilding);
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingName == tent.BuildingName).ConsumingRessources)
+            {
+                firstBuilding.RessourcesConsumed.Add(
+                    new TownBuildingRessourceConsumed()
+                    {
+                        TownBuilding = town.TownBuildings.FirstOrDefault(i => i.Building.BuildingName == tent.BuildingName),
+                        Ressource = ressource.Ressource,
+                        Amount = 0
+                    });
+            }
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingName == tent.BuildingName).ProducingRessources)
+            {
+                firstBuilding.RessourcesProduced.Add(
+                    new TownBuildingRessourceProduced()
+                    {
+                        TownBuilding = town.TownBuildings.FirstOrDefault(i => i.Building.BuildingName == tent.BuildingName),
+                        Ressource = ressource.Ressource,
+                        Amount = 0
+                    });
+            }
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "PopulationMax").Amount = 2;
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Storage").Amount = 20;
             town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Wood").Amount = 15;
@@ -207,7 +227,7 @@ namespace KingdomAdventure.Models.Repository
                     TimeSpan timeElapsed = currentTime - town.LastUpdated;
                     double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
                     const int minuteToMilSeconds = 60000;
-                    int ressourcesProduced = producingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).Amount;
+                    int ressourcesProduced = 0;// producingBuilding.RessourcesProduced.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).Amount;
                     double producedInMilSeconds = (double)producingRessource.Amount / minuteToMilSeconds * (double)producingBuilding.Workers;
                     double restOfLastInterval = town.TownRessources.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).ProducedBetweenInterval;
                     double producedInInterval = producedInMilSeconds * timeElapsedInMilSeconds;
@@ -364,14 +384,36 @@ namespace KingdomAdventure.Models.Repository
         {
             UpdateRessources(town);
             var building = Buildings.FirstOrDefault(n => n.BuildingID == id);
-            town.TownBuildings.Add(
-               new TownBuilding()
-               {
-                   Town = town,
-                   Building = building,
-                   Level = 1,
-                   WorkersMax = building.WorkersMaxTemplate
-               });
+
+            TownBuilding townBuilding = new TownBuilding()
+            {
+                Town = town,
+                Building = building,
+                Level = 1,
+                WorkersMax = building.WorkersMaxTemplate
+            };
+            town.TownBuildings.Add(townBuilding);
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).ConsumingRessources)
+            {
+                townBuilding.RessourcesConsumed.Add(
+                    new TownBuildingRessourceConsumed()
+                    {
+                        TownBuilding = town.TownBuildings.FirstOrDefault(i => i.TownBuildingID == townBuilding.TownBuildingID),
+                        Ressource = ressource.Ressource,
+                        Amount = 0
+                    });
+            }
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).ProducingRessources)
+            {
+                townBuilding.RessourcesProduced.Add(
+                    new TownBuildingRessourceProduced()
+                    {
+                        TownBuilding = town.TownBuildings.FirstOrDefault(i => i.TownBuildingID == townBuilding.TownBuildingID),
+                        Ressource = ressource.Ressource,
+                        Amount = 0
+                    });
+            }
+        
             foreach (var ressource in building.BuildingRessourcesCosts)
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=

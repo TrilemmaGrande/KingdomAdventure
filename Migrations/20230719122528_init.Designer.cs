@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230719082904_init")]
+    [Migration("20230719122528_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -230,6 +230,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerID")
                         .HasColumnType("int");
 
+                    b.Property<double>("PopulationFoodConsumptionLastInterval")
+                        .HasColumnType("float");
+
                     b.Property<int>("PopulationNotWorking")
                         .HasColumnType("int");
 
@@ -287,6 +290,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<double>("ConsumedBetweenInterval")
+                        .HasColumnType("float");
+
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
 
@@ -313,6 +319,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<double>("ProducedBetweenInterval")
+                        .HasColumnType("float");
+
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
 
@@ -338,12 +347,6 @@ namespace KingdomAdventure.Migrations
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
-
-                    b.Property<double>("ConsumedBetweenInterval")
-                        .HasColumnType("float");
-
-                    b.Property<double>("ProducedBetweenInterval")
-                        .HasColumnType("float");
 
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");

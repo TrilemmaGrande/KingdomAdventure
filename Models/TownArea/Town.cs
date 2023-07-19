@@ -14,6 +14,7 @@ namespace KingdomAdventure.Models.TownArea
 
         public string? TownName { get; set; }
         public int PopulationNotWorking { get; set; } = 0;
+        public double PopulationFoodConsumptionLastInterval { get; set; } = 0.0;
         public DateTime LastUpdated { get; set; } 
         public List<TownBuilding>? TownBuildings { get; set; } = new List<TownBuilding>();
         public List<TownRessource>? TownRessources { get; set; } = new List<TownRessource>();

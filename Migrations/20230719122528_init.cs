@@ -387,6 +387,7 @@ namespace KingdomAdventure.Migrations
                     PlayerID = table.Column<int>(type: "int", nullable: false),
                     TownName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PopulationNotWorking = table.Column<int>(type: "int", nullable: false),
+                    PopulationFoodConsumptionLastInterval = table.Column<double>(type: "float", nullable: false),
                     LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -494,8 +495,6 @@ namespace KingdomAdventure.Migrations
                     TownRessourceID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    ProducedBetweenInterval = table.Column<double>(type: "float", nullable: false),
-                    ConsumedBetweenInterval = table.Column<double>(type: "float", nullable: false),
                     TownID = table.Column<int>(type: "int", nullable: false),
                     RessourceID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -579,6 +578,7 @@ namespace KingdomAdventure.Migrations
                     TownBuildingRessourceConsumedID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<int>(type: "int", nullable: false),
+                    ConsumedBetweenInterval = table.Column<double>(type: "float", nullable: false),
                     TownBuildingID = table.Column<int>(type: "int", nullable: false),
                     RessourceID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -606,6 +606,7 @@ namespace KingdomAdventure.Migrations
                     TownBuildingRessourceProducedID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<int>(type: "int", nullable: false),
+                    ProducedBetweenInterval = table.Column<double>(type: "float", nullable: false),
                     TownBuildingID = table.Column<int>(type: "int", nullable: false),
                     RessourceID = table.Column<int>(type: "int", nullable: false)
                 },

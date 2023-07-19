@@ -227,6 +227,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerID")
                         .HasColumnType("int");
 
+                    b.Property<double>("PopulationFoodConsumptionLastInterval")
+                        .HasColumnType("float");
+
                     b.Property<int>("PopulationNotWorking")
                         .HasColumnType("int");
 
@@ -284,6 +287,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<double>("ConsumedBetweenInterval")
+                        .HasColumnType("float");
+
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
 
@@ -310,6 +316,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<double>("ProducedBetweenInterval")
+                        .HasColumnType("float");
+
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
 
@@ -335,12 +344,6 @@ namespace KingdomAdventure.Migrations
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
-
-                    b.Property<double>("ConsumedBetweenInterval")
-                        .HasColumnType("float");
-
-                    b.Property<double>("ProducedBetweenInterval")
-                        .HasColumnType("float");
 
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");

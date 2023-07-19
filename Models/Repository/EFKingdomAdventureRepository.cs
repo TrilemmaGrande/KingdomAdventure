@@ -247,10 +247,6 @@ namespace KingdomAdventure.Models.Repository
                                 ressourcesAvailableInBuilding = false;
                                 break;
                             }
-                            else
-                            {
-                                ressourcesAvailableInBuilding = true;
-                            }
                         }
                         if (ressourcesAvailableInBuilding)
                         {

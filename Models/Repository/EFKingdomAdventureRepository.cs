@@ -78,8 +78,7 @@ namespace KingdomAdventure.Models.Repository
                     {
                         Town = town,
                         Ressource = item,
-                        Amount = 0,
-                        ProducedBetweenInterval = 0
+                        Amount = 0
                     });
             }
             var tent = Buildings.FirstOrDefault(n => n.BuildingName == "Tent");
@@ -154,7 +153,7 @@ namespace KingdomAdventure.Models.Repository
                     const int minuteToMilSeconds = 60000;
                     int ressourcesConsumed = consumingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).Amount;
                     double consumedInMilSeconds = (double)consumingRessource.Amount / minuteToMilSeconds * (double)consumingBuilding.Workers;
-                    double restOfLastInterval = town.TownRessources.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ConsumedBetweenInterval;
+                    double restOfLastInterval = consumingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ConsumedBetweenInterval;
                     double consumedInInterval = consumedInMilSeconds * timeElapsedInMilSeconds;
                     // Amount of NewTownRessource is smaller than OldTownRessource! (Ressources got consumed)
                     int oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).Amount;
@@ -170,7 +169,7 @@ namespace KingdomAdventure.Models.Repository
                     {
                         if (consumedInInterval + restOfLastInterval < 1)
                         {
-                            town.TownRessources.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ConsumedBetweenInterval
+                            town.TownBuildings.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ConsumedBetweenInterval
                                 += consumedInInterval;
                         }
                         else

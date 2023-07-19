@@ -4,6 +4,7 @@
     {
         public int TownBuildingRessourceConsumedID { get; set; }
         public int Amount { get; set; } = 0;
+        public double ConsumedBetweenInterval { get; set; } = 0.0;
         // Foreign key
         public int TownBuildingID { get; set; }
 

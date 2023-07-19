@@ -238,11 +238,11 @@ namespace KingdomAdventure.Models.Repository
                     if (!producingRessource.ProduceOnce)
                     {
                         //test if Building consumed all ressources for producing
-                        bool ressourcesAvailableInBuilding = false;
+                        bool ressourcesAvailableInBuilding = true;
                         foreach (var consumingRessource in producingBuilding.Building.ConsumingRessources)
                         {
                             var consumedRessource = producingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID);
-                            if (consumingRessource.Amount > consumedRessource.Amount && consumingRessource is not null)
+                            if (consumingRessource.Amount > consumedRessource.Amount)
                             {
                                 ressourcesAvailableInBuilding = false;
                                 break;

@@ -6,6 +6,7 @@ using Microsoft.Identity.Client;
 using System.Collections;
 using System.Collections.Generic;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace KingdomAdventure.Models.Repository
 {
@@ -88,10 +89,10 @@ namespace KingdomAdventure.Models.Repository
                 Building = tent,
                 Level = 1,
                 WorkersMax = tent.WorkersMaxTemplate
-
             };
             town.TownBuildings.Add(firstBuilding);
-            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingName == tent.BuildingName).ConsumingRessources)
+            ctx.SaveChanges();
+            foreach (var ressource in BuildingRessourceProducings.Where(i => i.Building.BuildingName == tent.BuildingName))
             {
                 firstBuilding.RessourcesConsumed.Add(
                     new TownBuildingRessourceConsumed()
@@ -101,7 +102,7 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 0
                     });
             }
-            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingName == tent.BuildingName).ProducingRessources)
+            foreach (var ressource in BuildingRessourceProducings.Where(i => i.Building.BuildingName == tent.BuildingName))
             {
                 firstBuilding.RessourcesProduced.Add(
                     new TownBuildingRessourceProduced()
@@ -227,7 +228,7 @@ namespace KingdomAdventure.Models.Repository
                     TimeSpan timeElapsed = currentTime - town.LastUpdated;
                     double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
                     const int minuteToMilSeconds = 60000;
-                    int ressourcesProduced = 0;// producingBuilding.RessourcesProduced.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).Amount;
+                    int ressourcesProduced = producingBuilding.RessourcesProduced.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).Amount;
                     double producedInMilSeconds = (double)producingRessource.Amount / minuteToMilSeconds * (double)producingBuilding.Workers;
                     double restOfLastInterval = town.TownRessources.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).ProducedBetweenInterval;
                     double producedInInterval = producedInMilSeconds * timeElapsedInMilSeconds;
@@ -393,7 +394,7 @@ namespace KingdomAdventure.Models.Repository
                 WorkersMax = building.WorkersMaxTemplate
             };
             town.TownBuildings.Add(townBuilding);
-            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).ConsumingRessources)
+            foreach (var ressource in BuildingRessourceProducings.Where(i => i.Building.BuildingID == id))
             {
                 townBuilding.RessourcesConsumed.Add(
                     new TownBuildingRessourceConsumed()
@@ -403,7 +404,7 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 0
                     });
             }
-            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).ProducingRessources)
+            foreach (var ressource in BuildingRessourceProducings.Where(i => i.Building.BuildingID == id))
             {
                 townBuilding.RessourcesProduced.Add(
                     new TownBuildingRessourceProduced()

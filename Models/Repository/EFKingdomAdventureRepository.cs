@@ -400,7 +400,7 @@ namespace KingdomAdventure.Models.Repository
                 townBuilding.RessourcesConsumed.Add(
                     new TownBuildingRessourceConsumed()
                     {
-                        TownBuilding = town.TownBuildings.FirstOrDefault(i => i.TownBuildingID == townBuilding.TownBuildingID),
+                        TownBuilding = townBuilding,
                         Ressource = ressource.Ressource,
                         Amount = 0
                     });
@@ -410,7 +410,7 @@ namespace KingdomAdventure.Models.Repository
                 townBuilding.RessourcesProduced.Add(
                     new TownBuildingRessourceProduced()
                     {
-                        TownBuilding = town.TownBuildings.FirstOrDefault(i => i.TownBuildingID == townBuilding.TownBuildingID),
+                        TownBuilding = townBuilding,
                         Ressource = ressource.Ressource,
                         Amount = 0
                     });

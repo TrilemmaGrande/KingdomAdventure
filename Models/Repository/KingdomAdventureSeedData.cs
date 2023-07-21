@@ -41,7 +41,7 @@ namespace KingdomAdventure.Models.Repository
             {
                 GenerateRessources(dbContext);
                 GenerateBuildingRessources(dbContext);
-                MapRessources(dbContext);
+                MapBuildingLists(dbContext);
             }
 
 
@@ -204,7 +204,7 @@ namespace KingdomAdventure.Models.Repository
               );
             dbContext.SaveChanges();
         }
-        private static void MapRessources(KingdomAdventureDBContext dbContext)
+        private static void MapBuildingLists(KingdomAdventureDBContext dbContext)
         {
             foreach (var producingRessource in dbContext.BuildingRessourceProducing)
             {

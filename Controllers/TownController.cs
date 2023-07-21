@@ -20,11 +20,7 @@ namespace KingdomAdventure.Controllers
             {
                 repo.UpdateRessources(GetTown());
             }
-            ViewBag.Buildings = repo.Buildings
-                .Include(i => i.BuildingRessourcesCosts).ThenInclude(ii => ii.Ressource)
-                .Include(i => i.ConsumingRessources).ThenInclude(ii => ii.Ressource)
-                .Include(i => i.ProducingRessources).ThenInclude(ii => ii.Ressource)
-                .Include(i => i.ProducingSoldiers).ThenInclude(ii => ii.Soldier);
+            LoadBuildingViewData();
             return View(GetTown());
         }
         [HttpGet]
@@ -58,14 +54,22 @@ namespace KingdomAdventure.Controllers
         {
             return repo.Towns
                         .Include(i => i.TownRessources).ThenInclude(ii => ii.Ressource)
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.BuildingRessourcesCosts)
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ConsumingRessources)
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingRessources)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.BuildingRessourcesCosts).ThenInclude(iiii => iiii.Ressource)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ConsumingRessources).ThenInclude(iiii => iiii.Ressource)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingRessources).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.RessourcesConsumed).ThenInclude(iii => iii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.RessourcesProduced).ThenInclude(iii => iii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingSoldiers)
                         .Include(i => i.TownSoldiers).ThenInclude(ii => ii.Soldier)
                         .FirstOrDefault(p => p.PlayerID == HttpContext.Session.GetInt32("id"));
+        }
+        private void LoadBuildingViewData()
+        {
+            ViewData["Buildings"] = repo.Buildings
+                .Include(i => i.BuildingRessourcesCosts).ThenInclude(ii => ii.Ressource)
+                .Include(i => i.ConsumingRessources).ThenInclude(ii => ii.Ressource)
+                .Include(i => i.ProducingRessources).ThenInclude(ii => ii.Ressource)
+                .Include(i => i.ProducingSoldiers).ThenInclude(ii => ii.Soldier);
         }
     }
 }

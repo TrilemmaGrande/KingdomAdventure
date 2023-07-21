@@ -85,7 +85,7 @@
         }
 
         <h3>Buildings to build:</h3>
-        @foreach (var dataset in ViewBag.Buildings)
+        @foreach (var dataset in ViewData["Buildings"] as IEnumerable<Building>)
         {
             @:------------------------------------------- <br />
             @:<h5>@dataset.BuildingName</h5>

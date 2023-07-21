@@ -56,42 +56,42 @@ namespace KingdomAdventure.Models.Repository
                     EBuildingName = EBuildingName.Lumber,
                     WorkersMaxTemplate = 1
                 },
-                 new Building()
-                 {
-                     BuildingName = "Storage",
-                     EBuildingName = EBuildingName.Storage,
-                     WorkersMaxTemplate = 0
-                 },
-                  new Building()
-                  {
-                      BuildingName = "Hunting Lodge",
-                      EBuildingName = EBuildingName.Hunter,
-                      WorkersMaxTemplate = 1
-                  },
-                   new Building()
-                   {
-                       BuildingName = "Quarry",
-                       EBuildingName = EBuildingName.Quarry,
-                       WorkersMaxTemplate = 2
-                   },
-                    new Building()
-                    {
-                        BuildingName = "Windmill",
-                        EBuildingName = EBuildingName.Windmill,
-                        WorkersMaxTemplate = 3
-                    },
-                     new Building()
-                     {
-                         BuildingName = "House",
-                         EBuildingName = EBuildingName.House,
-                         WorkersMaxTemplate = 0
-                     },
-                   new Building()
-                   {
-                       BuildingName = "Tent",
-                       EBuildingName = EBuildingName.Tent,
-                       WorkersMaxTemplate = 0
-                   }
+                new Building()
+                {
+                    BuildingName = "Storage",
+                    EBuildingName = EBuildingName.Storage,
+                    WorkersMaxTemplate = 0
+                },
+                new Building()
+                {
+                    BuildingName = "Hunting Lodge",
+                    EBuildingName = EBuildingName.Hunter,
+                    WorkersMaxTemplate = 1
+                },
+                new Building()
+                {
+                    BuildingName = "Quarry",
+                    EBuildingName = EBuildingName.Quarry,
+                    WorkersMaxTemplate = 2
+                },
+                new Building()
+                {
+                    BuildingName = "Windmill",
+                    EBuildingName = EBuildingName.Windmill,
+                    WorkersMaxTemplate = 3
+                },
+                new Building()
+                {
+                    BuildingName = "House",
+                    EBuildingName = EBuildingName.House,
+                    WorkersMaxTemplate = 0
+                },
+                new Building()
+                {
+                    BuildingName = "Tent",
+                    EBuildingName = EBuildingName.Tent,
+                    WorkersMaxTemplate = 0
+                }
                 );
 
             dbContext.SaveChanges();

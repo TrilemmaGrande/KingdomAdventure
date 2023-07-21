@@ -41,6 +41,7 @@ namespace KingdomAdventure.Models.Repository
             {
                 GenerateRessources(dbContext);
                 GenerateBuildingRessources(dbContext);
+                MapRessources(dbContext);
             }
 
 
@@ -98,54 +99,54 @@ namespace KingdomAdventure.Models.Repository
         private static void GenerateBuildingRessources(KingdomAdventureDBContext dbContext)
         {
             dbContext.BuildingRessourceCost.AddRange(
-            new BuildingRessourceCost()
-            {
-                Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Lumber),
-                Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
-                Amount = 5
-            },
-             new BuildingRessourceCost()
-             {
-                 Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Lumber),
-                 Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
-                 Amount = 5
-             },
-              new BuildingRessourceCost()
-              {
-                  Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Hunter),
-                  Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
-                  Amount = 10
-              },
-               new BuildingRessourceCost()
-               {
-                   Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Quarry),
-                   Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
-                   Amount = 20
-               },
-               new BuildingRessourceCost()
-               {
-                   Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Windmill),
-                   Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
-                   Amount = 15
-               },
-                 new BuildingRessourceCost()
-                 {
-                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Windmill),
-                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Stone),
-                     Amount = 10
-                 },
+                new BuildingRessourceCost()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Lumber),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
+                    Amount = 5
+                },
+                new BuildingRessourceCost()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Lumber),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
+                    Amount = 5
+                },
+                new BuildingRessourceCost()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Hunter),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
+                    Amount = 10
+                },
+                new BuildingRessourceCost()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Quarry),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
+                    Amount = 20
+                },
+                new BuildingRessourceCost()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Windmill),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
+                    Amount = 15
+                },
+                new BuildingRessourceCost()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Windmill),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Stone),
+                    Amount = 10
+                },
                 new BuildingRessourceCost()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Storage),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
                     Amount = 10
                 },
-               new BuildingRessourceCost()
-               {
-                   Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.House),
-                   Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Stone),
-                   Amount = 5
-               },
+                new BuildingRessourceCost()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.House),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Stone),
+                    Amount = 5
+                },
                 new BuildingRessourceCost()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tent),
@@ -155,53 +156,56 @@ namespace KingdomAdventure.Models.Repository
                 );
             dbContext.SaveChanges();
             dbContext.BuildingRessourceProducing.AddRange(
-              new BuildingRessourceProducing()
-              {
-                  Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Lumber),
-                  Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
-                  Amount = 30
-              },
+                new BuildingRessourceProducing()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Lumber),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
+                    Amount = 30
+                },
                 new BuildingRessourceProducing()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Hunter),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
                     Amount = 5
                 },
-                 new BuildingRessourceProducing()
-                 {
-                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Quarry),
-                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Stone),
-                     Amount = 1
-                 },
-                 new BuildingRessourceProducing()
-                 {
-                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Windmill),
-                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
-                     Amount = 10
-                 },
-                    new BuildingRessourceProducing()
-                    {
-                        Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Storage),
-                        Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Storage),
-                        ProduceOnce = true,
-                        Amount = 10
-                    },
-                 new BuildingRessourceProducing()
-                 {
-                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.House),
-                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.PopulationMax),
-                     ProduceOnce = true,
-                     Amount = 5
-                 },
-                  new BuildingRessourceProducing()
-                  {
-                      Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tent),
-                      Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.PopulationMax),
-                      ProduceOnce = true,
-                      Amount = 2
-                  }
+                new BuildingRessourceProducing()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Quarry),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Stone),
+                    Amount = 1
+                },
+                new BuildingRessourceProducing()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Windmill),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
+                    Amount = 10
+                },
+                new BuildingRessourceProducing()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Storage),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Storage),
+                    ProduceOnce = true,
+                    Amount = 10
+                },
+                new BuildingRessourceProducing()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.House),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.PopulationMax),
+                    ProduceOnce = true,
+                    Amount = 5
+                },
+                new BuildingRessourceProducing()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tent),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.PopulationMax),
+                    ProduceOnce = true,
+                    Amount = 2
+                }
               );
             dbContext.SaveChanges();
+        }
+        private static void MapRessources(KingdomAdventureDBContext dbContext)
+        {
             foreach (var producingRessource in dbContext.BuildingRessourceProducing)
             {
                 var building = dbContext.Building

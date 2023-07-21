@@ -18,6 +18,7 @@ namespace KingdomAdventure.Migrations
                     BuildingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EBuildingName = table.Column<int>(type: "int", nullable: false),
                     WorkersMaxTemplate = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -89,6 +90,7 @@ namespace KingdomAdventure.Migrations
                     RessourceID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RessourceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ERessourceName = table.Column<int>(type: "int", nullable: false),
                     RessourceValue = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>

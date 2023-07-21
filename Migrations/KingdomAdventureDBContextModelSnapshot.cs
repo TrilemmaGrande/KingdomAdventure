@@ -33,6 +33,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<string>("BuildingName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EBuildingName")
+                        .HasColumnType("int");
+
                     b.Property<int>("WorkersMaxTemplate")
                         .HasColumnType("int");
 
@@ -164,6 +167,9 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RessourceID"));
+
+                    b.Property<int>("ERessourceName")
+                        .HasColumnType("int");
 
                     b.Property<string>("RessourceName")
                         .HasColumnType("nvarchar(max)");

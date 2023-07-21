@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230719122528_init")]
+    [Migration("20230721061656_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -35,6 +35,9 @@ namespace KingdomAdventure.Migrations
 
                     b.Property<string>("BuildingName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EBuildingName")
+                        .HasColumnType("int");
 
                     b.Property<int>("WorkersMaxTemplate")
                         .HasColumnType("int");
@@ -167,6 +170,9 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RessourceID"));
+
+                    b.Property<int>("ERessourceName")
+                        .HasColumnType("int");
 
                     b.Property<string>("RessourceName")
                         .HasColumnType("nvarchar(max)");

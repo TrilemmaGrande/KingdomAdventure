@@ -426,6 +426,10 @@ namespace KingdomAdventure.Models.Repository
                 {
                     town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount +=
                         ressource.Amount;
+
+                    town.TownBuildings.FirstOrDefault(i => i.BuildingID == building.BuildingID).RessourcesProduced
+                                      .FirstOrDefault(ii => ii.RessourceID == ressource.RessourceID).Amount +=
+                        ressource.Amount;
                 }
             }
             UpdatePopulationNotWorking(town);

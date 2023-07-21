@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Models",
+    "\\Models\\Repository"
   ],
+  "SelectedNode": "\\Models\\Repository\\EFKingdomAdventureRepository.cs",
   "PreviewInSolutionExplorer": false
 }

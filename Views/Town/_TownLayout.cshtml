@@ -24,7 +24,7 @@
                         {
                             @foreach (var dataset in Model.TownRessources)
                             {
-                                if (dataset.Ressource.RessourceName == "PopulationMax")
+                                if (dataset.Ressource.ERessourceName == ERessourceName.PopulationMax)
                                 {
                                     <li class="nav-item nav-link">
                                         @dataset.Ressource.RessourceName @Model.PopulationNotWorking /
@@ -35,7 +35,7 @@
                                 {
                                     <li class="nav-item nav-link">
                                         @dataset.Ressource.RessourceName @dataset.Amount /
-                                        @Model.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount
+                                        @Model.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Storage).Amount
                                     </li>
                                 }
                             }

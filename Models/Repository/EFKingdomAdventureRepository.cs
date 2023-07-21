@@ -82,7 +82,7 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 0
                     });
             }
-            var tent = Buildings.FirstOrDefault(n => n.BuildingName == "Tent");
+            var tent = Buildings.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tent);
             TownBuilding firstBuilding = new TownBuilding()
             {
                 Town = town,
@@ -112,10 +112,10 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 0
                     });
             }
-            town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "PopulationMax").Amount = 2;
-            town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Storage").Amount = 20;
-            town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Wood").Amount = 15;
-            town.TownRessources.FirstOrDefault(r => r.Ressource.RessourceName == "Food").Amount = 20;
+            town.TownRessources.FirstOrDefault(r => r.Ressource.ERessourceName == ERessourceName.PopulationMax).Amount = 2;
+            town.TownRessources.FirstOrDefault(r => r.Ressource.ERessourceName == ERessourceName.Storage).Amount = 20;
+            town.TownRessources.FirstOrDefault(r => r.Ressource.ERessourceName == ERessourceName.Wood).Amount = 15;
+            town.TownRessources.FirstOrDefault(r => r.Ressource.ERessourceName == ERessourceName.Food).Amount = 20;
             town.PopulationNotWorking = 2;
 
             ctx.SaveChanges();
@@ -234,7 +234,7 @@ namespace KingdomAdventure.Models.Repository
                     double producedInInterval = producedInMilSeconds * timeElapsedInMilSeconds;
                     int oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).Amount;
                     int newTownRessourceValue = oldTownRessourceValue + (int)Math.Floor(producedInInterval + restOfLastInterval);
-                    int storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Storage").Amount;
+                    int storageValue = town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Storage).Amount;
                     if (!producingRessource.ProduceOnce)
                     {
                         //test if Building consumed all ressources for producing
@@ -330,12 +330,12 @@ namespace KingdomAdventure.Models.Repository
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
             double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
             const int minuteToMilSeconds = 60000;
-            int workingPopulation = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "PopulationMax").Amount
+            int workingPopulation = town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.PopulationMax).Amount
                     - town.PopulationNotWorking;
             double restOfLastInterval = town.PopulationFoodConsumptionLastInterval;
             double consumedInMilSecond = (double)workingPopulation / minuteToMilSeconds;
             double consumedInInterval = consumedInMilSecond * timeElapsedInMilSeconds;
-            int oldFoodValue = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount;
+            int oldFoodValue = town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Food).Amount;
             int newFoodValue = oldFoodValue - (int)Math.Floor(consumedInInterval + restOfLastInterval);
 
             if (newFoodValue <= 0)
@@ -354,11 +354,13 @@ namespace KingdomAdventure.Models.Repository
                 town.PopulationFoodConsumptionLastInterval
                     = consumedInInterval + restOfLastInterval - Math.Floor(consumedInInterval + restOfLastInterval);
 
-                town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount = newFoodValue;
+                town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Food).Amount = newFoodValue;
 
 
                 // Make Workers to NotWorking if no Food
-                int workingPopulationWithoutFood = workingPopulation - town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount;
+                int workingPopulationWithoutFood = 
+                    workingPopulation - town.TownRessources
+                                            .FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Food).Amount;
                 if (workingPopulationWithoutFood > 0)
                 {
                     foreach (var building in town.TownBuildings)
@@ -367,9 +369,9 @@ namespace KingdomAdventure.Models.Repository
                         {
                             town.PopulationNotWorking++;
                             workingPopulationWithoutFood--;
-                            if (town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount > 0)
+                            if (town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Food).Amount > 0)
                             {
-                                town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "Food").Amount--;
+                                town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Food).Amount--;
                             }
                             building.Workers--;
                         }
@@ -436,7 +438,8 @@ namespace KingdomAdventure.Models.Repository
             {
                 workingPopulation += building.Workers;
             }
-            town.PopulationNotWorking = town.TownRessources.FirstOrDefault(i => i.Ressource.RessourceName == "PopulationMax").Amount - workingPopulation;
+            town.PopulationNotWorking = town.TownRessources
+                .FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.PopulationMax).Amount - workingPopulation;
         }
         public void AddWorkerToBuilding(Town town, int id)
         {

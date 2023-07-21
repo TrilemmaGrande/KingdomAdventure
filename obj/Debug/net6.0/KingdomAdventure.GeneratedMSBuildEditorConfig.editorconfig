@@ -9,61 +9,61 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = KingdomAdventure
 build_property.RootNamespace = KingdomAdventure
-build_property.ProjectDir = C:\Users\trilemma\Source\Repos\TrilemmaGrande\KingdomAdventure\
+build_property.ProjectDir = C:\Users\trilemma\source\repos\TrilemmaGrande\KingdomAdventure\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\trilemma\Source\Repos\TrilemmaGrande\KingdomAdventure
+build_property.MSBuildProjectDirectory = C:\Users\trilemma\source\repos\TrilemmaGrande\KingdomAdventure
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/Home/CreateNewPlayer.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/Home/CreateNewPlayer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDcmVhdGVOZXdQbGF5ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/Home/Index.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/Town/CreateNewTown.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/Town/CreateNewTown.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG93blxDcmVhdGVOZXdUb3duLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/Town/Index.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/Town/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG93blxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/Town/_ViewStart.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/Town/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG93blxfVmlld1N0YXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/World/Index.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/World/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29ybGRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/World/Inventory.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/World/Inventory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29ybGRcSW52ZW50b3J5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/World/_ViewStart.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/World/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29ybGRcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/_ViewImports.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/_ViewStart.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/Shared/_Layout.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-jiwgmdtkj0
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/Town/_TownLayout.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/Town/_TownLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG93blxfVG93bkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-z6sl27qdoi
 
-[C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/World/_WorldLayout.cshtml]
+[C:/Users/trilemma/source/repos/TrilemmaGrande/KingdomAdventure/Views/World/_WorldLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29ybGRcX1dvcmxkTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = b-6nmn12clc7

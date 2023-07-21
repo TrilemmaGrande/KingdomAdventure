@@ -415,12 +415,12 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 0
                     });
             }
-            foreach (var ressource in building.BuildingRessourcesCosts)
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).BuildingRessourcesCosts)
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=
                     ressource.Amount;
             }
-            foreach (var ressource in building.ProducingRessources)
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).ProducingRessources)
             {
                 if (ressource.ProduceOnce)
                 {

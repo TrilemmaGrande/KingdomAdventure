@@ -22,66 +22,72 @@
     else
     {
         <h3>Buildings in Town:</h3>
-        @foreach (var dataset in Model.TownBuildings)
+        @foreach (var buildingGroup in Model.TownBuildings.GroupBy(n => n.Building.BuildingName))
         {
-            @:------------------------------------------- <br />
-            <h5>@dataset.Building.BuildingName lvl @dataset.Level </h5>
-
-
-            bool buttonSwitch = false;
-            foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
-            {
-                if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
+            <div class="table row">
+                @foreach (var dataset in buildingGroup)
                 {
-                    buttonSwitch = false;
-                    break;
-                }
-                else
-                {
-                    buttonSwitch = true;
-                }
-            }
-            if (buttonSwitch)
-            {
-                <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
-            }
-            if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
-            {
-                <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID">Add Worker</a>
-            }
-            if (dataset.Workers > 0)
-            {
-                <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.TownBuildingID">Sub Worker</a>
-            }
+                    @:<div class="col">
+                        @:------------------------------------------- <br />
+                        <h5>@dataset.Building.BuildingName lvl @dataset.Level </h5>
 
-            <br />
-            @:Produces:
-            <br />
-            foreach (var productionRessource in dataset.Building.ProducingRessources)
-            {
-                @:<p>@productionRessource.Amount @productionRessource.Ressource.RessourceName</p>
-            }
-            <br />
-            @:Consumes:
-            <br />
-            if (dataset.Building.ConsumingRessources.Count > 0)
-            {
 
-                foreach (var consumingRessources in dataset.Building.ConsumingRessources)
-                {
-                    @:<p>@consumingRessources.Amount @consumingRessources.Ressource.RessourceName </p>
+                        bool buttonSwitch = false;
+                        foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
+                        {
+                        if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
+                        {
+                        buttonSwitch = false;
+                        break;
+                        }
+                        else
+                        {
+                        buttonSwitch = true;
+                        }
+                        }
+                        if (buttonSwitch)
+                        {
+                        <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
+                        }
+                        if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
+                        {
+                        <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID">Add Worker</a>
+                        }
+                        if (dataset.Workers > 0)
+                        {
+                        <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.TownBuildingID">Sub Worker</a>
+                        }
+
+                        <br />
+                        @:Produces:
+                        <br />
+                        foreach (var productionRessource in dataset.Building.ProducingRessources)
+                        {
+                        @:<p>@productionRessource.Amount @productionRessource.Ressource.RessourceName</p>
+                        }
+                        <br />
+                        @:Consumes:
+                        <br />
+                        if (dataset.Building.ConsumingRessources.Count > 0)
+                        {
+
+                        foreach (var consumingRessources in dataset.Building.ConsumingRessources)
+                        {
+                        @:<p>@consumingRessources.Amount @consumingRessources.Ressource.RessourceName </p>
+                        }
+                        }
+                        else
+                        {
+                        @:<p>nothing</p>
+                        }
+                        <br />
+                        @:Workers:
+                        <br />
+                        @:<p>@dataset.Workers / @dataset.WorkersMax</p>
+                        <br />
+                    @:</div>
                 }
-            }
-            else
-            {
-                @:<p>nothing</p>
-            }
-            <br />
-            @:Workers:
-            <br />
-            @:<p>@dataset.Workers / @dataset.WorkersMax</p>
-            <br />
-
+            </div>
         }
 
         <h3>Buildings to build:</h3>
@@ -89,6 +95,18 @@
         {
             @:------------------------------------------- <br />
             @:<h5>@dataset.BuildingName</h5>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

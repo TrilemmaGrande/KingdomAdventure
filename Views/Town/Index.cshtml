@@ -31,25 +31,26 @@
                         @:------------------------------------------- <br />
                         <h5>@dataset.Building.BuildingName lvl @dataset.Level </h5>
 
-                        bool buttonSwitch = false;
-                        foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
+                    bool buttonSwitch = false;
+                    foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
+                    {
+                        if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
                         {
-                            if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
-                            {
-                                buttonSwitch = false;
-                                break;
-                            }
-                            else
-                            {
-                                buttonSwitch = true;
-                            }
+                            buttonSwitch = false;
+                            break;
                         }
-                        if (buttonSwitch)
-                            if (dataset.Level < 3)
-                            {
+                        else
+                        {
+                            buttonSwitch = true;
+                        }
+                    }
+                    if (buttonSwitch)
+                    {
+                        if (dataset.Level < 3)
+                        {
                                 <a asp-action="LevelUpBuilding" asp-route-id="@dataset.BuildingID">Level Up</a>
                             }
-                        {
+                    
                             <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
                         }
                         if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)

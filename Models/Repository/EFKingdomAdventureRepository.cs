@@ -358,7 +358,7 @@ namespace KingdomAdventure.Models.Repository
 
 
                 // Make Workers to NotWorking if no Food
-                int workingPopulationWithoutFood = 
+                int workingPopulationWithoutFood =
                     workingPopulation - town.TownRessources
                                             .FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Food).Amount;
                 if (workingPopulationWithoutFood > 0)
@@ -439,8 +439,20 @@ namespace KingdomAdventure.Models.Repository
             ctx.SaveChanges();
             foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == townBuilding.BuildingID).BuildingRessourcesCosts)
             {
-                town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount +=
-                    (int)Math.Floor(ressource.Amount * 0.25);
+                int oldTownRessource = town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount;
+                int restoringRessources = (int)Math.Floor(ressource.Amount * 0.25);
+                int storageValue = town.TownRessources.FirstOrDefault(s => s.Ressource.ERessourceName == ERessourceName.Storage).Amount;
+                if (oldTownRessource + restoringRessources <= storageValue)
+                {
+                    town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount +=
+                        restoringRessources;
+                }
+                else
+                {
+                    town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount =
+                        storageValue;
+                }
+
             }
             foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == townBuilding.BuildingID).ProducingRessources)
             {

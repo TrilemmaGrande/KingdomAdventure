@@ -7,21 +7,30 @@ namespace KingdomAdventure.Models.TownArea
     {
         Tent,
         House,
-        Castle,
+        Mansion,
         Storage,
         Lumber,
         Hunter,
         Mine,
         Quarry,
-        Windmill,
-        Smith
+        Farm,
+        Smith,
+        Tanner,
+        Fletcher,
+        Weaver,
+        RitualFountain,
+        MageGuild,
+        Barracks,
+        Archery
     }
     public class Building
     {
         public int BuildingID { get; set; }
         public string? BuildingName { get; set; }
+        public int? AvailableInStage { get; set; }
+        public bool LockedInStage { get; set; } = false;
         public EBuildingName EBuildingName { get; set; }
-        public int WorkersMaxTemplate { get; set; }
+        public int? WorkersMaxTemplate { get; set; }
         public List<BuildingRessourceConsuming>? ConsumingRessources { get; set; } = new List<BuildingRessourceConsuming>();
         public List<BuildingRessourceProducing>? ProducingRessources { get; set; } = new List<BuildingRessourceProducing>();
         public List<BuildingSoldierProducing>? ProducingSoldiers { get; set; } = new List<BuildingSoldierProducing>();

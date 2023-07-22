@@ -1,11 +1,19 @@
 ﻿using KingdomAdventure.Models.WorldArea;
 
+public enum ESoldierName
+{
+    Archer,
+    Warrior,
+    Mage
+}
+
 namespace KingdomAdventure.Models.TownArea
 {
     public class Soldier
     {
         public int SoldierID { get; set; }
         public string? SoldierName { get; set; }
+        public ESoldierName ESoldierName { get; set; }
         public double? FullLP { get; set; }
         public double? AtkMelee { get; set; }
         public double? AtkPierce { get; set; }

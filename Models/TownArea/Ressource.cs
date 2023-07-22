@@ -9,8 +9,15 @@
         Stone,
         Cloth,
         Iron,
-        Jewelry,
-        Gold
+        Silver,
+        Gold,
+        IronArmor,
+        Sword,
+        Leather,
+        LeatherArmor,
+        Bow,
+        Robe,
+        Wand
     }
     public class Ressource
     {

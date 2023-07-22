@@ -50,6 +50,11 @@ namespace KingdomAdventure.Controllers
             repo.SubWorkerFromBuilding(GetTown(), id);
             return RedirectToAction("Index");
         }
+        public IActionResult LevelUpBuilding(int id)
+        {
+            repo.LevelUpBuilding(GetTown(), id);
+            return RedirectToAction("Index");
+        }
         private Town GetTown()
         {
             return repo.Towns

@@ -453,5 +453,26 @@ namespace KingdomAdventure.Models.Repository
             UpdatePopulationNotWorking(town);
             ctx.SaveChanges();
         }
+        public void LevelUpBuilding(Town town, int id)
+        {
+            town.TownBuildings.FirstOrDefault(i => i.BuildingID == id).WorkersMax +=
+                Buildings.FirstOrDefault(i => i.BuildingID == id).WorkersMaxTemplate;
+            town.TownBuildings.FirstOrDefault(i => i.BuildingID == id).Level++;
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).BuildingRessourcesCosts)
+            {
+                town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=
+                    ressource.Amount;
+            }
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).ProducingRessources)
+            {
+                if (ressource.ProduceOnce)
+                {
+                    town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount +=
+                        ressource.Amount;
+                }
+            }
+            UpdatePopulationNotWorking(town);
+            ctx.SaveChanges();
+        }
     }
 }

@@ -42,5 +42,6 @@ namespace KingdomAdventure.Models.Repository
         public void AddWorkerToBuilding(Town town, int id);
         public void SubWorkerFromBuilding(Town town, int id);
         public void UpdatePopulationNotWorking(Town town);
+        public void LevelUpBuilding(Town town, int id);
     }
 }

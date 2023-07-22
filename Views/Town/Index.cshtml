@@ -31,54 +31,79 @@
                         @:------------------------------------------- <br />
                         <h5>@dataset.Building.BuildingName lvl @dataset.Level </h5>
 
-
                         bool buttonSwitch = false;
                         foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
                         {
-                        if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
-                        {
-                        buttonSwitch = false;
-                        break;
-                        }
-                        else
-                        {
-                        buttonSwitch = true;
-                        }
+                            if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
+                            {
+                                buttonSwitch = false;
+                                break;
+                            }
+                            else
+                            {
+                                buttonSwitch = true;
+                            }
                         }
                         if (buttonSwitch)
+                            if (dataset.Level < 3)
+                            {
+                                <a asp-action="LevelUpBuilding" asp-route-id="@dataset.BuildingID">Level Up</a>
+                            }
                         {
-                        <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
+                            <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
                         }
                         if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
                         {
-                        <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID">Add Worker</a>
+                            <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID">Add Worker</a>
                         }
                         if (dataset.Workers > 0)
                         {
-                        <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.TownBuildingID">Sub Worker</a>
+                            <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.TownBuildingID">Sub Worker</a>
                         }
-
                         <br />
                         @:Produces:
                         <br />
-                        foreach (var productionRessource in dataset.Building.ProducingRessources)
-                        {
-                        @:<p>@productionRessource.Amount @productionRessource.Ressource.RessourceName</p>
-                        }
+                        @:<p>
+                            foreach (var productionRessource in dataset.Building.ProducingRessources)
+                            {
+                                @: @productionRessource.Ressource.RessourceName @productionRessource.Amount
+                            }
+                            <br />
+                            @:Produced:
+                            foreach (var producedRessource in dataset.RessourcesProduced)
+                            {
+                                @producedRessource.Ressource.RessourceName @producedRessource.Amount
+                                @:Produced in Interval: @producedRessource.ProducedBetweenInterval
+                            }
+                        @:</p>
                         <br />
                         @:Consumes:
                         <br />
                         if (dataset.Building.ConsumingRessources.Count > 0)
                         {
-
-                        foreach (var consumingRessources in dataset.Building.ConsumingRessources)
-                        {
-                        @:<p>@consumingRessources.Amount @consumingRessources.Ressource.RessourceName </p>
-                        }
+                            @:<p>
+                                foreach (var consumingRessources in dataset.Building.ConsumingRessources)
+                                {
+                                    @: @consumingRessources.Ressource.RessourceName @consumingRessources.Amount
+                                }
+                                @:Consumed:
+                                foreach (var consumedRessource in dataset.RessourcesConsumed)
+                                {
+                                    @consumedRessource.Ressource.RessourceName @consumedRessource.Amount
+                                    @:Consumed in Interval: @consumedRessource.ConsumedBetweenInterval
+                                }
+                            @:</p>
                         }
                         else
                         {
-                        @:<p>nothing</p>
+                            @:<p>nothing</p>
+                        }
+                        <br />
+                        @:Ressources needed to Upgrade:
+                        <br />
+                        foreach (var ressourceCosts in dataset.Building.BuildingRessourcesCosts)
+                        {
+                            @:<p>@ressourceCosts.Amount @ressourceCosts.Ressource.RessourceName</p>
                         }
                         <br />
                         @:Workers:
@@ -95,22 +120,6 @@
         {
             @:------------------------------------------- <br />
             @:<h5>@dataset.BuildingName</h5>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             bool buttonSwitch = false;
             foreach (var ressource in dataset.BuildingRessourcesCosts)
             {
@@ -128,7 +137,6 @@
             {
                 <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
             }
-
             <br />
             @:Can Produce:
             <br />

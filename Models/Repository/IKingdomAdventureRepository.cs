@@ -39,6 +39,7 @@ namespace KingdomAdventure.Models.Repository
         public void ProduceRessources(Town town);
         public void WorkersConsumeFood(Town town);
         public void AddBuilding(Town town, int id);
+        public void RemoveBuilding(Town town, int id);
         public void AddWorkerToBuilding(Town town, int id);
         public void SubWorkerFromBuilding(Town town, int id);
         public void UpdatePopulationNotWorking(Town town);

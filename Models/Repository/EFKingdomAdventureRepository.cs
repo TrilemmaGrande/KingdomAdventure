@@ -431,6 +431,28 @@ namespace KingdomAdventure.Models.Repository
             UpdatePopulationNotWorking(town);
             ctx.SaveChanges();
         }
+        public void RemoveBuilding(Town town, int id)
+        {
+            UpdateRessources(town);
+            var townBuilding = town.TownBuildings.FirstOrDefault(n => n.TownBuildingID == id);
+            town.TownBuildings.Remove(townBuilding);
+            ctx.SaveChanges();
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == townBuilding.BuildingID).BuildingRessourcesCosts)
+            {
+                town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount +=
+                    (int)Math.Floor(ressource.Amount * 0.25);
+            }
+            foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == townBuilding.BuildingID).ProducingRessources)
+            {
+                if (ressource.ProduceOnce)
+                {
+                    town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=
+                        ressource.Amount;
+                }
+            }
+            UpdatePopulationNotWorking(town);
+            ctx.SaveChanges();
+        }
         public void UpdatePopulationNotWorking(Town town)
         {
             int workingPopulation = 0;

@@ -31,28 +31,29 @@
                         @:------------------------------------------- <br />
                         <h5>@dataset.Building.BuildingName lvl @dataset.Level </h5>
 
-                    bool buttonSwitch = false;
-                    foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
-                    {
-                        if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
+                        bool buttonSwitch = false;
+                        foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
                         {
-                            buttonSwitch = false;
-                            break;
+                            if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
+                            {
+                                buttonSwitch = false;
+                                break;
+                            }
+                            else
+                            {
+                                buttonSwitch = true;
+                            }
                         }
-                        else
+                        if (buttonSwitch)
                         {
-                            buttonSwitch = true;
-                        }
-                    }
-                    if (buttonSwitch)
-                    {
-                        if (dataset.Level < 3)
-                        {
+                            if (dataset.Level < 3)
+                            {
                                 <a asp-action="LevelUpBuilding" asp-route-id="@dataset.BuildingID">Level Up</a>
                             }
-                    
+
                             <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
                         }
+                            <a asp-action="RemoveBuilding" asp-route-id="@dataset.TownBuildingID">Remove Building</a>
                         if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
                         {
                             <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID">Add Worker</a>

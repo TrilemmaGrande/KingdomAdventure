@@ -40,6 +40,11 @@ namespace KingdomAdventure.Controllers
             repo.AddBuilding(GetTown(), id);
             return RedirectToAction("Index");
         }
+        public IActionResult RemoveBuilding(int id)
+        {
+            repo.RemoveBuilding(GetTown(), id);
+            return RedirectToAction("Index");
+        }
         public IActionResult AddWorkerToBuilding(int id) 
         {
             repo.AddWorkerToBuilding(GetTown(), id);

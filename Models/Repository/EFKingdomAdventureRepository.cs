@@ -120,7 +120,7 @@ namespace KingdomAdventure.Models.Repository
             town.TownRessources.FirstOrDefault(r => r.Ressource.ERessourceName == ERessourceName.Storage).Amount = 20;
             town.TownRessources.FirstOrDefault(r => r.Ressource.ERessourceName == ERessourceName.Wood).Amount = 15;
             town.TownRessources.FirstOrDefault(r => r.Ressource.ERessourceName == ERessourceName.Food).Amount = 20;
-            town.PopulationNotWorking = 3;
+            town.PopulationNotWorking = 2;
 
             ctx.SaveChanges();
 

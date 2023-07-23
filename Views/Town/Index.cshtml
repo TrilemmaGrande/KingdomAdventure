@@ -119,7 +119,7 @@
                         <br />
                         foreach (var ressourceCosts in dataset.Building.RessourceCost)
                         {
-                            @:<p>@ressourceCosts.Amount @ressourceCosts.Ressource.RessourceName</p>
+                            @:<p>@((int)Math.Floor(@ressourceCosts.Amount * 0.75)) @ressourceCosts.Ressource.RessourceName</p>
                         }
                         <br />
                         @:Workers:

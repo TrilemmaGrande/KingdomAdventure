@@ -608,7 +608,7 @@ namespace KingdomAdventure.Models.Repository
             foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).RessourceCost)
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=
-                    ressource.Amount;
+                    (int)Math.Floor(ressource.Amount * 0.75);
             }
             foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == id).ProducingRessources)
             {

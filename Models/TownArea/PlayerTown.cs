@@ -2,7 +2,7 @@
 
 namespace KingdomAdventure.Models.TownArea
 {
-    public class Town
+    public class PlayerTown
     {
         public int TownID { get; set; }
 
@@ -12,6 +12,7 @@ namespace KingdomAdventure.Models.TownArea
         // Navigation property
         public Player Player { get; set; }
         public int Stage { get; set; } = 1;
+        public int SoldiersMax { get; set; } = 50;
         public string? TownName { get; set; }
         public int PopulationNotWorking { get; set; } = 0;
         public double PopulationFoodConsumptionLastInterval { get; set; } = 0.0;

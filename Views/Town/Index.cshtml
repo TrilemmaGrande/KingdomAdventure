@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Town Area";
 }
-@model Town
+@model PlayerTown
 
 <div class="text-center">
     <h1 class="display-4">
@@ -32,7 +32,7 @@
                         <h5>@dataset.Building.BuildingName lvl @dataset.Level </h5>
 
                         bool buttonSwitch = false;
-                        foreach (var ressource in dataset.Building.BuildingRessourcesCosts)
+                        foreach (var ressource in dataset.Building.RessourceCost)
                         {
                             if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
                             {
@@ -103,7 +103,7 @@
                         <br />
                         @:Ressources needed to Upgrade:
                         <br />
-                        foreach (var ressourceCosts in dataset.Building.BuildingRessourcesCosts)
+                        foreach (var ressourceCosts in dataset.Building.RessourceCost)
                         {
                             @:<p>@ressourceCosts.Amount @ressourceCosts.Ressource.RessourceName</p>
                         }
@@ -123,7 +123,7 @@
             @:------------------------------------------- <br />
             @:<h5>@dataset.BuildingName</h5>
             bool buttonSwitch = false;
-            foreach (var ressource in dataset.BuildingRessourcesCosts)
+            foreach (var ressource in dataset.RessourceCost)
             {
                 if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
                 {
@@ -163,7 +163,7 @@
             <br />
             @:Ressources needed to build:
             <br />
-            foreach (var ressourceCosts in dataset.BuildingRessourcesCosts)
+            foreach (var ressourceCosts in dataset.RessourceCost)
             {
                 @:<p>@ressourceCosts.Amount @ressourceCosts.Ressource.RessourceName</p>
             }

@@ -10,12 +10,13 @@ namespace KingdomAdventure.Models.TownArea
         public int Level { get; set; } = 1;
         public List<TownBuildingRessourceConsumed>? RessourcesConsumed { get; set; } = new List<TownBuildingRessourceConsumed>();
         public List<TownBuildingRessourceProduced>? RessourcesProduced { get; set; } = new List<TownBuildingRessourceProduced>();
+        public List<TownBuildingSoldierProduced>? SoldiersProduced { get; set; } = new List<TownBuildingSoldierProduced>();
 
         // Foreign key
         public int TownID { get; set; }
 
         // Navigation property
-        public Town Town{ get; set; }
+        public PlayerTown Town{ get; set; }
 
         // Foreign key
         public int BuildingID { get; set; }

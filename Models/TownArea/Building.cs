@@ -34,6 +34,6 @@ namespace KingdomAdventure.Models.TownArea
         public List<BuildingRessourceConsuming>? ConsumingRessources { get; set; } = new List<BuildingRessourceConsuming>();
         public List<BuildingRessourceProducing>? ProducingRessources { get; set; } = new List<BuildingRessourceProducing>();
         public List<BuildingSoldierProducing>? ProducingSoldiers { get; set; } = new List<BuildingSoldierProducing>();
-        public List<BuildingRessourceCost>? BuildingRessourcesCosts { get; set; } = new List<BuildingRessourceCost>();
+        public List<BuildingRessourceCost>? RessourceCost { get; set; } = new List<BuildingRessourceCost>();
     }
 }

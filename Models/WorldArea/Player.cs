@@ -32,7 +32,7 @@ namespace KingdomAdventure.Models.WorldArea
         private double CapCritDmg { get; } = 50;
 
         public Inventory Inventory { get; set; } = new Inventory();
-        public Town Town { get; set; } = new Town();
+        public PlayerTown Town { get; set; } = new PlayerTown();
         public Item? Mainhand { get; set; }
         public Item? Offhand { get; set; }
         public Item? Head { get; set; }

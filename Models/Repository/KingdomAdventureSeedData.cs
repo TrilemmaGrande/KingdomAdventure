@@ -714,7 +714,16 @@ namespace KingdomAdventure.Models.Repository
                     .FirstOrDefault(i => i.BuildingID == ressourceCost.BuildingID);
                 if (building is not null)
                 {
-                    building.BuildingRessourcesCosts.Add(ressourceCost);
+                    building.RessourceCost.Add(ressourceCost);
+                }
+            }
+            foreach (var producingSoldier in dbContext.BuildingSoldierProducing)
+            {
+                var building = dbContext.Building
+                    .FirstOrDefault(i => i.BuildingID == producingSoldier.BuildingID);
+                if (building is not null)
+                {
+                    building.ProducingSoldiers.Add(producingSoldier);
                 }
             }
             dbContext.SaveChanges();

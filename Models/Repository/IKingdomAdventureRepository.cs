@@ -13,9 +13,10 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<BuildingRessourceProducing> BuildingRessourceProducings { get; }
         public IQueryable<BuildingRessourceProducing> BuildingRessourceProduced { get; }
         public IQueryable<BuildingSoldierProducing> BuildingSoldierProducings { get; }
+        public IQueryable<BuildingSoldierProducing> BuildingSoldierProduced { get; }
         public IQueryable<Ressource> Ressources { get; }
         public IQueryable<Soldier> Soldiers { get; }
-        public IQueryable<Town> Towns { get; }
+        public IQueryable<PlayerTown> Towns { get; }
         public IQueryable<TownBuilding> TownBuildings { get; }
         public IQueryable<TownRessource> TownRessources { get; }
         public IQueryable<TownSoldier> TownSoldiers { get; }
@@ -33,16 +34,17 @@ namespace KingdomAdventure.Models.Repository
         public void DeletePlayer(Player player);
         public void AddInventoryItem(Item item, Inventory inventory);
         public void DeleteInventoryItem(InventoryItem inventoryItem, Inventory inventory);
-        public void CreateTownValues(Town town);
-        public void UpdateRessources(Town town);
-        public void ConsumeRessources(Town town);
-        public void ProduceRessources(Town town);
-        public void WorkersConsumeFood(Town town);
-        public void AddBuilding(Town town, int id);
-        public void RemoveBuilding(Town town, int id);
-        public void AddWorkerToBuilding(Town town, int id);
-        public void SubWorkerFromBuilding(Town town, int id);
-        public void UpdatePopulationNotWorking(Town town);
-        public void LevelUpBuilding(Town town, int id);
+        public void CreateTownValues(PlayerTown town);
+        public void UpdateRessources(PlayerTown town);
+        public void ConsumeRessources(PlayerTown town);
+        public void ProduceRessources(PlayerTown town);
+        public void ProduceSoldiers(PlayerTown town);
+        public void WorkersConsumeFood(PlayerTown town);
+        public void AddBuilding(PlayerTown town, int id);
+        public void RemoveBuilding(PlayerTown town, int id);
+        public void AddWorkerToBuilding(PlayerTown town, int id);
+        public void SubWorkerFromBuilding(PlayerTown town, int id);
+        public void UpdatePopulationNotWorking(PlayerTown town);
+        public void LevelUpBuilding(PlayerTown town, int id);
     }
 }

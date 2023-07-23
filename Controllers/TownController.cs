@@ -29,7 +29,7 @@ namespace KingdomAdventure.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateNewTown(Town town)
+        public IActionResult CreateNewTown(PlayerTown town)
         {
             GetTown().TownName = town.TownName;
             repo.CreateTownValues(GetTown());
@@ -60,11 +60,11 @@ namespace KingdomAdventure.Controllers
             repo.LevelUpBuilding(GetTown(), id);
             return RedirectToAction("Index");
         }
-        private Town GetTown()
+        private PlayerTown GetTown()
         {
             return repo.Towns
                         .Include(i => i.TownRessources).ThenInclude(ii => ii.Ressource)
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.BuildingRessourcesCosts).ThenInclude(iiii => iiii.Ressource)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.RessourceCost).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ConsumingRessources).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingRessources).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.RessourcesConsumed).ThenInclude(iii => iii.Ressource)
@@ -76,7 +76,7 @@ namespace KingdomAdventure.Controllers
         private void LoadBuildingViewData()
         {
             ViewData["Buildings"] = repo.Buildings
-                .Include(i => i.BuildingRessourcesCosts).ThenInclude(ii => ii.Ressource)
+                .Include(i => i.RessourceCost).ThenInclude(ii => ii.Ressource)
                 .Include(i => i.ConsumingRessources).ThenInclude(ii => ii.Ressource)
                 .Include(i => i.ProducingRessources).ThenInclude(ii => ii.Ressource)
                 .Include(i => i.ProducingSoldiers).ThenInclude(ii => ii.Soldier);

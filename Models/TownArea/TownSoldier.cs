@@ -5,13 +5,13 @@ namespace KingdomAdventure.Models.TownArea
     public class TownSoldier
     {
         public int TownSoldierID { get; set; }
-        public int Amount { get; set; }
+        public double CurrentLP { get; set; }
 
         // Foreign key
         public int TownID { get; set; }
 
         // Navigation property
-        public Town Town { get; set; }
+        public PlayerTown Town { get; set; }
 
         // Foreign key
         public int SoldierID { get; set; }

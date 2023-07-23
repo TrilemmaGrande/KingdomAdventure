@@ -540,8 +540,8 @@ namespace KingdomAdventure.Models.Repository
                         ressource.Amount;
                 }
             }
-            UpdatePopulationNotWorking(town);
             ctx.SaveChanges();
+            UpdatePopulationNotWorking(town);
         }
         public void RemoveBuilding(PlayerTown town, int id)
         {
@@ -574,8 +574,8 @@ namespace KingdomAdventure.Models.Repository
                         ressource.Amount;
                 }
             }
-            UpdatePopulationNotWorking(town);
             ctx.SaveChanges();
+            UpdatePopulationNotWorking(town);
         }
         public void UpdatePopulationNotWorking(PlayerTown town)
         {
@@ -586,6 +586,7 @@ namespace KingdomAdventure.Models.Repository
             }
             town.PopulationNotWorking = town.TownRessources
                 .FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.PopulationMax).Amount - workingPopulation;
+            ctx.SaveChanges();
         }
         public void AddWorkerToBuilding(PlayerTown town, int id)
         {
@@ -617,8 +618,8 @@ namespace KingdomAdventure.Models.Repository
                         ressource.Amount;
                 }
             }
-            UpdatePopulationNotWorking(town);
             ctx.SaveChanges();
+            UpdatePopulationNotWorking(town);
         }
         public void IncreaseTownStage(PlayerTown town)
         {
@@ -675,8 +676,8 @@ namespace KingdomAdventure.Models.Repository
                     }
                 }
             }
-            UpdatePopulationNotWorking(town);
             ctx.SaveChanges();
+            UpdatePopulationNotWorking(town);
         }
     }
 }

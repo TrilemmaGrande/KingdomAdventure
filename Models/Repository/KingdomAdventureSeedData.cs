@@ -146,7 +146,7 @@ namespace KingdomAdventure.Models.Repository
                 new Building()
                 {
                     BuildingName = "Archery",
-                    EBuildingName = EBuildingName.MageGuild,
+                    EBuildingName = EBuildingName.Archery,
                     AvailableInStage = 1,
                     WorkersMaxTemplate = 1
                 },

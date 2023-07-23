@@ -472,7 +472,6 @@ namespace KingdomAdventure.Migrations
                     WorkersMax = table.Column<int>(type: "int", nullable: false),
                     Workers = table.Column<int>(type: "int", nullable: false),
                     Level = table.Column<int>(type: "int", nullable: false),
-                    TownID = table.Column<int>(type: "int", nullable: false),
                     PlayerTownID = table.Column<int>(type: "int", nullable: false),
                     BuildingID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -500,7 +499,6 @@ namespace KingdomAdventure.Migrations
                     TownRessourceID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    TownID = table.Column<int>(type: "int", nullable: false),
                     PlayerTownID = table.Column<int>(type: "int", nullable: false),
                     RessourceID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -528,7 +526,6 @@ namespace KingdomAdventure.Migrations
                     TownSoldierID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CurrentLP = table.Column<double>(type: "float", nullable: false),
-                    TownID = table.Column<int>(type: "int", nullable: false),
                     PlayerTownID = table.Column<int>(type: "int", nullable: false),
                     SoldierID = table.Column<int>(type: "int", nullable: false)
                 },

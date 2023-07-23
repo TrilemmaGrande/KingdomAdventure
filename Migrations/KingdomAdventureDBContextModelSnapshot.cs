@@ -273,9 +273,6 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerTownID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TownID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Workers")
                         .HasColumnType("int");
 
@@ -395,9 +392,6 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TownID")
-                        .HasColumnType("int");
-
                     b.HasKey("TownRessourceID");
 
                     b.HasIndex("PlayerTownID");
@@ -422,9 +416,6 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("SoldierID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TownID")
                         .HasColumnType("int");
 
                     b.HasKey("TownSoldierID");

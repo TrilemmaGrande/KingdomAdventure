@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230723112701_init")]
+    [Migration("20230723153721_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -276,9 +276,6 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerTownID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TownID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Workers")
                         .HasColumnType("int");
 
@@ -398,9 +395,6 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TownID")
-                        .HasColumnType("int");
-
                     b.HasKey("TownRessourceID");
 
                     b.HasIndex("PlayerTownID");
@@ -425,9 +419,6 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("SoldierID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TownID")
                         .HasColumnType("int");
 
                     b.HasKey("TownSoldierID");

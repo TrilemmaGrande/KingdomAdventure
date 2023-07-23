@@ -8,7 +8,7 @@ namespace KingdomAdventure.Models.TownArea
         public double CurrentLP { get; set; }
 
         // Foreign key
-        public int TownID { get; set; }
+        public int PlayerTownID { get; set; }
 
         // Navigation property
         public PlayerTown PlayerTown { get; set; }

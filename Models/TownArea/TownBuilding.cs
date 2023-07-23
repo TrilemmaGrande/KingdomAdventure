@@ -13,7 +13,7 @@ namespace KingdomAdventure.Models.TownArea
         public List<TownBuildingSoldierProduced>? SoldiersProduced { get; set; } = new List<TownBuildingSoldierProduced>();
 
         // Foreign key
-        public int TownID { get; set; }
+        public int PlayerTownID { get; set; }
 
         // Navigation property
         public PlayerTown PlayerTown{ get; set; }

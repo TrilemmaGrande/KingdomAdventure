@@ -19,9 +19,13 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        @if (Model is not null)
-                        {
+                    <ul class="navbar-nav flex-grow-1 flex-wrap">
+  
+                            @if (Model is not null)
+                            {
+                            <li class="nav-item nav-link">
+                                Stage: @Model.Stage
+                            </li>
                             @foreach (var dataset in Model.TownRessources)
                             {
                                 if (dataset.Ressource.ERessourceName == ERessourceName.PopulationMax)
@@ -31,6 +35,14 @@
                                         @dataset.Amount
                                     </li>
                                 }
+                                else if (dataset.Ressource.ERessourceName == ERessourceName.Gold)
+                                {
+                                    <li class="nav-item nav-link">
+                                        @dataset.Ressource.RessourceName @dataset.Amount /
+                                        @Model.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Storage).Amount
+                                    </li>
+                                    <br />
+                                }
                                 else
                                 {
                                     <li class="nav-item nav-link">
@@ -39,33 +51,35 @@
                                     </li>
                                 }
                             }
-                            @foreach (var dataset in Model.TownSoldiers.GroupBy(i => i.Soldier.ESoldierName))
-                            {
-                                {
-                                    <li class="nav-item nav-link">
-                                        @dataset.Select(n => n.Soldier.SoldierName)  @dataset.Count()
-                                    </li>
-                                }
-                            }
                             <li class="nav-item nav-link">
-                                / @Model.SoldiersMax
+                                Archers:  @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Archer).Count()
+                            </li>
+                            <li class="nav-item nav-link">
+                                Warriors:  @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Warrior).Count()
+                            </li>
+                            <li class="nav-item nav-link">
+                                Mages:  @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Mage).Count()
+                            </li>
+                            <li class="nav-item nav-link">
+                                Max. Soldiers: @Model.SoldiersMax
                             </li>
                         }
+                    
                     </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+                </div>
+            </nav>
+        </header>
         <div class="container">
-            &copy; 2023 - KingdomAdventure -
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
-</body>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2023 - KingdomAdventure -
+            </div>
+        </footer>
+    </body>
 </html>

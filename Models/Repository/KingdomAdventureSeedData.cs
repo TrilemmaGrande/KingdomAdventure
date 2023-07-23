@@ -658,6 +658,8 @@ namespace KingdomAdventure.Models.Repository
                     Amount = 1
                 });
 
+            dbContext.SaveChanges();
+
             // SOLDIOERS PRODUCED BY BUILDINGS
 
             dbContext.BuildingSoldierProducing.AddRange(

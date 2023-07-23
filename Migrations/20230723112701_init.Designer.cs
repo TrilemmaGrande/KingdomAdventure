@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230721061656_init")]
+    [Migration("20230723112701_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -33,13 +33,19 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuildingID"));
 
+                    b.Property<int?>("AvailableInStage")
+                        .HasColumnType("int");
+
                     b.Property<string>("BuildingName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EBuildingName")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkersMaxTemplate")
+                    b.Property<bool>("LockedInStage")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("WorkersMaxTemplate")
                         .HasColumnType("int");
 
                     b.HasKey("BuildingID");
@@ -142,15 +148,6 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("BuildingID")
                         .HasColumnType("int");
 
-                    b.Property<double?>("CurrentLP")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Experience")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("Level")
-                        .HasColumnType("int");
-
                     b.Property<int>("SoldierID")
                         .HasColumnType("int");
 
@@ -161,6 +158,43 @@ namespace KingdomAdventure.Migrations
                     b.HasIndex("SoldierID");
 
                     b.ToTable("BuildingSoldierProducing");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.PlayerTown", b =>
+                {
+                    b.Property<int>("PlayerTownID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerTownID"));
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PlayerID")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PopulationFoodConsumptionLastInterval")
+                        .HasColumnType("float");
+
+                    b.Property<int>("PopulationNotWorking")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoldiersMax")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Stage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TownName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PlayerTownID");
+
+                    b.HasIndex("PlayerID")
+                        .IsUnique();
+
+                    b.ToTable("PlayerTown");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.Ressource", b =>
@@ -211,6 +245,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<double?>("DefPierce")
                         .HasColumnType("float");
 
+                    b.Property<int>("ESoldierName")
+                        .HasColumnType("int");
+
                     b.Property<double?>("FullLP")
                         .HasColumnType("float");
 
@@ -220,37 +257,6 @@ namespace KingdomAdventure.Migrations
                     b.HasKey("SoldierID");
 
                     b.ToTable("Soldier");
-                });
-
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.Town", b =>
-                {
-                    b.Property<int>("TownID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownID"));
-
-                    b.Property<DateTime>("LastUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PlayerID")
-                        .HasColumnType("int");
-
-                    b.Property<double>("PopulationFoodConsumptionLastInterval")
-                        .HasColumnType("float");
-
-                    b.Property<int>("PopulationNotWorking")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TownName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TownID");
-
-                    b.HasIndex("PlayerID")
-                        .IsUnique();
-
-                    b.ToTable("Town");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuilding", b =>
@@ -267,6 +273,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
+                    b.Property<int>("PlayerTownID")
+                        .HasColumnType("int");
+
                     b.Property<int>("TownID")
                         .HasColumnType("int");
 
@@ -280,7 +289,7 @@ namespace KingdomAdventure.Migrations
 
                     b.HasIndex("BuildingID");
 
-                    b.HasIndex("TownID");
+                    b.HasIndex("PlayerTownID");
 
                     b.ToTable("TownBuilding");
                 });
@@ -343,6 +352,35 @@ namespace KingdomAdventure.Migrations
                     b.ToTable("TownBuildingRessourceProduced");
                 });
 
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingSoldierProduced", b =>
+                {
+                    b.Property<int>("TownBuildingSoldierProducedID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownBuildingSoldierProducedID"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ProducedBetweenInterval")
+                        .HasColumnType("float");
+
+                    b.Property<int>("SoldierID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TownBuildingID")
+                        .HasColumnType("int");
+
+                    b.HasKey("TownBuildingSoldierProducedID");
+
+                    b.HasIndex("SoldierID");
+
+                    b.HasIndex("TownBuildingID");
+
+                    b.ToTable("TownBuildingSoldierProduced");
+                });
+
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownRessource", b =>
                 {
                     b.Property<int>("TownRessourceID")
@@ -354,6 +392,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<int>("PlayerTownID")
+                        .HasColumnType("int");
+
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
 
@@ -362,9 +403,9 @@ namespace KingdomAdventure.Migrations
 
                     b.HasKey("TownRessourceID");
 
-                    b.HasIndex("RessourceID");
+                    b.HasIndex("PlayerTownID");
 
-                    b.HasIndex("TownID");
+                    b.HasIndex("RessourceID");
 
                     b.ToTable("TownRessource");
                 });
@@ -377,16 +418,10 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownSoldierID"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<double?>("CurrentLP")
+                    b.Property<double>("CurrentLP")
                         .HasColumnType("float");
 
-                    b.Property<double?>("Experience")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("Level")
+                    b.Property<int>("PlayerTownID")
                         .HasColumnType("int");
 
                     b.Property<int>("SoldierID")
@@ -397,9 +432,9 @@ namespace KingdomAdventure.Migrations
 
                     b.HasKey("TownSoldierID");
 
-                    b.HasIndex("SoldierID");
+                    b.HasIndex("PlayerTownID");
 
-                    b.HasIndex("TownID");
+                    b.HasIndex("SoldierID");
 
                     b.ToTable("TownSoldier");
                 });
@@ -847,7 +882,7 @@ namespace KingdomAdventure.Migrations
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.BuildingRessourceCost", b =>
                 {
                     b.HasOne("KingdomAdventure.Models.TownArea.Building", "Building")
-                        .WithMany("BuildingRessourcesCosts")
+                        .WithMany("RessourceCost")
                         .HasForeignKey("BuildingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -901,11 +936,11 @@ namespace KingdomAdventure.Migrations
                     b.Navigation("Soldier");
                 });
 
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.Town", b =>
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.PlayerTown", b =>
                 {
                     b.HasOne("KingdomAdventure.Models.WorldArea.Player", "Player")
-                        .WithOne("Town")
-                        .HasForeignKey("KingdomAdventure.Models.TownArea.Town", "PlayerID")
+                        .WithOne("PlayerTown")
+                        .HasForeignKey("KingdomAdventure.Models.TownArea.PlayerTown", "PlayerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -920,15 +955,15 @@ namespace KingdomAdventure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KingdomAdventure.Models.TownArea.Town", "Town")
+                    b.HasOne("KingdomAdventure.Models.TownArea.PlayerTown", "PlayerTown")
                         .WithMany("TownBuildings")
-                        .HasForeignKey("TownID")
+                        .HasForeignKey("PlayerTownID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Building");
 
-                    b.Navigation("Town");
+                    b.Navigation("PlayerTown");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingRessourceConsumed", b =>
@@ -969,26 +1004,7 @@ namespace KingdomAdventure.Migrations
                     b.Navigation("TownBuilding");
                 });
 
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownRessource", b =>
-                {
-                    b.HasOne("KingdomAdventure.Models.TownArea.Ressource", "Ressource")
-                        .WithMany()
-                        .HasForeignKey("RessourceID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KingdomAdventure.Models.TownArea.Town", "Town")
-                        .WithMany("TownRessources")
-                        .HasForeignKey("TownID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ressource");
-
-                    b.Navigation("Town");
-                });
-
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownSoldier", b =>
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingSoldierProduced", b =>
                 {
                     b.HasOne("KingdomAdventure.Models.TownArea.Soldier", "Soldier")
                         .WithMany()
@@ -996,15 +1012,53 @@ namespace KingdomAdventure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KingdomAdventure.Models.TownArea.Town", "Town")
-                        .WithMany("TownSoldiers")
-                        .HasForeignKey("TownID")
+                    b.HasOne("KingdomAdventure.Models.TownArea.TownBuilding", "TownBuilding")
+                        .WithMany("SoldiersProduced")
+                        .HasForeignKey("TownBuildingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Soldier");
 
-                    b.Navigation("Town");
+                    b.Navigation("TownBuilding");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownRessource", b =>
+                {
+                    b.HasOne("KingdomAdventure.Models.TownArea.PlayerTown", "PlayerTown")
+                        .WithMany("TownRessources")
+                        .HasForeignKey("PlayerTownID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KingdomAdventure.Models.TownArea.Ressource", "Ressource")
+                        .WithMany()
+                        .HasForeignKey("RessourceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PlayerTown");
+
+                    b.Navigation("Ressource");
+                });
+
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownSoldier", b =>
+                {
+                    b.HasOne("KingdomAdventure.Models.TownArea.PlayerTown", "PlayerTown")
+                        .WithMany("TownSoldiers")
+                        .HasForeignKey("PlayerTownID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KingdomAdventure.Models.TownArea.Soldier", "Soldier")
+                        .WithMany()
+                        .HasForeignKey("SoldierID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PlayerTown");
+
+                    b.Navigation("Soldier");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Inventory", b =>
@@ -1145,16 +1199,16 @@ namespace KingdomAdventure.Migrations
 
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.Building", b =>
                 {
-                    b.Navigation("BuildingRessourcesCosts");
-
                     b.Navigation("ConsumingRessources");
 
                     b.Navigation("ProducingRessources");
 
                     b.Navigation("ProducingSoldiers");
+
+                    b.Navigation("RessourceCost");
                 });
 
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.Town", b =>
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.PlayerTown", b =>
                 {
                     b.Navigation("TownBuildings");
 
@@ -1168,6 +1222,8 @@ namespace KingdomAdventure.Migrations
                     b.Navigation("RessourcesConsumed");
 
                     b.Navigation("RessourcesProduced");
+
+                    b.Navigation("SoldiersProduced");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Inventory", b =>
@@ -1187,7 +1243,7 @@ namespace KingdomAdventure.Migrations
                     b.Navigation("Inventory")
                         .IsRequired();
 
-                    b.Navigation("Town")
+                    b.Navigation("PlayerTown")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -18,8 +18,10 @@ namespace KingdomAdventure.Migrations
                     BuildingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AvailableInStage = table.Column<int>(type: "int", nullable: true),
+                    LockedInStage = table.Column<bool>(type: "bit", nullable: false),
                     EBuildingName = table.Column<int>(type: "int", nullable: false),
-                    WorkersMaxTemplate = table.Column<int>(type: "int", nullable: false)
+                    WorkersMaxTemplate = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -105,6 +107,7 @@ namespace KingdomAdventure.Migrations
                     SoldierID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SoldierName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ESoldierName = table.Column<int>(type: "int", nullable: false),
                     FullLP = table.Column<double>(type: "float", nullable: true),
                     AtkMelee = table.Column<double>(type: "float", nullable: true),
                     AtkPierce = table.Column<double>(type: "float", nullable: true),
@@ -309,9 +312,6 @@ namespace KingdomAdventure.Migrations
                 {
                     BuildingSoldierProducingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Level = table.Column<int>(type: "int", nullable: true),
-                    Experience = table.Column<double>(type: "float", nullable: true),
-                    CurrentLP = table.Column<double>(type: "float", nullable: true),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     BuildingID = table.Column<int>(type: "int", nullable: false),
                     SoldierID = table.Column<int>(type: "int", nullable: false)
@@ -381,12 +381,14 @@ namespace KingdomAdventure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Town",
+                name: "PlayerTown",
                 columns: table => new
                 {
-                    TownID = table.Column<int>(type: "int", nullable: false)
+                    PlayerTownID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PlayerID = table.Column<int>(type: "int", nullable: false),
+                    Stage = table.Column<int>(type: "int", nullable: false),
+                    SoldiersMax = table.Column<int>(type: "int", nullable: false),
                     TownName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PopulationNotWorking = table.Column<int>(type: "int", nullable: false),
                     PopulationFoodConsumptionLastInterval = table.Column<double>(type: "float", nullable: false),
@@ -394,9 +396,9 @@ namespace KingdomAdventure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Town", x => x.TownID);
+                    table.PrimaryKey("PK_PlayerTown", x => x.PlayerTownID);
                     table.ForeignKey(
-                        name: "FK_Town_Player_PlayerID",
+                        name: "FK_PlayerTown_Player_PlayerID",
                         column: x => x.PlayerID,
                         principalTable: "Player",
                         principalColumn: "PlayerID",
@@ -471,6 +473,7 @@ namespace KingdomAdventure.Migrations
                     Workers = table.Column<int>(type: "int", nullable: false),
                     Level = table.Column<int>(type: "int", nullable: false),
                     TownID = table.Column<int>(type: "int", nullable: false),
+                    PlayerTownID = table.Column<int>(type: "int", nullable: false),
                     BuildingID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -483,10 +486,10 @@ namespace KingdomAdventure.Migrations
                         principalColumn: "BuildingID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TownBuilding_Town_TownID",
-                        column: x => x.TownID,
-                        principalTable: "Town",
-                        principalColumn: "TownID",
+                        name: "FK_TownBuilding_PlayerTown_PlayerTownID",
+                        column: x => x.PlayerTownID,
+                        principalTable: "PlayerTown",
+                        principalColumn: "PlayerTownID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -498,22 +501,23 @@ namespace KingdomAdventure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     TownID = table.Column<int>(type: "int", nullable: false),
+                    PlayerTownID = table.Column<int>(type: "int", nullable: false),
                     RessourceID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TownRessource", x => x.TownRessourceID);
                     table.ForeignKey(
+                        name: "FK_TownRessource_PlayerTown_PlayerTownID",
+                        column: x => x.PlayerTownID,
+                        principalTable: "PlayerTown",
+                        principalColumn: "PlayerTownID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_TownRessource_Ressource_RessourceID",
                         column: x => x.RessourceID,
                         principalTable: "Ressource",
                         principalColumn: "RessourceID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TownRessource_Town_TownID",
-                        column: x => x.TownID,
-                        principalTable: "Town",
-                        principalColumn: "TownID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -523,27 +527,25 @@ namespace KingdomAdventure.Migrations
                 {
                     TownSoldierID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Level = table.Column<int>(type: "int", nullable: true),
-                    Experience = table.Column<double>(type: "float", nullable: true),
-                    CurrentLP = table.Column<double>(type: "float", nullable: true),
-                    Amount = table.Column<int>(type: "int", nullable: false),
+                    CurrentLP = table.Column<double>(type: "float", nullable: false),
                     TownID = table.Column<int>(type: "int", nullable: false),
+                    PlayerTownID = table.Column<int>(type: "int", nullable: false),
                     SoldierID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TownSoldier", x => x.TownSoldierID);
                     table.ForeignKey(
+                        name: "FK_TownSoldier_PlayerTown_PlayerTownID",
+                        column: x => x.PlayerTownID,
+                        principalTable: "PlayerTown",
+                        principalColumn: "PlayerTownID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_TownSoldier_Soldier_SoldierID",
                         column: x => x.SoldierID,
                         principalTable: "Soldier",
                         principalColumn: "SoldierID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TownSoldier_Town_TownID",
-                        column: x => x.TownID,
-                        principalTable: "Town",
-                        principalColumn: "TownID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -623,6 +625,34 @@ namespace KingdomAdventure.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TownBuildingRessourceProduced_TownBuilding_TownBuildingID",
+                        column: x => x.TownBuildingID,
+                        principalTable: "TownBuilding",
+                        principalColumn: "TownBuildingID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TownBuildingSoldierProduced",
+                columns: table => new
+                {
+                    TownBuildingSoldierProducedID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    ProducedBetweenInterval = table.Column<double>(type: "float", nullable: false),
+                    TownBuildingID = table.Column<int>(type: "int", nullable: false),
+                    SoldierID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TownBuildingSoldierProduced", x => x.TownBuildingSoldierProducedID);
+                    table.ForeignKey(
+                        name: "FK_TownBuildingSoldierProduced_Soldier_SoldierID",
+                        column: x => x.SoldierID,
+                        principalTable: "Soldier",
+                        principalColumn: "SoldierID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TownBuildingSoldierProduced_TownBuilding_TownBuildingID",
                         column: x => x.TownBuildingID,
                         principalTable: "TownBuilding",
                         principalColumn: "TownBuildingID",
@@ -756,8 +786,8 @@ namespace KingdomAdventure.Migrations
                 column: "PlayerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Town_PlayerID",
-                table: "Town",
+                name: "IX_PlayerTown_PlayerID",
+                table: "PlayerTown",
                 column: "PlayerID",
                 unique: true);
 
@@ -767,9 +797,9 @@ namespace KingdomAdventure.Migrations
                 column: "BuildingID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TownBuilding_TownID",
+                name: "IX_TownBuilding_PlayerTownID",
                 table: "TownBuilding",
-                column: "TownID");
+                column: "PlayerTownID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TownBuildingRessourceConsumed_RessourceID",
@@ -792,24 +822,34 @@ namespace KingdomAdventure.Migrations
                 column: "TownBuildingID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TownBuildingSoldierProduced_SoldierID",
+                table: "TownBuildingSoldierProduced",
+                column: "SoldierID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TownBuildingSoldierProduced_TownBuildingID",
+                table: "TownBuildingSoldierProduced",
+                column: "TownBuildingID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TownRessource_PlayerTownID",
+                table: "TownRessource",
+                column: "PlayerTownID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TownRessource_RessourceID",
                 table: "TownRessource",
                 column: "RessourceID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TownRessource_TownID",
-                table: "TownRessource",
-                column: "TownID");
+                name: "IX_TownSoldier_PlayerTownID",
+                table: "TownSoldier",
+                column: "PlayerTownID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TownSoldier_SoldierID",
                 table: "TownSoldier",
                 column: "SoldierID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TownSoldier_TownID",
-                table: "TownSoldier",
-                column: "TownID");
         }
 
         /// <inheritdoc />
@@ -843,6 +883,9 @@ namespace KingdomAdventure.Migrations
                 name: "TownBuildingRessourceProduced");
 
             migrationBuilder.DropTable(
+                name: "TownBuildingSoldierProduced");
+
+            migrationBuilder.DropTable(
                 name: "TownRessource");
 
             migrationBuilder.DropTable(
@@ -873,7 +916,7 @@ namespace KingdomAdventure.Migrations
                 name: "Building");
 
             migrationBuilder.DropTable(
-                name: "Town");
+                name: "PlayerTown");
 
             migrationBuilder.DropTable(
                 name: "Player");

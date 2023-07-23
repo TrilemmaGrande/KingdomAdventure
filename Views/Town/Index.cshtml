@@ -21,6 +21,11 @@
     }
     else
     {
+        if (Model.Stage < 3)
+        {
+            <a asp-action="IncreaseTownStage">Increase Town Stage (test)</a>
+        }
+        <br />
         <h3>Buildings in Town:</h3>
         @foreach (var buildingGroup in Model.TownBuildings.GroupBy(n => n.Building.BuildingName))
         {
@@ -129,58 +134,63 @@
         <h3>Buildings to build:</h3>
         @foreach (var dataset in ViewData["Buildings"] as IEnumerable<Building>)
         {
-            @:------------------------------------------- <br />
-            @:<h5>@dataset.BuildingName</h5>
-            bool buttonSwitch = false;
-            foreach (var ressource in dataset.RessourceCost)
+            if ((dataset.AvailableInStage <= Model.Stage && dataset.LockedInStage == false) ||
+                dataset.AvailableInStage == Model.Stage && dataset.LockedInStage)
             {
-                if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
+
+                @:------------------------------------------- <br />
+                @:<h5>@dataset.BuildingName</h5>
+                bool buttonSwitch = false;
+                foreach (var ressource in dataset.RessourceCost)
                 {
-                    buttonSwitch = false;
-                    break;
+                    if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
+                    {
+                        buttonSwitch = false;
+                        break;
+                    }
+                    else
+                    {
+                        buttonSwitch = true;
+                    }
+                }
+                if (buttonSwitch)
+                {
+                    <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
+                }
+                <br />
+                @:Can Produce:
+                <br />
+                foreach (var productionRessource in dataset.ProducingRessources)
+                {
+                    @:<p>@productionRessource.Amount @productionRessource.Ressource.RessourceName</p>
+                }
+                <br />
+                @:Will Consume:
+                <br />
+                if (dataset.ConsumingRessources.Count > 0)
+                {
+                    foreach (var consumingRessources in dataset.ConsumingRessources)
+                    {
+                        @:<p>@consumingRessources.Amount @consumingRessources.Ressource.RessourceName</p>
+                    }
                 }
                 else
                 {
-                    buttonSwitch = true;
+                    @:<p>nothing</p>
                 }
-            }
-            if (buttonSwitch)
-            {
-                <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
-            }
-            <br />
-            @:Can Produce:
-            <br />
-            foreach (var productionRessource in dataset.ProducingRessources)
-            {
-                @:<p>@productionRessource.Amount @productionRessource.Ressource.RessourceName</p>
-            }
-            <br />
-            @:Will Consume:
-            <br />
-            if (dataset.ConsumingRessources.Count > 0)
-            {
-                foreach (var consumingRessources in dataset.ConsumingRessources)
+                <br />
+                @:Ressources needed to build:
+                <br />
+                foreach (var ressourceCosts in dataset.RessourceCost)
                 {
-                    @:<p>@consumingRessources.Amount @consumingRessources.Ressource.RessourceName</p>
+                    @:<p>@ressourceCosts.Amount @ressourceCosts.Ressource.RessourceName</p>
                 }
+                <br />
+                @:Workplaces:
+                <br />
+                @:<p>@dataset.WorkersMaxTemplate</p>
+                <br />
             }
-            else
-            {
-                @:<p>nothing</p>
-            }
-            <br />
-            @:Ressources needed to build:
-            <br />
-            foreach (var ressourceCosts in dataset.RessourceCost)
-            {
-                @:<p>@ressourceCosts.Amount @ressourceCosts.Ressource.RessourceName</p>
-            }
-            <br />
-            @:Workplaces:
-            <br />
-            @:<p>@dataset.WorkersMaxTemplate</p>
-            <br />
         }
     }
 </div>

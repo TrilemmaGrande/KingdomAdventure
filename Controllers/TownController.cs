@@ -60,6 +60,11 @@ namespace KingdomAdventure.Controllers
             repo.LevelUpBuilding(GetTown(), id);
             return RedirectToAction("Index");
         }
+        public IActionResult IncreaseTownStage()
+        {
+            repo.IncreaseTownStage(GetTown());
+            return RedirectToAction("Index");
+        }
         private PlayerTown GetTown()
         {
             return repo.PlayerTowns

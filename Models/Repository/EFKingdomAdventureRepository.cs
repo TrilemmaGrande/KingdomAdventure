@@ -29,7 +29,7 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<BuildingSoldierProducing> BuildingSoldierProduced => ctx.BuildingSoldierProduced;
         public IQueryable<Ressource> Ressources => ctx.Ressource;
         public IQueryable<Soldier> Soldiers => ctx.Soldier;
-        public IQueryable<PlayerTown> Towns => ctx.Town;
+        public IQueryable<PlayerTown> PlayerTowns => ctx.PlayerTown;
         public IQueryable<TownBuilding> TownBuildings => ctx.TownBuilding;
         public IQueryable<TownRessource> TownRessources => ctx.TownRessource;
         public IQueryable<TownSoldier> TownSoldiers => ctx.TownSoldier;
@@ -78,7 +78,7 @@ namespace KingdomAdventure.Models.Repository
 
                     new TownRessource()
                     {
-                        Town = town,
+                        PlayerTown = town,
                         Ressource = item,
                         Amount = 0
                     });
@@ -86,7 +86,7 @@ namespace KingdomAdventure.Models.Repository
             var tent = Buildings.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tent);
             TownBuilding firstBuilding = new TownBuilding()
             {
-                Town = town,
+                PlayerTown = town,
                 Building = tent,
                 Level = 1,
                 WorkersMax = (int)tent.WorkersMaxTemplate
@@ -496,7 +496,7 @@ namespace KingdomAdventure.Models.Repository
 
             TownBuilding townBuilding = new TownBuilding()
             {
-                Town = town,
+                PlayerTown = town,
                 Building = building,
                 Level = 1,
                 WorkersMax = (int)building.WorkersMaxTemplate

@@ -11,7 +11,7 @@ namespace KingdomAdventure.Models.TownArea
         public int TownID { get; set; }
 
         // Navigation property
-        public PlayerTown Town { get; set; }
+        public PlayerTown PlayerTown { get; set; }
 
         // Foreign key
         public int RessourceID { get; set; }

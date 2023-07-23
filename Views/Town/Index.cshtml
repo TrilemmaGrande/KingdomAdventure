@@ -53,7 +53,7 @@
 
                             <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
                         }
-                            <a asp-action="RemoveBuilding" asp-route-id="@dataset.TownBuildingID">Remove Building</a>
+                        <a asp-action="RemoveBuilding" asp-route-id="@dataset.TownBuildingID">Remove Building</a>
                         if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
                         {
                             <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID">Add Worker</a>
@@ -70,12 +70,21 @@
                             {
                                 @: @productionRessource.Ressource.RessourceName @productionRessource.Amount
                             }
+                            foreach (var productionSoldier in dataset.Building.ProducingSoldiers)
+                            {
+                                @: @productionSoldier.Soldier.SoldierName @productionSoldier.Amount
+                            }
                             <br />
                             @:Produced:
                             foreach (var producedRessource in dataset.RessourcesProduced)
                             {
                                 @producedRessource.Ressource.RessourceName @producedRessource.Amount
                                 @:Produced in Interval: @producedRessource.ProducedBetweenInterval
+                            }
+                            foreach (var producedSoldier in dataset.SoldiersProduced)
+                            {
+                                @producedSoldier.Soldier.SoldierName @producedSoldier.Amount
+                                @:Produced in Interval: @producedSoldier.ProducedBetweenInterval
                             }
                         @:</p>
                         <br />

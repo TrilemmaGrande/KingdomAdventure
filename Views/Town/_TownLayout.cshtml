@@ -39,6 +39,17 @@
                                     </li>
                                 }
                             }
+                            @foreach (var dataset in Model.TownSoldiers.GroupBy(i => i.Soldier.ESoldierName))
+                            {
+                                {
+                                    <li class="nav-item nav-link">
+                                        @dataset.Select(n => n.Soldier.SoldierName)  @dataset.Count()
+                                    </li>
+                                }
+                            }
+                            <li class="nav-item nav-link">
+                                / @Model.SoldiersMax
+                            </li>
                         }
                     </ul>
                 </div>

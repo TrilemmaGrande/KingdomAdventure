@@ -62,7 +62,7 @@ namespace KingdomAdventure.Controllers
         }
         private PlayerTown GetTown()
         {
-            return repo.Towns
+            return repo.PlayerTowns
                         .Include(i => i.TownRessources).ThenInclude(ii => ii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.RessourceCost).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ConsumingRessources).ThenInclude(iiii => iiii.Ressource)

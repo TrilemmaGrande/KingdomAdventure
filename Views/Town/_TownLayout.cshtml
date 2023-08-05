@@ -37,7 +37,7 @@
                                 @if (dataset.Ressource.ERessourceName == ERessourceName.Gold)
                                 {
                                     <li class="nav-item nav-link">
-                                        @dataset.Ressource.RessourceName @dataset.Amount /
+                                        @dataset.Ressource.RessourceName @dataset.Amount.ToString("N2") /
                                         @Model.Storage
                                     </li>
                                     <br />
@@ -45,7 +45,7 @@
                                 else
                                 {
                                     <li class="nav-item nav-link">
-                                        @dataset.Ressource.RessourceName @dataset.Amount /
+                                        @dataset.Ressource.RessourceName @dataset.Amount.ToString("N2") /
                                         @Model.Storage
                                     </li>
                                 }

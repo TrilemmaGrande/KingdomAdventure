@@ -83,6 +83,7 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 0
                     });
             }
+   
             var tent = Buildings.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tent);
             for (int i = 0; i < 2; i++)
             {
@@ -96,7 +97,7 @@ namespace KingdomAdventure.Models.Repository
                     Storage = tent.StorageMaxTemplate
                 };
                 town.TownBuildings.Add(firstBuilding);
-                ctx.SaveChanges();
+         
             }
             town.Population = 2;
             town.PopulationNotWorking = 2;
@@ -113,9 +114,11 @@ namespace KingdomAdventure.Models.Repository
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
             double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
             const double minuteToMilSeconds = 60000;
+            timeElapsedInMilSeconds = 10;
 
             for (int tempTimeStep = 0; tempTimeStep < timeElapsedInMilSeconds; tempTimeStep++)
             {
+
                 ResetBuildingProduction(town);
 
                 foreach (var townRessource in town.TownRessources)
@@ -150,10 +153,12 @@ namespace KingdomAdventure.Models.Repository
                         continue;
                     }
                 }
+                ctx.SaveChanges();
                 ProduceRessources(town);
 
                 if (timeElapsedInMilSeconds + tempTimeStep % minuteToMilSeconds == 0)
                 {
+                    ctx.SaveChanges();
                     WorkersConsumeFood(town);
                 }
             }
@@ -408,13 +413,14 @@ namespace KingdomAdventure.Models.Repository
         {
             var townBuilding = town.TownBuildings.FirstOrDefault(i => i.TownBuildingID == id);
             DecreaseTownProduction(town, id);
-            if (townBuilding.WorkersMax < townBuilding.Workers && town.PopulationNotWorking > 0)
+            if (townBuilding.WorkersMax > townBuilding.Workers && town.PopulationNotWorking > 0)
             {
                 townBuilding.Workers++;
                 town.PopulationNotWorking--;
             }
             IncreaseTownProduction(town, id);
             ctx.SaveChanges();
+
         }
         public void SubWorkerFromBuilding(PlayerTown town, int id)
         {
@@ -427,6 +433,7 @@ namespace KingdomAdventure.Models.Repository
             }
             IncreaseTownProduction(town, id);
             ctx.SaveChanges();
+       
         }
         private void IncreaseTownProduction(PlayerTown town, int id)
         {

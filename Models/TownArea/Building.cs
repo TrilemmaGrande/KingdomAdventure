@@ -30,7 +30,9 @@ namespace KingdomAdventure.Models.TownArea
         public int? AvailableInStage { get; set; }
         public bool LockedInStage { get; set; } = false;
         public EBuildingName EBuildingName { get; set; }
-        public int? WorkersMaxTemplate { get; set; }
+        public int WorkersMaxTemplate { get; set; }
+        public int PopulationMaxTemplate { get; set; }
+        public int StorageMaxTemplate { get; set; }
         public List<BuildingRessourceConsuming>? ConsumingRessources { get; set; } = new List<BuildingRessourceConsuming>();
         public List<BuildingRessourceProducing>? ProducingRessources { get; set; } = new List<BuildingRessourceProducing>();
         public List<BuildingSoldierProducing>? ProducingSoldiers { get; set; } = new List<BuildingSoldierProducing>();

@@ -5,7 +5,7 @@ namespace KingdomAdventure.Models.TownArea
     public class BuildingRessourceConsuming
     {
         public int BuildingRessourceConsumingID { get; set; }
-        public int Amount { get; set; }
+        public double ConsumeInMInute { get; set; }
         // Foreign key
         public int BuildingID { get; set; }
 

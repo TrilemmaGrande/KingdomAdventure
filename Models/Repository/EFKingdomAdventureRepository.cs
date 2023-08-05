@@ -158,7 +158,7 @@ namespace KingdomAdventure.Models.Repository
                     double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
                     const int minuteToMilSeconds = 60000;
                     int ressourcesConsumed = consumingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).Amount;
-                    double consumedInMilSeconds = (double)consumingRessource.Amount / minuteToMilSeconds * (double)consumingBuilding.Workers;
+                    double consumedInMilSeconds = (double)consumingRessource.ConsumeInMInute / minuteToMilSeconds * (double)consumingBuilding.Workers;
                     double restOfLastInterval = consumingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ConsumedBetweenInterval;
                     double consumedInInterval = consumedInMilSeconds * timeElapsedInMilSeconds;
                     // Amount of NewTownRessource is smaller than OldTownRessource! (Ressources got consumed)
@@ -171,7 +171,7 @@ namespace KingdomAdventure.Models.Repository
                         restOfLastInterval = 0;
                         consumedInInterval = oldTownRessourceValue;
                     }
-                    if (ressourcesConsumed < consumingRessource.Amount && oldTownRessourceValue > 0)
+                    if (ressourcesConsumed < consumingRessource.ConsumeInMInute && oldTownRessourceValue > 0)
                     {
                         if (consumedInInterval + restOfLastInterval < 1)
 
@@ -184,9 +184,9 @@ namespace KingdomAdventure.Models.Repository
                         consumingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ConsumedBetweenInterval
                             = consumedInInterval + restOfLastInterval - Math.Floor(consumedInInterval + restOfLastInterval);
                         // if consuming ressources overflow consumed ressources: take only what needed
-                        if (oldTownRessourceValue - newTownRessourceValue + ressourcesConsumed > consumingRessource.Amount)
+                        if (oldTownRessourceValue - newTownRessourceValue + ressourcesConsumed > consumingRessource.ConsumeInMInute)
                         {
-                            int newConsumingAmount = consumingRessource.Amount - ressourcesConsumed;
+                            int newConsumingAmount = consumingRessource.ConsumeInMInute - ressourcesConsumed;
                             // decrease TownRessource
                             town.TownRessources.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).Amount = oldTownRessourceValue - newConsumingAmount;
                             // increase ConsumedCounter
@@ -234,7 +234,7 @@ namespace KingdomAdventure.Models.Repository
                     double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
                     const int minuteToMilSeconds = 60000;
                     int ressourcesProduced = producingBuilding.RessourcesProduced.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).Amount;
-                    double producedInMilSeconds = (double)producingRessource.Amount / minuteToMilSeconds * (double)producingBuilding.Workers;
+                    double producedInMilSeconds = (double)producingRessource.ProduceInMinute / minuteToMilSeconds * (double)producingBuilding.Workers;
                     double restOfLastInterval = producingBuilding.RessourcesProduced.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).ProducedBetweenInterval;
                     double producedInInterval = producedInMilSeconds * timeElapsedInMilSeconds;
                     int oldTownRessourceValue = town.TownRessources.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).Amount;
@@ -248,7 +248,7 @@ namespace KingdomAdventure.Models.Repository
                         {
                             var consumedRessource = producingBuilding.RessourcesConsumed
                                                         .FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID);
-                            if (consumingRessource.Amount > consumedRessource.Amount)
+                            if (consumingRessource.ConsumeInMInute > consumedRessource.Amount)
                             {
                                 ressourcesAvailableInBuilding = false;
                                 break;
@@ -262,7 +262,7 @@ namespace KingdomAdventure.Models.Repository
                                 restOfLastInterval = 0;
                                 producedInInterval = storageValue - oldTownRessourceValue;
                             }
-                            if (ressourcesProduced < producingRessource.Amount && oldTownRessourceValue < storageValue)
+                            if (ressourcesProduced < producingRessource.ProduceInMinute && oldTownRessourceValue < storageValue)
                             {
 
                                 if (producedInInterval + restOfLastInterval < 1)
@@ -278,9 +278,9 @@ namespace KingdomAdventure.Models.Repository
                                         .FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).ProducedBetweenInterval
                                          = producedInInterval + restOfLastInterval - Math.Floor(producedInInterval + restOfLastInterval);
                                     // if producing ressources overflow produced ressources: produce only what needed
-                                    if (newTownRessourceValue - oldTownRessourceValue + ressourcesProduced > producingRessource.Amount)
+                                    if (newTownRessourceValue - oldTownRessourceValue + ressourcesProduced > producingRessource.ProduceInMinute)
                                     {
-                                        int newProducingAmount = producingRessource.Amount - ressourcesProduced;
+                                        int newProducingAmount = producingRessource.ProduceInMinute - ressourcesProduced;
                                         // increase TownRessource
                                         town.TownRessources.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).Amount = oldTownRessourceValue + newProducingAmount;
                                         // increase ProducedCounter
@@ -298,7 +298,7 @@ namespace KingdomAdventure.Models.Repository
                                 }
                             }
                             // test if a cycle of producing is through (produced the whole Amount)
-                            int ressourcesProducing = producingRessource.Amount;
+                            int ressourcesProducing = producingRessource.ProduceInMinute;
                             ressourcesProduced = producingBuilding.RessourcesProduced.FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).Amount;
                             if (ressourcesProduced < ressourcesProducing)
                             {
@@ -354,7 +354,7 @@ namespace KingdomAdventure.Models.Repository
                     foreach (var consumingRessource in producingBuilding.Building.ConsumingRessources)
                     {
                         var consumedRessource = producingBuilding.RessourcesConsumed.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID);
-                        if (consumingRessource.Amount > consumedRessource.Amount)
+                        if (consumingRessource.ConsumeInMInute > consumedRessource.Amount)
                         {
                             ressourcesAvailableInBuilding = false;
                             break;
@@ -537,7 +537,7 @@ namespace KingdomAdventure.Models.Repository
                 if (ressource.ProduceOnce)
                 {
                     town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount +=
-                        ressource.Amount;
+                        ressource.ProduceInMinute;
                 }
             }
             ctx.SaveChanges();
@@ -571,7 +571,7 @@ namespace KingdomAdventure.Models.Repository
                 if (ressource.ProduceOnce)
                 {
                     town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount -=
-                        ressource.Amount;
+                        ressource.ProduceInMinute;
                 }
             }
             ctx.SaveChanges();
@@ -615,7 +615,7 @@ namespace KingdomAdventure.Models.Repository
                 if (ressource.ProduceOnce)
                 {
                     town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount +=
-                        ressource.Amount;
+                        ressource.ProduceInMinute;
                 }
             }
             ctx.SaveChanges();

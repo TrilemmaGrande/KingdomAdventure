@@ -73,7 +73,7 @@
                         @:<p>
                             foreach (var productionRessource in dataset.Building.ProducingRessources)
                             {
-                                @: @productionRessource.Ressource.RessourceName @productionRessource.Amount
+                                @: @productionRessource.Ressource.RessourceName @productionRessource.ProduceInMinute
                             }
                             foreach (var productionSoldier in dataset.Building.ProducingSoldiers)
                             {
@@ -100,7 +100,7 @@
                             @:<p>
                                 foreach (var consumingRessources in dataset.Building.ConsumingRessources)
                                 {
-                                    @: @consumingRessources.Ressource.RessourceName @consumingRessources.Amount
+                                    @: @consumingRessources.Ressource.RessourceName @consumingRessources.ConsumeInMInute
                                 }
                                 @:Consumed:
                                 foreach (var consumedRessource in dataset.RessourcesConsumed)
@@ -162,7 +162,7 @@
                 <br />
                 foreach (var productionRessource in dataset.ProducingRessources)
                 {
-                    @:<p>@productionRessource.Amount @productionRessource.Ressource.RessourceName</p>
+                    @:<p>@productionRessource.ProduceInMinute @productionRessource.Ressource.RessourceName</p>
                 }
                 <br />
                 @:Will Consume:
@@ -171,7 +171,7 @@
                 {
                     foreach (var consumingRessources in dataset.ConsumingRessources)
                     {
-                        @:<p>@consumingRessources.Amount @consumingRessources.Ressource.RessourceName</p>
+                        @:<p>@consumingRessources.ConsumeInMInute @consumingRessources.Ressource.RessourceName</p>
                     }
                 }
                 else

@@ -5,8 +5,8 @@ namespace KingdomAdventure.Models.TownArea
     public class BuildingRessourceProducing
     {
         public int BuildingRessourceProducingID { get; set; }
-        public int Amount { get; set; }
-        public bool ProduceOnce { get; set; } = false;
+        public double ProduceInMinute { get; set; }
+
         // Foreign key
         public int BuildingID { get; set; }
 

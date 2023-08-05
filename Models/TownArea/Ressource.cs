@@ -2,8 +2,6 @@
 {
     public enum ERessourceName
     {
-        PopulationMax,
-        Storage,
         Food,
         Wood,
         Stone,
@@ -24,6 +22,6 @@
         public int RessourceID { get; set; }
         public string? RessourceName { get; set; }
         public ERessourceName ERessourceName { get; set; }
-        public double? RessourceValue { get; set; }
+        public double RessourceValue { get; set; }
     }
 }

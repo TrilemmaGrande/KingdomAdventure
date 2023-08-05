@@ -56,6 +56,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     BuildingName = "Storage",
                     EBuildingName = EBuildingName.Storage,
+                    StorageMaxTemplate = 10,
                     AvailableInStage = 1,
                     WorkersMaxTemplate = 0
                 },
@@ -154,6 +155,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     BuildingName = "Mansion",
                     EBuildingName = EBuildingName.Mansion,
+                    PopulationMaxTemplate = 15,
                     AvailableInStage = 3,
                     LockedInStage = true,
                     WorkersMaxTemplate = 0
@@ -162,6 +164,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     BuildingName = "House",
                     EBuildingName = EBuildingName.House,
+                    PopulationMaxTemplate = 4,
                     AvailableInStage = 2,
                     LockedInStage = true,
                     WorkersMaxTemplate = 0
@@ -170,10 +173,11 @@ namespace KingdomAdventure.Models.Repository
                 {
                     BuildingName = "Tent",
                     EBuildingName = EBuildingName.Tent,
+                    PopulationMaxTemplate = 1,
                     AvailableInStage = 1,
                     LockedInStage = true,
                     WorkersMaxTemplate = 0
-                });
+                }) ;
 
             dbContext.SaveChanges();
         }
@@ -421,48 +425,12 @@ namespace KingdomAdventure.Models.Repository
 
             dbContext.BuildingRessourceProducing.AddRange(
 
-            // Tent
-                new BuildingRessourceProducing()
-                {
-                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tent),
-                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.PopulationMax),
-                    Amount = 1,
-                    ProduceOnce = true
-                },
-
-            // House
-                new BuildingRessourceProducing()
-                {
-                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.House),
-                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.PopulationMax),
-                    Amount = 4,
-                    ProduceOnce = true
-                },
-
-            // Mansion
-                new BuildingRessourceProducing()
-                {
-                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Mansion),
-                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.PopulationMax),
-                    Amount = 15,
-                    ProduceOnce = true
-                },
-
-            // Storage
-                new BuildingRessourceProducing()
-                {
-                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Storage),
-                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Storage),
-                    Amount = 10,
-                    ProduceOnce = true
-                },
-
             // Lumber
                 new BuildingRessourceProducing()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Lumber),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
-                    Amount = 6
+                    ProduceInMinute = 6
                 },
 
             // Hunter
@@ -470,13 +438,13 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Hunter),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Leather),
-                    Amount = 3
+                    ProduceInMinute = 3
                 },
                 new BuildingRessourceProducing()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Hunter),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
-                    Amount = 5
+                    ProduceInMinute = 5
                 },
 
             // Mine
@@ -484,19 +452,19 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Mine),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Iron),
-                    Amount = 5
+                    ProduceInMinute = 5
                 },
                 new BuildingRessourceProducing()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Mine),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Silver),
-                    Amount = 2
+                    ProduceInMinute = 2
                 },
                 new BuildingRessourceProducing()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Mine),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Gold),
-                    Amount = 1
+                    ProduceInMinute = 1
                 },
 
             // Quarry
@@ -504,7 +472,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Quarry),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Stone),
-                    Amount = 2
+                    ProduceInMinute = 2
                 },
 
             // Farm
@@ -512,13 +480,13 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Farm),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Cloth),
-                    Amount = 4
+                    ProduceInMinute = 4
                 },
                 new BuildingRessourceProducing()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Farm),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
-                    Amount = 10
+                    ProduceInMinute = 10
                 },
 
             // Smith
@@ -526,13 +494,13 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Smith),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Sword),
-                    Amount = 1
+                    ProduceInMinute = 1
                 },
                 new BuildingRessourceProducing()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Smith),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.IronArmor),
-                    Amount = 1
+                    ProduceInMinute = 1
                 },
 
             // Tanner
@@ -540,7 +508,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tanner),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.LeatherArmor),
-                    Amount = 1
+                    ProduceInMinute = 1
                 },
 
             // Fletcher
@@ -548,7 +516,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Fletcher),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Bow),
-                    Amount = 1
+                    ProduceInMinute = 1
                 },
 
             // Weaver
@@ -556,7 +524,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Weaver),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Robe),
-                    Amount = 1
+                    ProduceInMinute = 1
                 },
 
             // Ritual Fountain
@@ -564,7 +532,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.RitualFountain),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wand),
-                    Amount = 1
+                    ProduceInMinute = 1
                 });
 
             dbContext.SaveChanges();
@@ -578,7 +546,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tanner),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Leather),
-                    Amount = 4
+                    ConsumeInMInute = 4
                 },
 
             // Fletcher
@@ -586,7 +554,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Fletcher),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
-                    Amount = 2
+                    ConsumeInMInute = 2
                 },
 
             // Weaver
@@ -594,13 +562,13 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Weaver),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Silver),
-                    Amount = 2
+                    ConsumeInMInute = 2
                 },
                 new BuildingRessourceConsuming()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Weaver),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Cloth),
-                    Amount = 4
+                    ConsumeInMInute = 4
                 },
 
             // RitualFountain
@@ -608,13 +576,13 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.RitualFountain),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Gold),
-                    Amount = 4
+                    ConsumeInMInute = 4
                 },
                 new BuildingRessourceConsuming()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.RitualFountain),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
-                    Amount = 2
+                    ConsumeInMInute = 2
                 },
 
             // MageGuild
@@ -622,12 +590,12 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.MageGuild),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Robe),
-                    Amount = 1
+                    ConsumeInMInute = 1
                 }, new BuildingRessourceConsuming()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.MageGuild),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wand),
-                    Amount = 1
+                    ConsumeInMInute = 1
                 },
 
             // Barracks
@@ -635,13 +603,13 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Barracks),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.IronArmor),
-                    Amount = 1
+                    ConsumeInMInute = 1
                 },
                 new BuildingRessourceConsuming()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Barracks),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Sword),
-                    Amount = 1
+                    ConsumeInMInute = 1
                 },
 
             // Archery
@@ -649,13 +617,13 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Archery),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Bow),
-                    Amount = 1
+                    ConsumeInMInute = 1
                 },
                 new BuildingRessourceConsuming()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Archery),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Robe),
-                    Amount = 1
+                    ConsumeInMInute = 1
                 });
 
             dbContext.SaveChanges();
@@ -764,18 +732,7 @@ namespace KingdomAdventure.Models.Repository
         private static void GenerateRessources(KingdomAdventureDBContext dbContext)
         {
             dbContext.Ressource.AddRange(
-                new Ressource()
-                {
-                    RessourceName = "PopulationMax",
-                    ERessourceName = ERessourceName.PopulationMax,
-                    RessourceValue = 0
-                },
-                new Ressource()
-                {
-                    RessourceName = "Storage",
-                    ERessourceName = ERessourceName.Storage,
-                    RessourceValue = 0
-                },
+
                 new Ressource()
                 {
                     RessourceName = "Food",

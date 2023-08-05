@@ -36,15 +36,12 @@ namespace KingdomAdventure.Models.Repository
         public void DeleteInventoryItem(InventoryItem inventoryItem, Inventory inventory);
         public void CreateTownValues(PlayerTown town);
         public void UpdateRessources(PlayerTown town);
-        public void ConsumeRessources(PlayerTown town);
         public void ProduceRessources(PlayerTown town);
-        public void ProduceSoldiers(PlayerTown town);
         public void WorkersConsumeFood(PlayerTown town);
         public void AddBuilding(PlayerTown town, int id);
         public void RemoveBuilding(PlayerTown town, int id);
         public void AddWorkerToBuilding(PlayerTown town, int id);
         public void SubWorkerFromBuilding(PlayerTown town, int id);
-        public void UpdatePopulationNotWorking(PlayerTown town);
         public void LevelUpBuilding(PlayerTown town, int id);
         public void IncreaseTownStage(PlayerTown town);
     }

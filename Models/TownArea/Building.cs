@@ -27,7 +27,7 @@ namespace KingdomAdventure.Models.TownArea
     {
         public int BuildingID { get; set; }
         public string? BuildingName { get; set; }
-        public int? AvailableInStage { get; set; }
+        public int AvailableInStage { get; set; }
         public bool LockedInStage { get; set; } = false;
         public EBuildingName EBuildingName { get; set; }
         public int WorkersMaxTemplate { get; set; }

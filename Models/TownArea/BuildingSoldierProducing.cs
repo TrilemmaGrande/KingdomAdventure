@@ -5,7 +5,6 @@ namespace KingdomAdventure.Models.TownArea
     public class BuildingSoldierProducing
     {
         public int BuildingSoldierProducingID { get; set; }
-        public int Amount { get; set; }
 
         // Foreign key
         public int BuildingID { get; set; }

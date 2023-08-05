@@ -1,10 +1,8 @@
 ﻿namespace KingdomAdventure.Models.TownArea
 {
-    public class TownBuildingRessourceProduced
+    public class DeactivatedRessourceProductions
     {
-        public int TownBuildingRessourceProducedID { get; set; }
-        public int Amount { get; set; } = 0;
-        public double ProducedBetweenInterval { get; set; } = 0.0;
+        public int DeactivatedRessourceProductionsID { get; set; }
         // Foreign key
         public int TownBuildingID { get; set; }
 
@@ -15,6 +13,6 @@
         public int RessourceID { get; set; }
 
         // Navigation property
-        public Ressource Ressource { get; set; }
+        public BuildingRessourceProducing RessourceProducing { get; set; }
     }
 }

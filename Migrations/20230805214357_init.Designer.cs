@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230723153721_init")]
+    [Migration("20230805214357_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -33,7 +33,7 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuildingID"));
 
-                    b.Property<int?>("AvailableInStage")
+                    b.Property<int>("AvailableInStage")
                         .HasColumnType("int");
 
                     b.Property<string>("BuildingName")
@@ -45,7 +45,13 @@ namespace KingdomAdventure.Migrations
                     b.Property<bool>("LockedInStage")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("WorkersMaxTemplate")
+                    b.Property<int>("PopulationMaxTemplate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StorageMaxTemplate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkersMaxTemplate")
                         .HasColumnType("int");
 
                     b.HasKey("BuildingID");
@@ -61,11 +67,11 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuildingRessourceConsumingID"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
                     b.Property<int>("BuildingID")
                         .HasColumnType("int");
+
+                    b.Property<double>("ConsumeInMinute")
+                        .HasColumnType("float");
 
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
@@ -113,14 +119,11 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuildingRessourceProducingID"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
                     b.Property<int>("BuildingID")
                         .HasColumnType("int");
 
-                    b.Property<bool>("ProduceOnce")
-                        .HasColumnType("bit");
+                    b.Property<double>("ProduceInMinute")
+                        .HasColumnType("float");
 
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
@@ -141,9 +144,6 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuildingSoldierProducingID"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
 
                     b.Property<int>("BuildingID")
                         .HasColumnType("int");
@@ -174,8 +174,8 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerID")
                         .HasColumnType("int");
 
-                    b.Property<double>("PopulationFoodConsumptionLastInterval")
-                        .HasColumnType("float");
+                    b.Property<int>("Population")
+                        .HasColumnType("int");
 
                     b.Property<int>("PopulationNotWorking")
                         .HasColumnType("int");
@@ -184,6 +184,9 @@ namespace KingdomAdventure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Stage")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Storage")
                         .HasColumnType("int");
 
                     b.Property<string>("TownName")
@@ -211,7 +214,7 @@ namespace KingdomAdventure.Migrations
                     b.Property<string>("RessourceName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("RessourceValue")
+                    b.Property<double>("RessourceValue")
                         .HasColumnType("float");
 
                     b.HasKey("RessourceID");
@@ -227,28 +230,28 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SoldierID"));
 
-                    b.Property<double?>("AtkMagic")
+                    b.Property<double>("AtkMagic")
                         .HasColumnType("float");
 
-                    b.Property<double?>("AtkMelee")
+                    b.Property<double>("AtkMelee")
                         .HasColumnType("float");
 
-                    b.Property<double?>("AtkPierce")
+                    b.Property<double>("AtkPierce")
                         .HasColumnType("float");
 
-                    b.Property<double?>("DefMagic")
+                    b.Property<double>("DefMagic")
                         .HasColumnType("float");
 
-                    b.Property<double?>("DefMelee")
+                    b.Property<double>("DefMelee")
                         .HasColumnType("float");
 
-                    b.Property<double?>("DefPierce")
+                    b.Property<double>("DefPierce")
                         .HasColumnType("float");
 
                     b.Property<int>("ESoldierName")
                         .HasColumnType("int");
 
-                    b.Property<double?>("FullLP")
+                    b.Property<double>("FullLP")
                         .HasColumnType("float");
 
                     b.Property<string>("SoldierName")
@@ -276,6 +279,12 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerTownID")
                         .HasColumnType("int");
 
+                    b.Property<int>("Population")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Storage")
+                        .HasColumnType("int");
+
                     b.Property<int>("Workers")
                         .HasColumnType("int");
 
@@ -291,91 +300,27 @@ namespace KingdomAdventure.Migrations
                     b.ToTable("TownBuilding");
                 });
 
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingRessourceConsumed", b =>
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingDeactivatedRessourceProduction", b =>
                 {
-                    b.Property<int>("TownBuildingRessourceConsumedID")
+                    b.Property<int>("TownBuildingDeactivatedRessourceProductionID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownBuildingRessourceConsumedID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownBuildingDeactivatedRessourceProductionID"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ConsumedBetweenInterval")
-                        .HasColumnType("float");
-
-                    b.Property<int>("RessourceID")
+                    b.Property<int>("BuildingRessourceProducingID")
                         .HasColumnType("int");
 
                     b.Property<int>("TownBuildingID")
                         .HasColumnType("int");
 
-                    b.HasKey("TownBuildingRessourceConsumedID");
+                    b.HasKey("TownBuildingDeactivatedRessourceProductionID");
 
-                    b.HasIndex("RessourceID");
-
-                    b.HasIndex("TownBuildingID");
-
-                    b.ToTable("TownBuildingRessourceConsumed");
-                });
-
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingRessourceProduced", b =>
-                {
-                    b.Property<int>("TownBuildingRessourceProducedID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownBuildingRessourceProducedID"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ProducedBetweenInterval")
-                        .HasColumnType("float");
-
-                    b.Property<int>("RessourceID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TownBuildingID")
-                        .HasColumnType("int");
-
-                    b.HasKey("TownBuildingRessourceProducedID");
-
-                    b.HasIndex("RessourceID");
+                    b.HasIndex("BuildingRessourceProducingID");
 
                     b.HasIndex("TownBuildingID");
 
-                    b.ToTable("TownBuildingRessourceProduced");
-                });
-
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingSoldierProduced", b =>
-                {
-                    b.Property<int>("TownBuildingSoldierProducedID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownBuildingSoldierProducedID"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ProducedBetweenInterval")
-                        .HasColumnType("float");
-
-                    b.Property<int>("SoldierID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TownBuildingID")
-                        .HasColumnType("int");
-
-                    b.HasKey("TownBuildingSoldierProducedID");
-
-                    b.HasIndex("SoldierID");
-
-                    b.HasIndex("TownBuildingID");
-
-                    b.ToTable("TownBuildingSoldierProduced");
+                    b.ToTable("TownBuildingDeactivatedRessourceProduction");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownRessource", b =>
@@ -386,11 +331,14 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownRessourceID"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
 
                     b.Property<int>("PlayerTownID")
                         .HasColumnType("int");
+
+                    b.Property<double>("ProducingInMinute")
+                        .HasColumnType("float");
 
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
@@ -957,59 +905,21 @@ namespace KingdomAdventure.Migrations
                     b.Navigation("PlayerTown");
                 });
 
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingRessourceConsumed", b =>
+            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingDeactivatedRessourceProduction", b =>
                 {
-                    b.HasOne("KingdomAdventure.Models.TownArea.Ressource", "Ressource")
+                    b.HasOne("KingdomAdventure.Models.TownArea.BuildingRessourceProducing", "RessourceProducing")
                         .WithMany()
-                        .HasForeignKey("RessourceID")
+                        .HasForeignKey("BuildingRessourceProducingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KingdomAdventure.Models.TownArea.TownBuilding", "TownBuilding")
-                        .WithMany("RessourcesConsumed")
+                        .WithMany("DeactivatedRessourceProductions")
                         .HasForeignKey("TownBuildingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Ressource");
-
-                    b.Navigation("TownBuilding");
-                });
-
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingRessourceProduced", b =>
-                {
-                    b.HasOne("KingdomAdventure.Models.TownArea.Ressource", "Ressource")
-                        .WithMany()
-                        .HasForeignKey("RessourceID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KingdomAdventure.Models.TownArea.TownBuilding", "TownBuilding")
-                        .WithMany("RessourcesProduced")
-                        .HasForeignKey("TownBuildingID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ressource");
-
-                    b.Navigation("TownBuilding");
-                });
-
-            modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingSoldierProduced", b =>
-                {
-                    b.HasOne("KingdomAdventure.Models.TownArea.Soldier", "Soldier")
-                        .WithMany()
-                        .HasForeignKey("SoldierID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KingdomAdventure.Models.TownArea.TownBuilding", "TownBuilding")
-                        .WithMany("SoldiersProduced")
-                        .HasForeignKey("TownBuildingID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Soldier");
+                    b.Navigation("RessourceProducing");
 
                     b.Navigation("TownBuilding");
                 });
@@ -1210,11 +1120,7 @@ namespace KingdomAdventure.Migrations
 
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuilding", b =>
                 {
-                    b.Navigation("RessourcesConsumed");
-
-                    b.Navigation("RessourcesProduced");
-
-                    b.Navigation("SoldiersProduced");
+                    b.Navigation("DeactivatedRessourceProductions");
                 });
 
             modelBuilder.Entity("KingdomAdventure.Models.WorldArea.Inventory", b =>

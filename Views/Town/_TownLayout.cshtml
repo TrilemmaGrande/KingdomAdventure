@@ -34,7 +34,7 @@
                             </li>
                             @foreach (var dataset in Model.TownRessources)
                             {
-                                @else if (dataset.Ressource.ERessourceName == ERessourceName.Gold)
+                                @if (dataset.Ressource.ERessourceName == ERessourceName.Gold)
                                 {
                                     <li class="nav-item nav-link">
                                         @dataset.Ressource.RessourceName @dataset.Amount /

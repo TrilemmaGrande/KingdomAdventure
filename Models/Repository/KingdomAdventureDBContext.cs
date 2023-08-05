@@ -11,12 +11,10 @@ namespace KingdomAdventure.Models.Repository
         }
         public DbSet<Building> Building { get; set; }
         public DbSet<BuildingRessourceConsuming> BuildingRessourceConsuming { get; set; }
-        public DbSet<BuildingRessourceConsuming> BuildingRessourceConsumed { get; set; }
         public DbSet<BuildingRessourceCost> BuildingRessourceCost { get; set; }
         public DbSet<BuildingRessourceProducing> BuildingRessourceProducing { get; set; }
-        public DbSet<BuildingRessourceProducing> BuildingRessourceProduced { get; set; }
         public DbSet<BuildingSoldierProducing> BuildingSoldierProducing { get; set; }
-        public DbSet<BuildingSoldierProducing> BuildingSoldierProduced { get; set; }
+        public IQueryable<TownBuildingDeactivatedRessourceProduction> TownBuildingDeactivatedRessourceProduction { get; set; }
         public DbSet<Ressource> Ressource { get; set; }
         public DbSet<Soldier> Soldier { get; set; }
         public DbSet<PlayerTown> PlayerTown { get; set; }

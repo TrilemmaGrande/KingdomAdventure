@@ -22,12 +22,10 @@ namespace KingdomAdventure.Models.Repository
         }
         public IQueryable<Building> Buildings => ctx.Building;
         public IQueryable<BuildingRessourceConsuming> BuildingRessourceConsumings => ctx.BuildingRessourceConsuming;
-        public IQueryable<BuildingRessourceConsuming> BuildingRessourceConsumed => ctx.BuildingRessourceConsumed;
         public IQueryable<BuildingRessourceCost> BuildingRessourceCosts => ctx.BuildingRessourceCost;
         public IQueryable<BuildingRessourceProducing> BuildingRessourceProducings => ctx.BuildingRessourceProducing;
-        public IQueryable<BuildingRessourceProducing> BuildingRessourceProduced => ctx.BuildingRessourceProduced;
         public IQueryable<BuildingSoldierProducing> BuildingSoldierProducings => ctx.BuildingSoldierProducing;
-        public IQueryable<BuildingSoldierProducing> BuildingSoldierProduced => ctx.BuildingSoldierProduced;
+        public IQueryable<TownBuildingDeactivatedRessourceProduction> TownBuildingDeactivatedRessourceProductions => ctx.TownBuildingDeactivatedRessourceProduction;
         public IQueryable<Ressource> Ressources => ctx.Ressource;
         public IQueryable<Soldier> Soldiers => ctx.Soldier;
         public IQueryable<PlayerTown> PlayerTowns => ctx.PlayerTown;
@@ -43,6 +41,7 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<Player> Players => ctx.Player;
         public IQueryable<PlayerEnemyNPC> PlayerEnemyNPCs => ctx.PlayerEnemyNPC;
         public IQueryable<Upgrade> Upgrades => ctx.Upgrade;
+
 
 
         public void AddPlayer(Player player)
@@ -179,12 +178,12 @@ namespace KingdomAdventure.Models.Repository
                         break;
                     }
                 }
-                foreach (var producingRessource in townBuilding.DeactivatedRessourceProductions)
+                foreach (var deactivatedProducingRessource in townBuilding.DeactivatedRessourceProductions)
                 {
-                    double buildingProducingInMilSeconds = producingRessource.RessourceProducing.ProduceInMinute * workers / minuteToMilSeconds;
+                    double buildingProducingInMilSeconds = deactivatedProducingRessource.RessourceProducing.ProduceInMinute * workers / minuteToMilSeconds;
                     if (buildingProducingInMilSeconds < town.Storage)
                     {
-                        ActivateBuildingRessourceProduction(townBuilding, producingRessource.RessourceID);
+                        ActivateBuildingRessourceProduction(townBuilding, deactivatedProducingRessource.RessourceProducing.RessourceID);
                     }
                 }
             }
@@ -199,7 +198,7 @@ namespace KingdomAdventure.Models.Repository
                 ctx.Update(town.TownRessources
                     .FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).ProducingInMinute
                         -= producingRessource.ProduceInMinute * workers);
-                DeactivatedRessourceProductions drp = new DeactivatedRessourceProductions()
+                TownBuildingDeactivatedRessourceProduction drp = new TownBuildingDeactivatedRessourceProduction()
                 {
                     TownBuilding = townBuilding,
                     RessourceProducing = producingRessource
@@ -224,7 +223,7 @@ namespace KingdomAdventure.Models.Repository
                 ctx.Update(town.TownRessources
                     .FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).ProducingInMinute
                         -= producingRessource.ProduceInMinute * workers);
-                DeactivatedRessourceProductions drp = new DeactivatedRessourceProductions()
+                TownBuildingDeactivatedRessourceProduction drp = new TownBuildingDeactivatedRessourceProduction()
                 {
                     TownBuilding = townBuilding,
                     RessourceProducing = producingRessource
@@ -245,7 +244,7 @@ namespace KingdomAdventure.Models.Repository
                         += producingRessource.ProduceInMinute * workers);
 
                 var dpr = townBuilding.DeactivatedRessourceProductions
-                    .FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID);
+                    .FirstOrDefault(i => i.BuildingRessourceProducingID == producingRessource.BuildingRessourceProducingID);
                 ctx.Update(townBuilding.DeactivatedRessourceProductions.Remove(dpr));
             }
             foreach (var consumingRessource in townBuilding.Building.ConsumingRessources)
@@ -266,7 +265,10 @@ namespace KingdomAdventure.Models.Repository
                     .FirstOrDefault(i => i.RessourceID == ressourceID).ProduceInMinute * workers);
 
             var dpr = townBuilding.DeactivatedRessourceProductions
-                    .FirstOrDefault(i => i.RessourceID == ressourceID);
+                    .FirstOrDefault(i => i.BuildingRessourceProducingID
+                     == townBuilding.Building.ProducingRessources
+                    .FirstOrDefault(ii => ii.RessourceID == ressourceID).BuildingRessourceProducingID);
+
             ctx.Update(townBuilding.DeactivatedRessourceProductions.Remove(dpr));
             foreach (var consumingRessource in townBuilding.Building.ConsumingRessources)
             {
@@ -376,7 +378,7 @@ namespace KingdomAdventure.Models.Repository
             }
             foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == townBuilding.BuildingID).ProducingRessources)
             {
-                if (!townBuilding.DeactivatedRessourceProductions.Any(i => i.RessourceID == ressource.RessourceID))
+                if (!townBuilding.DeactivatedRessourceProductions.Any(i => i.RessourceProducing.RessourceID == ressource.RessourceID))
                 {
                     ctx.Update(town.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).ProducingInMinute -=
                         ressource.ProduceInMinute * townBuilding.Workers);
@@ -433,7 +435,7 @@ namespace KingdomAdventure.Models.Repository
             int workers = townBuilding.Workers;
             foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == townBuilding.BuildingID).ProducingRessources)
             {
-                if (!townBuilding.DeactivatedRessourceProductions.Any(i => i.RessourceID == ressource.RessourceID))
+                if (!townBuilding.DeactivatedRessourceProductions.Any(i => i.RessourceProducing.RessourceID == ressource.RessourceID))
                 {
                     ctx.Update(town.TownRessources
                         .FirstOrDefault(i => i.RessourceID == ressource.RessourceID).ProducingInMinute -=

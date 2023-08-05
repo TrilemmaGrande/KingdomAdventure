@@ -1,4 +1,7 @@
 ﻿using KingdomAdventure.Models.WorldArea;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KingdomAdventure.Models.TownArea
 {
@@ -10,7 +13,8 @@ namespace KingdomAdventure.Models.TownArea
         public int Level { get; set; } = 1;
         public int Storage { get; set; } = 0;
         public int Population { get; set; } = 0;
-        public List<DeactivatedRessourceProductions>? DeactivatedRessourceProductions { get; set; } = new List<DeactivatedRessourceProductions>();
+        []
+        public List<TownBuildingDeactivatedRessourceProduction>? DeactivatedRessourceProductions { get; set; } = new List<TownBuildingDeactivatedRessourceProduction>();
 
         // Foreign key
         public int PlayerTownID { get; set; }

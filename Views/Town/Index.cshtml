@@ -68,13 +68,13 @@
                             <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.TownBuildingID">Sub Worker</a>
                         }
                         <br />
-                        if (dataset.PopulationMaxTemplate > 0)
+                        if (dataset.Population > 0)
                         {
-                            @:Creates Population: <p>@dataset.PopulationMaxTemplate</p>
+                            @:Creates Population: <p>@dataset.Population</p>
                         }
-                        if (dataset.StorageMaxTemplate > 0)
+                        if (dataset.Storage > 0)
                         {
-                            @:Creates Storage: <p>@dataset.StorageMaxTemplate</p>
+                            @:Creates Storage: <p>@dataset.Storage</p>
                         }
                         <br />
                         @:Produces:

@@ -637,7 +637,6 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Archery),
                     Soldier = dbContext.Soldier.FirstOrDefault(r => r.ESoldierName == ESoldierName.Archer),
-                    Amount = 1
                 },
 
             // Barracks
@@ -645,7 +644,6 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Barracks),
                     Soldier = dbContext.Soldier.FirstOrDefault(r => r.ESoldierName == ESoldierName.Warrior),
-                    Amount = 1
                 },
 
             // Mage Guild
@@ -653,7 +651,6 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.MageGuild),
                     Soldier = dbContext.Soldier.FirstOrDefault(r => r.ESoldierName == ESoldierName.Mage),
-                    Amount = 1
                 });
 
             dbContext.SaveChanges();

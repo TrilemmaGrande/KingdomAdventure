@@ -18,7 +18,7 @@ namespace KingdomAdventure.Controllers
         {
             if (GetTown().TownName is not null)
             {
-                repo.UpdateRessources(GetTown());
+              repo.UpdateRessources(GetTown());
             }
             LoadBuildingViewData();
             return View(GetTown());

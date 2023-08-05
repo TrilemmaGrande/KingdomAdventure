@@ -114,7 +114,6 @@ namespace KingdomAdventure.Models.Repository
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
             double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
             const double minuteToMilSeconds = 60000;
-            timeElapsedInMilSeconds = 10;
 
             for (int tempTimeStep = 0; tempTimeStep < timeElapsedInMilSeconds; tempTimeStep++)
             {

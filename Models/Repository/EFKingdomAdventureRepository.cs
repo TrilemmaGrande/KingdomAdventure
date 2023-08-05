@@ -111,7 +111,7 @@ namespace KingdomAdventure.Models.Repository
         {
             DateTime currentTime = DateTime.UtcNow;
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
-            double timeElapsedInMilSeconds = timeElapsed.TotalMinutes;
+            double timeElapsedInMilSeconds = timeElapsed.TotalMilliseconds;
             const double minuteToMilSeconds = 60000;
 
             for (int tempTimeStep = 0; tempTimeStep < timeElapsedInMilSeconds; tempTimeStep++)

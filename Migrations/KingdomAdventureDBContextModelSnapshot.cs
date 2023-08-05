@@ -305,7 +305,7 @@ namespace KingdomAdventure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TownBuildingDeactivatedRessourceProductionID"));
 
-                    b.Property<int>("BuildingRessourceProducingID")
+                    b.Property<int?>("BuildingRessourceProducingID")
                         .HasColumnType("int");
 
                     b.Property<int>("TownBuildingID")
@@ -904,11 +904,9 @@ namespace KingdomAdventure.Migrations
 
             modelBuilder.Entity("KingdomAdventure.Models.TownArea.TownBuildingDeactivatedRessourceProduction", b =>
                 {
-                    b.HasOne("KingdomAdventure.Models.TownArea.BuildingRessourceProducing", "RessourceProducing")
+                    b.HasOne("KingdomAdventure.Models.TownArea.BuildingRessourceProducing", "ProducingRessource")
                         .WithMany()
-                        .HasForeignKey("BuildingRessourceProducingID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BuildingRessourceProducingID");
 
                     b.HasOne("KingdomAdventure.Models.TownArea.TownBuilding", "TownBuilding")
                         .WithMany("DeactivatedRessourceProductions")
@@ -916,7 +914,7 @@ namespace KingdomAdventure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RessourceProducing");
+                    b.Navigation("ProducingRessource");
 
                     b.Navigation("TownBuilding");
                 });

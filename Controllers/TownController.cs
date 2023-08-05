@@ -73,7 +73,8 @@ namespace KingdomAdventure.Controllers
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ConsumingRessources).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingRessources).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingSoldiers).ThenInclude(iiii => iiii.Soldier)
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.DeactivatedRessourceProductions).ThenInclude(iii => iii.RessourceProducing)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.DeactivatedRessourceProductions)
+                            .ThenInclude(iii => iii.ProducingRessource).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownSoldiers).ThenInclude(ii => ii.Soldier)
                         .FirstOrDefault(p => p.PlayerID == HttpContext.Session.GetInt32("id"));
         }

@@ -583,7 +583,7 @@ namespace KingdomAdventure.Migrations
                     TownBuildingDeactivatedRessourceProductionID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TownBuildingID = table.Column<int>(type: "int", nullable: false),
-                    BuildingRessourceProducingID = table.Column<int>(type: "int", nullable: false)
+                    BuildingRessourceProducingID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -592,8 +592,7 @@ namespace KingdomAdventure.Migrations
                         name: "FK_TownBuildingDeactivatedRessourceProduction_BuildingRessourceProducing_BuildingRessourceProducingID",
                         column: x => x.BuildingRessourceProducingID,
                         principalTable: "BuildingRessourceProducing",
-                        principalColumn: "BuildingRessourceProducingID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BuildingRessourceProducingID");
                     table.ForeignKey(
                         name: "FK_TownBuildingDeactivatedRessourceProduction_TownBuilding_TownBuildingID",
                         column: x => x.TownBuildingID,

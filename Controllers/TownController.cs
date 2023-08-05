@@ -45,7 +45,7 @@ namespace KingdomAdventure.Controllers
             repo.RemoveBuilding(GetTown(), id);
             return RedirectToAction("Index");
         }
-        public IActionResult AddWorkerToBuilding(int id) 
+        public IActionResult AddWorkerToBuilding(int id)
         {
             repo.AddWorkerToBuilding(GetTown(), id);
             return RedirectToAction("Index");
@@ -72,9 +72,8 @@ namespace KingdomAdventure.Controllers
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.RessourceCost).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ConsumingRessources).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingRessources).ThenInclude(iiii => iiii.Ressource)
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.RessourcesConsumed).ThenInclude(iii => iii.Ressource)
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.RessourcesProduced).ThenInclude(iii => iii.Ressource)
-                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingSoldiers)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingSoldiers).ThenInclude(iiii => iiii.Soldier)
+                        .Include(i => i.TownBuildings).ThenInclude(ii => ii.DeactivatedRessourceProductions).ThenInclude(iii => iii.RessourceProducing)
                         .Include(i => i.TownSoldiers).ThenInclude(ii => ii.Soldier)
                         .FirstOrDefault(p => p.PlayerID == HttpContext.Session.GetInt32("id"));
         }

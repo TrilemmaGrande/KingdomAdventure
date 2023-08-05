@@ -59,13 +59,22 @@
                             <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
                         }
                         <a asp-action="RemoveBuilding" asp-route-id="@dataset.TownBuildingID">Remove Building</a>
-                        if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)                        
+                        if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
                         {
                             <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID">Add Worker</a>
                         }
                         if (dataset.Workers > 0)
                         {
                             <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.TownBuildingID">Sub Worker</a>
+                        }
+                        <br />
+                        if (dataset.PopulationMaxTemplate > 0)
+                        {
+                            @:Creates Population: <p>@dataset.PopulationMaxTemplate</p>
+                        }
+                        if (dataset.StorageMaxTemplate > 0)
+                        {
+                            @:Creates Storage: <p>@dataset.StorageMaxTemplate</p>
                         }
                         <br />
                         @:Produces:
@@ -77,20 +86,9 @@
                             }
                             foreach (var productionSoldier in dataset.Building.ProducingSoldiers)
                             {
-                                @: @productionSoldier.Soldier.SoldierName @productionSoldier.Amount
+                                @: @productionSoldier.Soldier.SoldierName
                             }
                             <br />
-                            @:Produced:
-                            foreach (var producedRessource in dataset.RessourcesProduced)
-                            {
-                                @producedRessource.Ressource.RessourceName @producedRessource.Amount
-                                @:Produced in Interval: @producedRessource.ProducedBetweenInterval
-                            }
-                            foreach (var producedSoldier in dataset.SoldiersProduced)
-                            {
-                                @producedSoldier.Soldier.SoldierName @producedSoldier.Amount
-                                @:Produced in Interval: @producedSoldier.ProducedBetweenInterval
-                            }
                         @:</p>
                         <br />
                         @:Consumes:
@@ -100,13 +98,7 @@
                             @:<p>
                                 foreach (var consumingRessources in dataset.Building.ConsumingRessources)
                                 {
-                                    @: @consumingRessources.Ressource.RessourceName @consumingRessources.ConsumeInMInute
-                                }
-                                @:Consumed:
-                                foreach (var consumedRessource in dataset.RessourcesConsumed)
-                                {
-                                    @consumedRessource.Ressource.RessourceName @consumedRessource.Amount
-                                    @:Consumed in Interval: @consumedRessource.ConsumedBetweenInterval
+                                    @: @consumingRessources.Ressource.RessourceName @consumingRessources.ConsumeInMinute
                                 }
                             @:</p>
                         }
@@ -158,6 +150,15 @@
                     <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
                 }
                 <br />
+                if (dataset.PopulationMaxTemplate > 0)
+                {
+                    @:Creates Population: <p>@dataset.PopulationMaxTemplate</p>
+                }
+                if (dataset.StorageMaxTemplate > 0)
+                {
+                    @:Creates Storage: <p>@dataset.StorageMaxTemplate</p>
+                }
+                <br />
                 @:Can Produce:
                 <br />
                 foreach (var productionRessource in dataset.ProducingRessources)
@@ -171,7 +172,7 @@
                 {
                     foreach (var consumingRessources in dataset.ConsumingRessources)
                     {
-                        @:<p>@consumingRessources.ConsumeInMInute @consumingRessources.Ressource.RessourceName</p>
+                        @:<p>@consumingRessources.ConsumeInMinute @consumingRessources.Ressource.RessourceName</p>
                     }
                 }
                 else

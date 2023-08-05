@@ -20,26 +20,25 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 flex-wrap">
-  
-                            @if (Model is not null)
-                            {
+
+                        @if (Model is not null)
+                        {
                             <li class="nav-item nav-link">
                                 Stage: @Model.Stage
                             </li>
+                            <li class="nav-item nav-link">
+                                Population: @Model.PopulationNotWorking / @Model.Population
+                            </li>
+                            <li class="nav-item nav-link">
+                                Storage:  @Model.Storage
+                            </li>
                             @foreach (var dataset in Model.TownRessources)
                             {
-                                if (dataset.Ressource.ERessourceName == ERessourceName.PopulationMax)
-                                {
-                                    <li class="nav-item nav-link">
-                                        @dataset.Ressource.RessourceName @Model.PopulationNotWorking /
-                                        @dataset.Amount
-                                    </li>
-                                }
-                                else if (dataset.Ressource.ERessourceName == ERessourceName.Gold)
+                                @else if (dataset.Ressource.ERessourceName == ERessourceName.Gold)
                                 {
                                     <li class="nav-item nav-link">
                                         @dataset.Ressource.RessourceName @dataset.Amount /
-                                        @Model.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Storage).Amount
+                                        @Model.Storage
                                     </li>
                                     <br />
                                 }
@@ -47,7 +46,7 @@
                                 {
                                     <li class="nav-item nav-link">
                                         @dataset.Ressource.RessourceName @dataset.Amount /
-                                        @Model.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Storage).Amount
+                                        @Model.Storage
                                     </li>
                                 }
                             }
@@ -64,22 +63,22 @@
                                 Max. Soldiers: @Model.SoldiersMax
                             </li>
                         }
-                    
+
                     </ul>
                 </div>
-                </div>
-            </nav>
-        </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2023 - KingdomAdventure -
             </div>
-        </footer>
-    </body>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - KingdomAdventure -
+        </div>
+    </footer>
+</body>
 </html>

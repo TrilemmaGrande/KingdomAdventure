@@ -3,6 +3,7 @@ using KingdomAdventure.Models.TownArea;
 using KingdomAdventure.Models.WorldArea;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace KingdomAdventure.Controllers
 {
@@ -18,7 +19,7 @@ namespace KingdomAdventure.Controllers
         {
             if (GetTown().TownName is not null)
             {
-              repo.UpdateRessources(GetTown());
+                repo.UpdateRessources(GetTown());
             }
             LoadBuildingViewData();
             return View(GetTown());
@@ -32,7 +33,10 @@ namespace KingdomAdventure.Controllers
         public IActionResult CreateNewTown(PlayerTown town)
         {
             GetTown().TownName = town.TownName;
-            repo.CreateTownValues(GetTown());
+            if (town.TownName is not null)
+            {
+                repo.CreateTownValues(GetTown());
+            }
             return RedirectToAction("Index");
         }
         public IActionResult AddBuilding(int id)

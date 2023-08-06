@@ -152,12 +152,12 @@ namespace KingdomAdventure.Models.Repository
                         continue;
                     }
                 }
-                ctx.SaveChanges();
+       
                 ProduceRessources(town);
 
                 if (timeElapsedInMilSeconds + tempTimeStep % minuteToMilSeconds == 0)
                 {
-                    ctx.SaveChanges();
+    
                     WorkersConsumeFood(town);
                 }
             }
@@ -191,7 +191,6 @@ namespace KingdomAdventure.Models.Repository
                     }
                 }
             }
-            ctx.SaveChanges();
         }
         private void DeactivateBuildingRessourceProduction(TownBuilding townBuilding)
         {
@@ -216,7 +215,7 @@ namespace KingdomAdventure.Models.Repository
                       .FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ProducingInMinute
                           += consumingRessource.ConsumeInMinute * workers;
             }
-            ctx.SaveChanges();
+
         }
         private void DeactivateBuildingRessourceProduction(TownBuilding townBuilding, int ressourceID)
         {
@@ -235,7 +234,7 @@ namespace KingdomAdventure.Models.Repository
                 };
                 townBuilding.DeactivatedRessourceProductions.Add(drp);
             }
-            ctx.SaveChanges();
+       
         }
         private void ActivateBuildingRessourceProduction(TownBuilding townBuilding)
         {
@@ -258,7 +257,7 @@ namespace KingdomAdventure.Models.Repository
                     .FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ProducingInMinute
                         -= consumingRessource.ConsumeInMinute * workers;
             }
-            ctx.SaveChanges();
+        
         }
         private void ActivateBuildingRessourceProduction(TownBuilding townBuilding, int ressourceID)
         {
@@ -282,7 +281,7 @@ namespace KingdomAdventure.Models.Repository
                     .FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ProducingInMinute
                         -= consumingRessource.ConsumeInMinute * workers;
             }
-            ctx.SaveChanges();
+      
         }
 
         public void ProduceRessources(PlayerTown town)
@@ -313,7 +312,7 @@ namespace KingdomAdventure.Models.Repository
             {
                 townFoodRessource.Amount -= workingPopulation;
             }
-            ctx.SaveChanges();
+       
         }
 
         public void AddBuilding(PlayerTown town, int id)

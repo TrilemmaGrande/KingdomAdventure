@@ -83,7 +83,7 @@ namespace KingdomAdventure.Models.Repository
                         Amount = 0
                     });
             }
-   
+
             var tent = Buildings.FirstOrDefault(n => n.EBuildingName == EBuildingName.Tent);
             for (int i = 0; i < 2; i++)
             {
@@ -97,7 +97,7 @@ namespace KingdomAdventure.Models.Repository
                     Storage = tent.StorageMaxTemplate
                 };
                 town.TownBuildings.Add(firstBuilding);
-         
+
             }
             town.LastUpdated = DateTime.UtcNow;
             town.Population = 2;
@@ -116,7 +116,7 @@ namespace KingdomAdventure.Models.Repository
             double timeElapsedInMilSeconds = Math.Floor(timeElapsed.TotalSeconds);
             const double minuteToMilSeconds = 60;
 
-            for (int tempTimeStep = 0; tempTimeStep < timeElapsedInMilSeconds; tempTimeStep++)
+            for (int tempTimeStep = 0; tempTimeStep <= timeElapsedInMilSeconds; tempTimeStep++)
             {
 
                 ResetBuildingProduction(town);
@@ -153,12 +153,11 @@ namespace KingdomAdventure.Models.Repository
                         continue;
                     }
                 }
-       
+
                 ProduceRessources(town);
 
-                if (timeElapsedInMilSeconds + tempTimeStep % minuteToMilSeconds == 0)
+                if (timeElapsedInMilSeconds - tempTimeStep % minuteToMilSeconds == 0)
                 {
-    
                     WorkersConsumeFood(town);
                 }
             }
@@ -202,12 +201,16 @@ namespace KingdomAdventure.Models.Repository
                 town.TownRessources
                      .FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).ProducingInMinute
                          -= producingRessource.ProduceInMinute * workers;
-                TownBuildingDeactivatedRessourceProduction drp = new TownBuildingDeactivatedRessourceProduction()
+                if (townBuilding.DeactivatedRessourceProductions.Any(i => i.ProducingRessource == producingRessource))
                 {
-                    TownBuilding = townBuilding,
-                    ProducingRessource = producingRessource
-                };
-                townBuilding.DeactivatedRessourceProductions.Add(drp);
+                    TownBuildingDeactivatedRessourceProduction drp = new TownBuildingDeactivatedRessourceProduction()
+                    {
+                        TownBuilding = townBuilding,
+                        ProducingRessource = producingRessource
+                    };
+                    townBuilding.DeactivatedRessourceProductions.Add(drp);
+                }
+
             }
             foreach (var consumingRessource in townBuilding.Building.ConsumingRessources)
             {
@@ -226,18 +229,22 @@ namespace KingdomAdventure.Models.Repository
                 town.TownRessources
                       .FirstOrDefault(i => i.RessourceID == producingRessource.RessourceID).ProducingInMinute
                           -= producingRessource.ProduceInMinute * workers;
-                TownBuildingDeactivatedRessourceProduction drp = new TownBuildingDeactivatedRessourceProduction()
+                if (townBuilding.DeactivatedRessourceProductions.Any(i => i.ProducingRessource == producingRessource))
                 {
-                    TownBuilding = townBuilding,
-                    ProducingRessource = producingRessource
-                };
-                townBuilding.DeactivatedRessourceProductions.Add(drp);
+                    TownBuildingDeactivatedRessourceProduction drp = new TownBuildingDeactivatedRessourceProduction()
+                    {
+                        TownBuilding = townBuilding,
+                        ProducingRessource = producingRessource
+                    };
+                    townBuilding.DeactivatedRessourceProductions.Add(drp);
+                }
+
             }
-       
+
         }
         private void ActivateBuildingRessourceProduction(TownBuilding townBuilding, PlayerTown town)
         {
-          
+
             int workers = townBuilding.Workers;
 
             foreach (var producingRessource in townBuilding.Building.ProducingRessources)
@@ -256,11 +263,11 @@ namespace KingdomAdventure.Models.Repository
                     .FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ProducingInMinute
                         -= consumingRessource.ConsumeInMinute * workers;
             }
-        
+
         }
         private void ActivateBuildingRessourceProduction(TownBuilding townBuilding, PlayerTown town, int ressourceID)
         {
-  
+
             int workers = townBuilding.Workers;
 
             town.TownRessources
@@ -280,7 +287,7 @@ namespace KingdomAdventure.Models.Repository
                     .FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).ProducingInMinute
                         -= consumingRessource.ConsumeInMinute * workers;
             }
-      
+
         }
 
         public void ProduceRessources(PlayerTown town)
@@ -291,7 +298,7 @@ namespace KingdomAdventure.Models.Repository
             {
                 townRessource.Amount += (double)townRessource.ProducingInMinute / (double)minuteToMilSeconds;
             }
-       
+
         }
         public void WorkersConsumeFood(PlayerTown town)
         {
@@ -311,7 +318,7 @@ namespace KingdomAdventure.Models.Repository
             {
                 townFoodRessource.Amount -= workingPopulation;
             }
-       
+
         }
 
         public void AddBuilding(PlayerTown town, int id)
@@ -430,7 +437,7 @@ namespace KingdomAdventure.Models.Repository
             }
             IncreaseTownProduction(town, id);
             ctx.SaveChanges();
-       
+
         }
         private void IncreaseTownProduction(PlayerTown town, int id)
         {

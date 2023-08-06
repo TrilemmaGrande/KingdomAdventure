@@ -334,7 +334,7 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerTownID")
                         .HasColumnType("int");
 
-                    b.Property<double>("ProducingInMinute")
+                    b.Property<double>("ProduceInTimestep")
                         .HasColumnType("float");
 
                     b.Property<int>("RessourceID")

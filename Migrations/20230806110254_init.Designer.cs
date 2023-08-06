@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230805233403_init")]
+    [Migration("20230806110254_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -337,7 +337,7 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("PlayerTownID")
                         .HasColumnType("int");
 
-                    b.Property<double>("ProducingInMinute")
+                    b.Property<double>("ProduceInTimestep")
                         .HasColumnType("float");
 
                     b.Property<int>("RessourceID")

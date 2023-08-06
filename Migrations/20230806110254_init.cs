@@ -502,7 +502,7 @@ namespace KingdomAdventure.Migrations
                     TownRessourceID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<double>(type: "float", nullable: false),
-                    ProducingInMinute = table.Column<double>(type: "float", nullable: false),
+                    ProduceInTimestep = table.Column<double>(type: "float", nullable: false),
                     PlayerTownID = table.Column<int>(type: "int", nullable: false),
                     RessourceID = table.Column<int>(type: "int", nullable: false)
                 },

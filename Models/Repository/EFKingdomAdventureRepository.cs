@@ -292,7 +292,7 @@ namespace KingdomAdventure.Models.Repository
             {
                 townRessource.Amount += (double)townRessource.ProducingInMinute / (double)minuteToMilSeconds;
             }
-            ctx.SaveChanges();
+       
         }
         public void WorkersConsumeFood(PlayerTown town)
         {

@@ -2,6 +2,30 @@
     ViewData["Title"] = "Town Area";
 }
 @model PlayerTown
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script defer>
+    var townData = @Html.Raw(Json.Serialize(Model));
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/townHub")
+        .build()
+
+    function updateTownData(town) {
+    }
+
+    connection.on("ReceiveUpdateRessources", function (town) {
+        updateTownData(town);
+    });
+
+    connection.start()
+        .then(function () {
+            setInterval(function () {
+                connection.invoke("RequestUpdateRessources", townData); 
+            }, 10);
+        })
+        .catch(err => console.error(err));
+</script>
 
 <div class="text-center">
     <h1 class="display-4">

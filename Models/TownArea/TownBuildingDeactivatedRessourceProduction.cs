@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace KingdomAdventure.Models.TownArea
 {
@@ -9,6 +10,7 @@ namespace KingdomAdventure.Models.TownArea
         public int TownBuildingID { get; set; }
 
         // Navigation property
+        [JsonIgnore]
         public TownBuilding? TownBuilding { get; set; }
       
         // Foreign key

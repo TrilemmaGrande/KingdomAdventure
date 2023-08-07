@@ -1,4 +1,5 @@
 ﻿using KingdomAdventure.Models.WorldArea;
+using System.Text.Json.Serialization;
 
 namespace KingdomAdventure.Models.TownArea
 {
@@ -11,6 +12,7 @@ namespace KingdomAdventure.Models.TownArea
         public int PlayerTownID { get; set; }
 
         // Navigation property
+        [JsonIgnore]
         public PlayerTown PlayerTown { get; set; }
 
         // Foreign key

@@ -1,4 +1,5 @@
 using KingdomAdventure.Models.Repository;
+using KingdomAdventure.Models.TownArea;
 using Microsoft.EntityFrameworkCore;
 
 namespace KingdomAdventure
@@ -17,6 +18,7 @@ namespace KingdomAdventure
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
             });
+            builder.Services.AddSignalR();
             builder.Services.AddScoped<IKingdomAdventureRepository, EFKingdomAdventureRepository>();
 
             var app = builder.Build();
@@ -39,10 +41,14 @@ namespace KingdomAdventure
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<TownHub>("/townHub");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            });
             app.Run();
         }
     }

@@ -430,7 +430,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Lumber),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
-                    ProduceInMinute = 6
+                    ProduceInMinute = 40
                 },
 
             // Hunter

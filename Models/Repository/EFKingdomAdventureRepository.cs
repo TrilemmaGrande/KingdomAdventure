@@ -113,7 +113,7 @@ namespace KingdomAdventure.Models.Repository
         {
             DateTime currentTime = DateTime.UtcNow;
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
-            double timeElapsedInMilSeconds = Math.Floor(timeElapsed.TotalMilliseconds / 10);
+            double timeElapsedInMilSeconds = Math.Floor(timeElapsed.TotalMilliseconds / 100);
 
             for (int tempTimeStep = 0; tempTimeStep <= timeElapsedInMilSeconds; tempTimeStep++)
             {
@@ -233,7 +233,7 @@ namespace KingdomAdventure.Models.Repository
 
         private void ActivateBuildingRessourceConsumption(PlayerTown town, TownBuilding townBuilding)
         {
-            const double minuteToTenMilSeconds = 6000.00;
+            const double minuteToTenMilSeconds = 600.00;
             foreach (var consumptionRessource in townBuilding.Building.ConsumingRessources)
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == consumptionRessource.RessourceID).ProduceInTimestep
@@ -247,7 +247,7 @@ namespace KingdomAdventure.Models.Repository
 
         private void ActivateBuildingRessourceProduction(PlayerTown town, TownBuilding townBuilding, int ressourceID)
         {
-            const double minuteToTenMilSeconds = 6000.00; 
+            const double minuteToTenMilSeconds = 600.00; 
             int workers = townBuilding.Workers;
             var producingRessource = townBuilding.Building.ProducingRessources.FirstOrDefault(i => i.RessourceID == ressourceID);
             town.TownRessources
@@ -261,7 +261,7 @@ namespace KingdomAdventure.Models.Repository
         }
         private void DeactivateBuildingRessourceProduction(PlayerTown town, TownBuilding townBuilding, int ressourceID)
         {
-            const double minuteToTenMilSeconds = 6000.00; 
+            const double minuteToTenMilSeconds = 600.00; 
             var producingRessource = townBuilding.Building.ProducingRessources.FirstOrDefault(i => i.RessourceID == ressourceID);
 
             if (!townBuilding.DeactivatedRessourceProductions.Any(i => i.ProducingRessource == producingRessource))
@@ -278,7 +278,7 @@ namespace KingdomAdventure.Models.Repository
         }
         private void DeactivateBuildingRessourceConsumption(PlayerTown town, TownBuilding townBuilding)
         {
-            const double minuteToTenMilSeconds = 6000.00;
+            const double minuteToTenMilSeconds = 600.00;
             foreach (var consumptionRessource in townBuilding.Building.ConsumingRessources)
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == consumptionRessource.RessourceID).ProduceInTimestep
@@ -346,19 +346,19 @@ namespace KingdomAdventure.Models.Repository
         }
         private void ActivateWorkerFoodConsumption(PlayerTown town)
         {
-            const double minuteToTenMilSeconds = 6000.00;
+            const double minuteToTenMilSeconds = 600.00;
             town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Food).ProduceInTimestep -= 1 / minuteToTenMilSeconds;
         }
         private void DeactivateWorkerFoodConsumption(PlayerTown town)
         {
-            const double minuteToTenMilSeconds = 6000.00;
+            const double minuteToTenMilSeconds = 600.00;
             town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Food).ProduceInTimestep += 1 / minuteToTenMilSeconds;
 
         }
 
         private void IncreaseTownProduction(PlayerTown town, TownBuilding townBuilding)
         {
-            const double minuteToTenMilSeconds = 6000.00;
+            const double minuteToTenMilSeconds = 600.00;
             int workers = townBuilding.Workers;
             foreach (var producingRessource in townBuilding.Building.ProducingRessources)
             {
@@ -373,7 +373,7 @@ namespace KingdomAdventure.Models.Repository
         }
         private void DecreaseTownProduction(PlayerTown town, TownBuilding townBuilding)
         {
-            const double minuteToTenMilSeconds = 6000.00;
+            const double minuteToTenMilSeconds = 600.00;
             int workers = townBuilding.Workers;
             foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == townBuilding.BuildingID).ProducingRessources)
             {
@@ -414,7 +414,7 @@ namespace KingdomAdventure.Models.Repository
         public void RemoveBuilding(PlayerTown town, int id)
         {
             UpdateRessources(town);
-            const double minuteToTenMilSeconds = 6000.00;
+            const double minuteToTenMilSeconds = 600.00;
             var townBuilding = town.TownBuildings.FirstOrDefault(n => n.TownBuildingID == id);
             foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == townBuilding.BuildingID).RessourceCost)
             {

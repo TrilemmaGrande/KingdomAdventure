@@ -5,10 +5,10 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <ul>
+    <ul style="list-style: none">
         @foreach (var player in Model)
         {
-            <li>
+            <li >
                 <a asp-action="Index" asp-controller="World" asp-route-id="@player.PlayerID">@player.PlayerName</a>
                 <a asp-action="DeletePlayer" asp-route-id="@player.PlayerID">Delete</a>
             </li>

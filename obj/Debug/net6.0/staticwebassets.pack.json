@@ -17,6 +17,30 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r1.png",
+      "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r1.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r1.xcf",
+      "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r1.xcf"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r2.png",
+      "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r2.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r2.xcf",
+      "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r2.xcf"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r3.png",
+      "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r3.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r3.xcf",
+      "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r3.xcf"
+    },
+    {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Population\\notWorking.png",
       "PackagePath": "staticwebassets\\img\\Population\\notWorking.png"
     },
@@ -75,6 +99,22 @@
     {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\wood.png",
       "PackagePath": "staticwebassets\\img\\Ressources\\wood.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Soldiers\\archer.png",
+      "PackagePath": "staticwebassets\\img\\Soldiers\\archer.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Soldiers\\mage.png",
+      "PackagePath": "staticwebassets\\img\\Soldiers\\mage.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Soldiers\\soldiers.png",
+      "PackagePath": "staticwebassets\\img\\Soldiers\\soldiers.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Soldiers\\warrior.png",
+      "PackagePath": "staticwebassets\\img\\Soldiers\\warrior.png"
     },
     {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Storage\\storage.png",

@@ -1,4 +1,8 @@
 ﻿
+body {
+    background-color: lightgoldenrodyellow;
+}
+
 .container {
     padding-top: 50px;
 }

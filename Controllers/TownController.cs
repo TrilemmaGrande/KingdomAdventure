@@ -17,12 +17,16 @@ namespace KingdomAdventure.Controllers
         }
         public IActionResult Index()
         {
-            if (GetTown().TownName is not null)
+            if (GetTown() is not null && GetTown().TownName is not null)
             {
                 repo.UpdateRessources(GetTown());
+                LoadBuildingViewData();
+                return View(GetTown());
             }
-            LoadBuildingViewData();
-            return View(GetTown());
+            else
+            {
+                return RedirectToAction("CreateNewTown");
+            }
         }
         [HttpGet]
         public IActionResult CreateNewTown()
@@ -78,7 +82,6 @@ namespace KingdomAdventure.Controllers
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingRessources).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.Building).ThenInclude(iii => iii.ProducingSoldiers).ThenInclude(iiii => iiii.Soldier)
                         .Include(i => i.TownBuildings).ThenInclude(ii => ii.DeactivatedRessourceProductions)
-                            .ThenInclude(iii => iii.ProducingRessource).ThenInclude(iiii => iiii.Ressource)
                         .Include(i => i.TownSoldiers).ThenInclude(ii => ii.Soldier)
                         .FirstOrDefault(p => p.PlayerID == HttpContext.Session.GetInt32("id"));
         }

@@ -734,85 +734,100 @@ namespace KingdomAdventure.Models.Repository
                 {
                     RessourceName = "Food",
                     ERessourceName = ERessourceName.Food,
-                    RessourceValue = 0.2
+                    RessourceValue = 0.2,
+                    Icon = "/img/Ressources/food.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Wood",
                     ERessourceName = ERessourceName.Wood,
                     RessourceValue = 0.1
+                    ,
+                    Icon = "/img/Ressources/wood.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Stone",
                     ERessourceName = ERessourceName.Stone,
-                    RessourceValue = 0.1
+                    RessourceValue = 0.1,
+                    Icon = "/img/Ressources/stone.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Cloth",
                     ERessourceName = ERessourceName.Cloth,
-                    RessourceValue = 1.5
+                    RessourceValue = 1.5,
+                    Icon = "/img/Ressources/cloth.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Leather",
                     ERessourceName = ERessourceName.Leather,
-                    RessourceValue = 1.5
+                    RessourceValue = 1.5,
+                    Icon = "/img/Ressources/leather.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Iron",
                     ERessourceName = ERessourceName.Iron,
-                    RessourceValue = 1.0
+                    RessourceValue = 1.0,
+                    Icon = "/img/Ressources/iron.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Silver",
                     ERessourceName = ERessourceName.Silver,
-                    RessourceValue = 2.5
+                    RessourceValue = 2.5,
+                    Icon = "/img/Ressources/silver.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Gold",
                     ERessourceName = ERessourceName.Gold,
-                    RessourceValue = 4.0
+                    RessourceValue = 4.0,
+                    Icon = "/img/Ressources/gold.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "IronArmor",
                     ERessourceName = ERessourceName.IronArmor,
-                    RessourceValue = 5.0
+                    RessourceValue = 5.0,
+                    Icon = "/img/Ressources/ironArmor.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Sword",
                     ERessourceName = ERessourceName.Sword,
-                    RessourceValue = 5.0
+                    RessourceValue = 5.0,
+                    Icon = "/img/Ressources/sword.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "LeatherArmor",
                     ERessourceName = ERessourceName.LeatherArmor,
-                    RessourceValue = 3.5
+                    RessourceValue = 3.5,
+                    Icon = "/img/Ressources/leatherArmor.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Bow",
                     ERessourceName = ERessourceName.Bow,
-                    RessourceValue = 2.5
+                    RessourceValue = 2.5,
+                    Icon = "/img/Ressources/bow.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Robe",
                     ERessourceName = ERessourceName.Robe,
-                    RessourceValue = 5.0
+                    RessourceValue = 5.0,
+                    Icon = "/img/Ressources/robe.png"
                 },
                 new Ressource()
                 {
                     RessourceName = "Wand",
                     ERessourceName = ERessourceName.Wand,
-                    RessourceValue = 7.0
+                    RessourceValue = 7.0,
+                    Icon = "/img/Ressources/wand.png"
                 });
 
             dbContext.SaveChanges();

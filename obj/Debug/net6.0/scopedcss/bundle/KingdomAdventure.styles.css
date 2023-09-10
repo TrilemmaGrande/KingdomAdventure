@@ -60,6 +60,36 @@ a.navbar-brand[b-z6sl27qdoi] {
 a[b-z6sl27qdoi] {
   color: #0077cc;
 }
+/* Style for the container element */
+.nav-item.nav-link[b-z6sl27qdoi] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid grey;
+    margin: 5px; /* Adjust the margin as needed */
+    padding: 5px; /* Adjust the padding as needed */
+}
+
+/* Style for the image container */
+.icon-container[b-z6sl27qdoi] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+    .icon-container img[b-z6sl27qdoi] {
+        width: 32px;
+        height: 32px;
+    }
+
+/* Style for the text below the image */
+.nav-item.nav-link .text-below-icon[b-z6sl27qdoi] {
+    text-align: center;
+    white-space: nowrap; /* Prevent text from wrapping */
+    font-size: 12px;
+}
 
 .btn-primary[b-z6sl27qdoi] {
   color: #fff;

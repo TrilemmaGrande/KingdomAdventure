@@ -23,5 +23,6 @@
         public string? RessourceName { get; set; }
         public ERessourceName ERessourceName { get; set; }
         public double RessourceValue { get; set; }
+        public string Icon { get; set; }
     }
 }

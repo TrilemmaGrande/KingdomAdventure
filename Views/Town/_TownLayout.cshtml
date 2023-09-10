@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">KingdomAdventure</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -27,40 +27,70 @@
                                 Stage: @Model.Stage
                             </li>
                             <li class="nav-item nav-link">
-                                Population: @Model.PopulationNotWorking / @Model.Population
+                                <div class="icon-container">
+                                    <img src="~/img/Population/notWorking.png" title="Population not working" />
+                                    <div class="text-below-icon">
+
+                                        @Model.PopulationNotWorking / @Model.Population
+                                    </div>
+                                </div>
                             </li>
                             <li class="nav-item nav-link">
-                                Storage:  @Model.Storage
+                                <div class="icon-container">
+                                    <img src="~/img/Storage/storage.png" title="Storage" />
+                                    <div class="text-below-icon">
+                                        @Model.Storage
+                                    </div>
+                                </div>
                             </li>
                             @foreach (var dataset in Model.TownRessources)
                             {
-                                @if (dataset.Ressource.ERessourceName == ERessourceName.Gold)
-                                {
-                                    <li class="nav-item nav-link">
-                                        @dataset.Ressource.RessourceName @dataset.Amount.ToString("N2") /
-                                        @Model.Storage
-                                    </li>
-                                    <br />
-                                }
-                                else
-                                {
-                                    <li class="nav-item nav-link">
-                                        @dataset.Ressource.RessourceName @dataset.Amount.ToString("N2") /
-                                        @Model.Storage
-                                    </li>
-                                }
+                                <li class="nav-item nav-link">
+                                    <div class="icon-container">
+                                        <img src="@dataset.Ressource.Icon" title="@dataset.Ressource.RessourceName" />
+                                        <div class="text-below-icon">
+                                            @dataset.Amount.ToString() /
+                                            @Model.Storage
+                                        </div>
+                                    </div>
+                                </li>
                             }
+                            <br />
                             <li class="nav-item nav-link">
-                                Archers:  @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Archer).Count()
+                                <div class="icon-container">
+                                Archers
+                                    <div class="text-below-icon">
+                                    @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Archer).Count()
+                                    </div>
+                                </div>
+                                
                             </li>
                             <li class="nav-item nav-link">
-                                Warriors:  @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Warrior).Count()
+                                <div class="icon-container">
+                                    Warriors
+                                    <div class="text-below-icon">
+                                        @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Warrior).Count()
+                                    </div>
+                                </div>
+
                             </li>
                             <li class="nav-item nav-link">
-                                Mages:  @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Mage).Count()
+                                <div class="icon-container">
+                                    Mages
+                                    <div class="text-below-icon">
+                                        @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Mage).Count()
+                                    </div>
+                                </div>
+
                             </li>
                             <li class="nav-item nav-link">
-                                Max. Soldiers: @Model.SoldiersMax
+                                <div class="icon-container">
+                                    Max. Soldiers
+                                    <div class="text-below-icon">
+                                        @Model.SoldiersMax
+                                    </div>
+                                </div>
+
                             </li>
                         }
 

@@ -17,6 +17,70 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Population\\notWorking.png",
+      "PackagePath": "staticwebassets\\img\\Population\\notWorking.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\bow.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\bow.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\cloth.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\cloth.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\food.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\food.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\gold.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\gold.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\iron.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\iron.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\ironArmor.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\ironArmor.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\leather.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\leather.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\leatherArmor.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\leatherArmor.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\robe.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\robe.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\silver.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\silver.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\stone.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\stone.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\sword.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\sword.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\wand.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\wand.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Ressources\\wood.png",
+      "PackagePath": "staticwebassets\\img\\Ressources\\wood.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Storage\\storage.png",
+      "PackagePath": "staticwebassets\\img\\Storage\\storage.png"
+    },
+    {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

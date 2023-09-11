@@ -114,6 +114,36 @@ namespace KingdomAdventure.Models.Repository
             DateTime currentTime = DateTime.UtcNow;
             TimeSpan timeElapsed = currentTime - town.LastUpdated;
             double timeElapsedInMilSeconds = Math.Floor(timeElapsed.TotalMilliseconds / 100);
+            double maxPreTime = 3600000;
+
+            if (timeElapsedInMilSeconds > maxPreTime)
+            {
+                var foodRessource = town.TownRessources.FirstOrDefault(n => n.Ressource.ERessourceName == ERessourceName.Food);
+                if (foodRessource.ProduceInTimestep * timeElapsedInMilSeconds <= 0)
+                {
+                    var timeProducing = foodRessource.Amount / foodRessource.ProduceInTimestep * -1;
+                    timeElapsedInMilSeconds = timeProducing;
+                }
+                else
+                {
+                    timeElapsedInMilSeconds = maxPreTime;
+                }
+                foreach (var townRessource in town.TownRessources.Where(n => n.Ressource.ERessourceName != ERessourceName.Food))
+                {
+                    if (townRessource.ProduceInTimestep * timeElapsedInMilSeconds >= town.Storage)
+                    {
+                        townRessource.Amount = town.Storage;
+                    }
+                    else if (townRessource.ProduceInTimestep * timeElapsedInMilSeconds <= 0)
+                    {
+                        townRessource.Amount = 0;
+                    }
+                    else
+                    {
+                        townRessource.Amount = townRessource.ProduceInTimestep * timeElapsedInMilSeconds;
+                    }
+                }
+            }
 
             for (int tempTimeStep = 0; tempTimeStep <= timeElapsedInMilSeconds; tempTimeStep++)
             {
@@ -247,7 +277,7 @@ namespace KingdomAdventure.Models.Repository
 
         private void ActivateBuildingRessourceProduction(PlayerTown town, TownBuilding townBuilding, int ressourceID)
         {
-            const double minuteToTenMilSeconds = 600.00; 
+            const double minuteToTenMilSeconds = 600.00;
             int workers = townBuilding.Workers;
             var producingRessource = townBuilding.Building.ProducingRessources.FirstOrDefault(i => i.RessourceID == ressourceID);
             town.TownRessources
@@ -261,7 +291,7 @@ namespace KingdomAdventure.Models.Repository
         }
         private void DeactivateBuildingRessourceProduction(PlayerTown town, TownBuilding townBuilding, int ressourceID)
         {
-            const double minuteToTenMilSeconds = 600.00; 
+            const double minuteToTenMilSeconds = 600.00;
             var producingRessource = townBuilding.Building.ProducingRessources.FirstOrDefault(i => i.RessourceID == ressourceID);
 
             if (!townBuilding.DeactivatedRessourceProductions.Any(i => i.ProducingRessource == producingRessource))

@@ -38,7 +38,7 @@ a {
 .nav-item.nav-link .text-below-icon {
     text-align: center;
     white-space: nowrap; /* Prevent text from wrapping */
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .btn-primary {

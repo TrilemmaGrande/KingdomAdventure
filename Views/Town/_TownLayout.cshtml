@@ -18,13 +18,14 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 flex-wrap">
-                        @{
-                            var townStageFile = "r" + Model.Stage + ".png";
-                        }
                         @if (Model is not null)
                         {
+
+                            var townStageFile = "r" + Model.Stage + ".png";
+
+
                             <li class="nav-item nav-link">
                                 <div class="icon-container">
                                     <img src="~/img/Numbers/Roman/@townStageFile" title="Stage of Town" />
@@ -34,7 +35,7 @@
                                 <div class="icon-container">
                                     <img src="~/img/Population/notWorking.png" title="Population not working" />
                                     <div class="text-below-icon">
-                                        @Model.PopulationNotWorking / @Model.Population
+                                        @Model.PopulationNotWorking.ToString("N0") / @Model.Population.ToString("N0")
                                     </div>
                                 </div>
                             </li>
@@ -42,27 +43,30 @@
                                 <div class="icon-container">
                                     <img src="~/img/Storage/storage.png" title="Storage" />
                                     <div class="text-below-icon">
-                                        @Model.Storage
+                                        @Model.Storage.ToString("N0")
                                     </div>
                                 </div>
                             </li>
+
                             @foreach (var dataset in Model.TownRessources)
                             {
                                 <li class="nav-item nav-link">
                                     <div class="icon-container">
                                         <img src="@dataset.Ressource.Icon" title="@dataset.Ressource.RessourceName" />
                                         <div class="text-below-icon">
-                                            @dataset.Amount.ToString() /
-                                            @Model.Storage
+                                            @dataset.Amount.ToString("N0") /
+                                            @Model.Storage.ToString("N0")
                                         </div>
                                     </div>
                                 </li>
                             }
+
+
                             <li class="nav-item nav-link">
                                 <div class="icon-container">
                                     <img src="/img/Soldiers/warrior.png" title="Warriors" />
                                     <div class="text-below-icon">
-                                        @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Warrior).Count()
+                                        @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Warrior).Count().ToString("N0")
                                     </div>
                                 </div>
                             </li>
@@ -70,7 +74,7 @@
                                 <div class="icon-container">
                                     <img src="/img/Soldiers/archer.png" title="Archers" />
                                     <div class="text-below-icon">
-                                        @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Archer).Count()
+                                        @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Archer).Count().ToString("N0")
                                     </div>
                                 </div>
                             </li>
@@ -78,7 +82,7 @@
                                 <div class="icon-container">
                                     <img src="/img/Soldiers/mage.png" title="Mages" />
                                     <div class="text-below-icon">
-                                        @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Mage).Count()
+                                        @Model.TownSoldiers.Where(i => i.Soldier.ESoldierName == ESoldierName.Mage).Count().ToString("N0")
                                     </div>
                                 </div>
                             </li>
@@ -86,10 +90,11 @@
                                 <div class="icon-container">
                                     <img src="/img/Soldiers/soldiers.png" title="Max. Soldiers" />
                                     <div class="text-below-icon">
-                                        @Model.SoldiersMax
+                                        @Model.SoldiersMax.ToString("N0")
                                     </div>
                                 </div>
                             </li>
+
                         }
 
                     </ul>

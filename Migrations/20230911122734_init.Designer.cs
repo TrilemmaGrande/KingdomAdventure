@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230911082912_init")]
+    [Migration("20230911122734_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -261,6 +261,10 @@ namespace KingdomAdventure.Migrations
 
                     b.Property<double>("FullLP")
                         .HasColumnType("float");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SoldierName")
                         .HasColumnType("nvarchar(max)");

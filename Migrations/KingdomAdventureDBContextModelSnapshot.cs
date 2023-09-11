@@ -259,6 +259,10 @@ namespace KingdomAdventure.Migrations
                     b.Property<double>("FullLP")
                         .HasColumnType("float");
 
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SoldierName")
                         .HasColumnType("nvarchar(max)");
 

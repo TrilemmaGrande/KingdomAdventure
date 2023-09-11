@@ -720,6 +720,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     SoldierName = "Warrior",
                     ESoldierName = ESoldierName.Warrior,
+                    Icon = "/img/Soldiers/warrior.png",
                     AtkMelee = 10,
                     DefMelee = 5,
                     FullLP = 25
@@ -728,6 +729,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     SoldierName = "Archer",
                     ESoldierName = ESoldierName.Archer,
+                    Icon = "/img/Soldiers/archer.png",
                     AtkPierce = 10,
                     DefMelee = 5,
                     DefPierce = 5,
@@ -737,6 +739,7 @@ namespace KingdomAdventure.Models.Repository
                 {
                     SoldierName = "Mage",
                     ESoldierName = ESoldierName.Mage,
+                    Icon = "/img/Soldiers/mage.png",
                     AtkMagic = 10,
                     DefMelee = 5,
                     DefMagic = 5,

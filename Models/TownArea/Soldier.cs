@@ -14,6 +14,7 @@ namespace KingdomAdventure.Models.TownArea
         public int SoldierID { get; set; }
         public string? SoldierName { get; set; }
         public ESoldierName ESoldierName { get; set; }
+        public string Icon { get; set; }
         public double FullLP { get; set; }
         public double AtkMelee { get; set; }
         public double AtkPierce { get; set; }

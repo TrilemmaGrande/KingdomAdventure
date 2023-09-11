@@ -554,6 +554,36 @@ namespace KingdomAdventure.Models.Repository
                     town.TownBuildings.Add(newTownBuilding);
                 }
             }
+
+            ctx.SaveChanges();
+        }
+        public void AddSoldier(PlayerTown town, ESoldierName soldierType)
+        {
+            var soldier = Soldiers.FirstOrDefault(i => i.ESoldierName == soldierType);
+            town.TownSoldiers.Add(
+                       new TownSoldier
+                       {
+                           PlayerTownID = town.PlayerTownID,
+                           SoldierID = soldier.SoldierID,
+                           CurrentLP = soldier.FullLP
+                       });
+            switch (soldierType)
+            {
+                case ESoldierName.Archer:
+                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.LeatherArmor).Amount--;
+                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Bow).Amount--;
+                    break;
+                case ESoldierName.Warrior:
+                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.IronArmor).Amount--;
+                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Sword).Amount--;
+                    break;
+                case ESoldierName.Mage:
+                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Robe).Amount--;
+                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Wand).Amount--;
+                    break;
+                default:
+                    break;
+            }
             ctx.SaveChanges();
         }
     }

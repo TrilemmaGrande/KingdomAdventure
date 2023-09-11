@@ -112,6 +112,7 @@ namespace KingdomAdventure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SoldierName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ESoldierName = table.Column<int>(type: "int", nullable: false),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FullLP = table.Column<double>(type: "float", nullable: false),
                     AtkMelee = table.Column<double>(type: "float", nullable: false),
                     AtkPierce = table.Column<double>(type: "float", nullable: false),

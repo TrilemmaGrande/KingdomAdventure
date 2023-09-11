@@ -1,6 +1,7 @@
 ﻿using KingdomAdventure.Models.TownArea;
 using KingdomAdventure.Models.WorldArea;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Identity.Client.Extensions.Msal;
 using System.Diagnostics.Metrics;
 using System.Runtime.CompilerServices;
@@ -58,98 +59,112 @@ namespace KingdomAdventure.Models.Repository
                     EBuildingName = EBuildingName.Storage,
                     StorageMaxTemplate = 10,
                     AvailableInStage = 1,
-                    WorkersMaxTemplate = 0
+                    WorkersMaxTemplate = 0,
+                    Icon = "/img/Buildings/storage.png"
                 },
                 new Building()
                 {
                     BuildingName = "Lumber",
                     EBuildingName = EBuildingName.Lumber,
                     AvailableInStage = 1,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/lumber.png"
                 },
                 new Building()
                 {
                     BuildingName = "Hunting Lodge",
                     EBuildingName = EBuildingName.Hunter,
                     AvailableInStage = 1,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Farm",
                     EBuildingName = EBuildingName.Farm,
                     AvailableInStage = 3,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Quarry",
                     EBuildingName = EBuildingName.Quarry,
                     AvailableInStage = 2,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Mine",
                     EBuildingName = EBuildingName.Mine,
                     AvailableInStage = 2,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Smith",
                     EBuildingName = EBuildingName.Smith,
                     AvailableInStage = 2,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Fletcher",
                     EBuildingName = EBuildingName.Fletcher,
                     AvailableInStage = 1,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Tanner",
                     EBuildingName = EBuildingName.Tanner,
                     AvailableInStage = 1,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Weaver",
                     EBuildingName = EBuildingName.Weaver,
                     AvailableInStage = 3,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Ritual Fountain",
                     EBuildingName = EBuildingName.RitualFountain,
                     AvailableInStage = 3,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Mage Guild",
                     EBuildingName = EBuildingName.MageGuild,
                     AvailableInStage = 3,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Barracks",
                     EBuildingName = EBuildingName.Barracks,
                     AvailableInStage = 2,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
                     BuildingName = "Archery",
                     EBuildingName = EBuildingName.Archery,
                     AvailableInStage = 1,
-                    WorkersMaxTemplate = 1
+                    WorkersMaxTemplate = 1,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
@@ -158,7 +173,8 @@ namespace KingdomAdventure.Models.Repository
                     PopulationMaxTemplate = 15,
                     AvailableInStage = 3,
                     LockedInStage = true,
-                    WorkersMaxTemplate = 0
+                    WorkersMaxTemplate = 0,
+                    Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
                 {
@@ -167,7 +183,8 @@ namespace KingdomAdventure.Models.Repository
                     PopulationMaxTemplate = 4,
                     AvailableInStage = 2,
                     LockedInStage = true,
-                    WorkersMaxTemplate = 0
+                    WorkersMaxTemplate = 0,
+                    Icon = "/img/Buildings/house.png"
                 },
                 new Building()
                 {
@@ -176,7 +193,8 @@ namespace KingdomAdventure.Models.Repository
                     PopulationMaxTemplate = 1,
                     AvailableInStage = 1,
                     LockedInStage = true,
-                    WorkersMaxTemplate = 0
+                    WorkersMaxTemplate = 0,
+                    Icon = "/img/Buildings/tent.png"
                 }) ;
 
             dbContext.SaveChanges();
@@ -414,7 +432,7 @@ namespace KingdomAdventure.Models.Repository
                 // Archery
                 new BuildingRessourceCost()
                 {
-                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.MageGuild),
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Archery),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wood),
                     Amount = 20
                 });
@@ -622,7 +640,7 @@ namespace KingdomAdventure.Models.Repository
                 new BuildingRessourceConsuming()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Archery),
-                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Robe),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.LeatherArmor),
                     ConsumeInMinute = 1
                 });
 

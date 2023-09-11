@@ -441,7 +441,6 @@ namespace KingdomAdventure.Models.Repository
         public void RemoveBuilding(PlayerTown town, int id)
         {
             UpdateRessources(town);
-            const double minuteToTenMilSeconds = 600.00;
             var townBuilding = town.TownBuildings.FirstOrDefault(n => n.TownBuildingID == id);
             foreach (var ressource in Buildings.FirstOrDefault(i => i.BuildingID == townBuilding.BuildingID).RessourceCost)
             {
@@ -501,12 +500,15 @@ namespace KingdomAdventure.Models.Repository
         public void LevelUpBuilding(PlayerTown town, int id)
         {
             var townBuilding = town.TownBuildings.FirstOrDefault(i => i.BuildingID == id);
-            townBuilding.WorkersMax++;
+            if (townBuilding.WorkersMax > 0)
+            {
+                townBuilding.WorkersMax++;
+            }
             townBuilding.Level++;
             townBuilding.Population += townBuilding.Building.PopulationMaxTemplate;
+            townBuilding.Storage += townBuilding.Building.StorageMaxTemplate;
             town.Population += townBuilding.Building.PopulationMaxTemplate;
             town.PopulationNotWorking += townBuilding.Building.PopulationMaxTemplate;
-            townBuilding.Storage += townBuilding.Building.StorageMaxTemplate;
             town.Storage += townBuilding.Building.StorageMaxTemplate;
             foreach (var ressource in townBuilding.Building.RessourceCost)
             {

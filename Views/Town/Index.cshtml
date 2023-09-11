@@ -2,7 +2,6 @@
     ViewData["Title"] = "Town Area";
 }
 @model PlayerTown
-<link rel="stylesheet" href="~/css/townArea.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <script defer>
@@ -50,19 +49,110 @@
             {
                 <a asp-action="IncreaseTownStage">Increase Town Stage (test)</a>
             }
-            <br />
+
 
             <h3>Buildings in Town:</h3>
-            @foreach (var buildingGroup in Model.TownBuildings.GroupBy(n => n.Building.BuildingName))
-            {
-                <div class="table row">
+            @:<div class="building-container">
+                @foreach (var buildingGroup in Model.TownBuildings.GroupBy(n => n.Building.BuildingName))
+                {
                     @foreach (var dataset in buildingGroup)
                     {
-                        @:<div class="col">
-                            <h5>@dataset.Building.BuildingName lvl @dataset.Level </h5>
+                        @:<div class="building-card">
+                            <img src=@dataset.Building.Icon title="@dataset.Building.BuildingName" />
+                        var levelIcon = "/img/Numbers/Roman/r" + dataset.Level + ".png";
+                            <p>
+                                <img class="icon" src="@levelIcon" title="Level" />
+                            </p>
 
-                            bool buttonSwitch = false;
+                            bool buttonSwitchUpgrade = false;
                             foreach (var ressource in dataset.Building.RessourceCost)
+                            {
+                                if (ressource.Amount > (int)Math.Floor(Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount * 0.75)
+                                && dataset.Level < 3)
+                                {
+                                    buttonSwitchUpgrade = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    buttonSwitchUpgrade = true;
+                                }
+                            }
+                            if (buttonSwitchUpgrade)
+                            {
+                                <a asp-action="LevelUpBuilding" asp-route-id="@dataset.BuildingID"><img class="icon" src="~/img/Symbols/arrowUp.png" title="Level Up" /></a>
+                            }
+                            <a asp-action="RemoveBuilding" asp-route-id="@dataset.TownBuildingID"><img class="icon" src="~/img/Symbols/cross.png" title="Remove Building" /></a>
+                            if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
+                            {
+                                <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID"><img class="icon" src="~/img/Symbols/workerPlus.png" title="Add Worker" /></a>
+                            }
+                            if (dataset.Workers > 0)
+                            {
+                                <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.TownBuildingID"><img class="icon" src="~/img/Symbols/workerMinus.png" title="Sub Worker" /></a>
+                            }
+
+                            if (dataset.Population > 0)
+                            {
+                                @:Creates Population: <p>@dataset.Population.ToString("N0")</p>
+                            }
+                            if (dataset.Storage > 0)
+                            {
+                                @:Creates Storage: <p>@dataset.Storage.ToString("N0")</p>
+                            }
+
+                            @:Produces:
+
+                            @:<p>
+                                foreach (var productionRessource in dataset.Building.ProducingRessources)
+                                {
+                                    @: @productionRessource.ProduceInMinute.ToString("N0")
+                                    <img src="@productionRessource.Ressource.Icon" title="@productionRessource.Ressource.RessourceName" />
+                                }
+                                foreach (var productionSoldier in dataset.Building.ProducingSoldiers)
+                                {
+                                    @: @productionSoldier.Soldier.SoldierName
+                                }
+                            @:</p>
+                            @:Consumes:
+
+                            if (dataset.Building.ConsumingRessources.Count > 0)
+                            {
+                                @:<p>
+                                    foreach (var consumingRessources in dataset.Building.ConsumingRessources)
+                                    {
+                                        @: @consumingRessources.ConsumeInMinute.ToString("N0")
+                                        <img src="@consumingRessources.Ressource.Icon" title="@consumingRessources.Ressource.RessourceName" />
+                                    }
+                                @:</p>
+                            }
+                            else
+                            {
+                                @:<p>nothing</p>
+                            }
+                            @:Upgrade Cost:
+                            foreach (var ressourceCosts in dataset.Building.RessourceCost)
+                            {
+                                @:<p>@((int)Math.Floor(ressourceCosts.Amount * 0.75))</p>
+                                <img src="@ressourceCosts.Ressource.Icon" title="@ressourceCosts.Ressource.RessourceName" />
+                            }
+                            @:Workers:
+                            @:<p>@dataset.Workers.ToString("N0") / @dataset.WorkersMax.ToString("N0")</p>
+                        @:</div>
+                    }
+                }
+            @:</div>
+            <h3>Buildings to build:</h3>
+            @:<div class="building-container">
+                @foreach (var dataset in ViewData["Buildings"] as IEnumerable<Building>)
+                {
+                    if ((dataset.AvailableInStage <= Model.Stage && dataset.LockedInStage == false) ||
+                        dataset.AvailableInStage == Model.Stage && dataset.LockedInStage)
+                    {
+                        @:<div class="building-card">
+                            @:<img src=@dataset.Icon title="@dataset.BuildingName" />
+                            bool buttonSwitch = false;
+                            @foreach (var ressource in dataset.RessourceCost)
                             {
                                 if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
                                 {
@@ -76,150 +166,50 @@
                             }
                             if (buttonSwitch)
                             {
-                                if (dataset.Level < 3)
-                                {
-                                    <a asp-action="LevelUpBuilding" asp-route-id="@dataset.BuildingID">Level Up</a>
-                                }
+                                <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID"><img class="icon" src="~/img/Symbols/plus.png" title="Build" /></a>
+                            }
 
-                                <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Increase Amount</a>
-                            }
-                            <a asp-action="RemoveBuilding" asp-route-id="@dataset.TownBuildingID">Remove Building</a>
-                            if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
+                            if (dataset.PopulationMaxTemplate > 0)
                             {
-                                <a asp-action="AddWorkerToBuilding" asp-route-id="@dataset.TownBuildingID">Add Worker</a>
+                                @:Creates Population: <p>@dataset.PopulationMaxTemplate.ToString("N0")</p>
                             }
-                            if (dataset.Workers > 0)
+                            if (dataset.StorageMaxTemplate > 0)
                             {
-                                <a asp-action="SubWorkerFromBuilding" asp-route-id="@dataset.TownBuildingID">Sub Worker</a>
+                                @:Creates Storage: <p>@dataset.StorageMaxTemplate.ToString("N0")</p>
                             }
-                            <br />
-                            if (dataset.Population > 0)
+
+                            @:Can Produce:
+                            foreach (var productionRessource in dataset.ProducingRessources)
                             {
-                                @:Creates Population: <p>@dataset.Population</p>
+                                @:<p>@productionRessource.ProduceInMinute.ToString("N0")</p>
+                                <img src="@productionRessource.Ressource.Icon" title="@productionRessource.Ressource.RessourceName" />
+
                             }
-                            if (dataset.Storage > 0)
+                            @:Will Consume:
+                            if (dataset.ConsumingRessources.Count > 0)
                             {
-                                @:Creates Storage: <p>@dataset.Storage</p>
-                            }
-                            <br />
-                            @:Produces:
-                            <br />
-                            @:<p>
-                                foreach (var productionRessource in dataset.Building.ProducingRessources)
+                                foreach (var consumingRessources in dataset.ConsumingRessources)
                                 {
-                                    @: @productionRessource.Ressource.RessourceName @productionRessource.ProduceInMinute
+                                    @:<p>@consumingRessources.ConsumeInMinute.ToString("N0")</p>
+                                    <img src="@consumingRessources.Ressource.Icon" title="@consumingRessources.Ressource.RessourceName" />
                                 }
-                                foreach (var productionSoldier in dataset.Building.ProducingSoldiers)
-                                {
-                                    @: @productionSoldier.Soldier.SoldierName
-                                }
-                                <br />
-                            @:</p>
-                            <br />
-                            @:Consumes:
-                            <br />
-                            if (dataset.Building.ConsumingRessources.Count > 0)
-                            {
-                                @:<p>
-                                    foreach (var consumingRessources in dataset.Building.ConsumingRessources)
-                                    {
-                                        @: @consumingRessources.Ressource.RessourceName @consumingRessources.ConsumeInMinute
-                                    }
-                                @:</p>
                             }
                             else
                             {
                                 @:<p>nothing</p>
                             }
-                            <br />
-                            @:Ressources needed to Upgrade:
-                            <br />
-                            foreach (var ressourceCosts in dataset.Building.RessourceCost)
+                            @:Ressources needed to build:
+                            foreach (var ressourceCosts in dataset.RessourceCost)
                             {
-                                @:<p>@((int)Math.Floor(@ressourceCosts.Amount * 0.75)) @ressourceCosts.Ressource.RessourceName</p>
+                                @:<p>@ressourceCosts.Amount.ToString("N0")</p>
+                                <img src="@ressourceCosts.Ressource.Icon" title="@ressourceCosts.Ressource.RessourceName" />
                             }
-                            <br />
-                            @:Workers:
-                            <br />
-                            @:<p>@dataset.Workers / @dataset.WorkersMax</p>
-                            <br />
+                            @:Workplaces:
+                            <p>@dataset.WorkersMaxTemplate.ToString("N0")</p>
                         @:</div>
                     }
-                </div>
-            }
-
-            <h3>Buildings to build:</h3>
-            @foreach (var dataset in ViewData["Buildings"] as IEnumerable<Building>)
-            {
-                if ((dataset.AvailableInStage <= Model.Stage && dataset.LockedInStage == false) ||
-                    dataset.AvailableInStage == Model.Stage && dataset.LockedInStage)
-                {
-
-                    @:------------------------------------------- <br />
-                    @:<h5>@dataset.BuildingName</h5>
-                    bool buttonSwitch = false;
-                    foreach (var ressource in dataset.RessourceCost)
-                    {
-                        if (ressource.Amount > Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount)
-                        {
-                            buttonSwitch = false;
-                            break;
-                        }
-                        else
-                        {
-                            buttonSwitch = true;
-                        }
-                    }
-                    if (buttonSwitch)
-                    {
-                        <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID">Build</a>
-                    }
-                    <br />
-                    if (dataset.PopulationMaxTemplate > 0)
-                    {
-                        @:Creates Population: <p>@dataset.PopulationMaxTemplate</p>
-                    }
-                    if (dataset.StorageMaxTemplate > 0)
-                    {
-                        @:Creates Storage: <p>@dataset.StorageMaxTemplate</p>
-                    }
-                    <br />
-                    @:Can Produce:
-                    <br />
-                    foreach (var productionRessource in dataset.ProducingRessources)
-                    {
-                        @:<p>@productionRessource.ProduceInMinute @productionRessource.Ressource.RessourceName</p>
-                    }
-                    <br />
-                    @:Will Consume:
-                    <br />
-                    if (dataset.ConsumingRessources.Count > 0)
-                    {
-                        foreach (var consumingRessources in dataset.ConsumingRessources)
-                        {
-                            @:<p>@consumingRessources.ConsumeInMinute @consumingRessources.Ressource.RessourceName</p>
-                        }
-                    }
-                    else
-                    {
-                        @:<p>nothing</p>
-                    }
-                    <br />
-                    @:Ressources needed to build:
-                    <br />
-                    foreach (var ressourceCosts in dataset.RessourceCost)
-                    {
-                        @:<p>@ressourceCosts.Amount @ressourceCosts.Ressource.RessourceName</p>
-                    }
-                    <br />
-                    @:Workplaces:
-                    <br />
-                    @:<p>@dataset.WorkersMaxTemplate</p>
-                    <br />
                 }
-            }
-
+            @:</div>
         }
-
     </div>
 </div>

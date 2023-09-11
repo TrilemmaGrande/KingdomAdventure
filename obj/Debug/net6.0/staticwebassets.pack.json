@@ -9,36 +9,40 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\css\\townArea.css",
-      "PackagePath": "staticwebassets\\css\\townArea.css"
-    },
-    {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Buildings\\house.png",
+      "PackagePath": "staticwebassets\\img\\Buildings\\house.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Buildings\\lumber.png",
+      "PackagePath": "staticwebassets\\img\\Buildings\\lumber.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Buildings\\storage.png",
+      "PackagePath": "staticwebassets\\img\\Buildings\\storage.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Buildings\\tent.png",
+      "PackagePath": "staticwebassets\\img\\Buildings\\tent.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Buildings\\todo.png",
+      "PackagePath": "staticwebassets\\img\\Buildings\\todo.png"
     },
     {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r1.png",
       "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r1.png"
     },
     {
-      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r1.xcf",
-      "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r1.xcf"
-    },
-    {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r2.png",
       "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r2.png"
     },
     {
-      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r2.xcf",
-      "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r2.xcf"
-    },
-    {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r3.png",
       "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r3.png"
-    },
-    {
-      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Numbers\\Roman\\r3.xcf",
-      "PackagePath": "staticwebassets\\img\\Numbers\\Roman\\r3.xcf"
     },
     {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Population\\notWorking.png",
@@ -119,6 +123,30 @@
     {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Storage\\storage.png",
       "PackagePath": "staticwebassets\\img\\Storage\\storage.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Symbols\\arrowUp.png",
+      "PackagePath": "staticwebassets\\img\\Symbols\\arrowUp.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Symbols\\cross.png",
+      "PackagePath": "staticwebassets\\img\\Symbols\\cross.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Symbols\\minus.png",
+      "PackagePath": "staticwebassets\\img\\Symbols\\minus.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Symbols\\plus.png",
+      "PackagePath": "staticwebassets\\img\\Symbols\\plus.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Symbols\\workerMinus.png",
+      "PackagePath": "staticwebassets\\img\\Symbols\\workerMinus.png"
+    },
+    {
+      "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\img\\Symbols\\workerPlus.png",
+      "PackagePath": "staticwebassets\\img\\Symbols\\workerPlus.png"
     },
     {
       "Id": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\wwwroot\\js\\site.js",

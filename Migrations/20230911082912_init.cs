@@ -23,7 +23,8 @@ namespace KingdomAdventure.Migrations
                     EBuildingName = table.Column<int>(type: "int", nullable: false),
                     WorkersMaxTemplate = table.Column<int>(type: "int", nullable: false),
                     PopulationMaxTemplate = table.Column<int>(type: "int", nullable: false),
-                    StorageMaxTemplate = table.Column<int>(type: "int", nullable: false)
+                    StorageMaxTemplate = table.Column<int>(type: "int", nullable: false),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

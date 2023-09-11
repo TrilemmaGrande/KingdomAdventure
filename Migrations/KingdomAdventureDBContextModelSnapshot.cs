@@ -39,6 +39,10 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("EBuildingName")
                         .HasColumnType("int");
 
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockedInStage")
                         .HasColumnType("bit");
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230910122607_init")]
+    [Migration("20230911082912_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -41,6 +41,10 @@ namespace KingdomAdventure.Migrations
 
                     b.Property<int>("EBuildingName")
                         .HasColumnType("int");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockedInStage")
                         .HasColumnType("bit");

@@ -124,10 +124,6 @@ namespace KingdomAdventure.Models.Repository
                     var timeProducing = foodRessource.Amount / foodRessource.ProduceInTimestep * -1;
                     timeElapsedInMilSeconds = timeProducing;
                 }
-                else
-                {
-                    timeElapsedInMilSeconds = maxPreTime;
-                }
                 foreach (var townRessource in town.TownRessources.Where(n => n.Ressource.ERessourceName != ERessourceName.Food))
                 {
                     if (townRessource.ProduceInTimestep * timeElapsedInMilSeconds >= town.Storage)
@@ -143,6 +139,7 @@ namespace KingdomAdventure.Models.Repository
                         townRessource.Amount = townRessource.ProduceInTimestep * timeElapsedInMilSeconds;
                     }
                 }
+                timeElapsedInMilSeconds = maxPreTime;
             }
 
             for (int tempTimeStep = 0; tempTimeStep <= timeElapsedInMilSeconds; tempTimeStep++)

@@ -294,6 +294,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<int>("Population")
                         .HasColumnType("int");
 
+                    b.Property<bool>("ProductionDeactivated")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Storage")
                         .HasColumnType("int");
 

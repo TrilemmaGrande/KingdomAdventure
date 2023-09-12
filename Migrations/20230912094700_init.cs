@@ -479,6 +479,7 @@ namespace KingdomAdventure.Migrations
                     Level = table.Column<int>(type: "int", nullable: false),
                     Storage = table.Column<int>(type: "int", nullable: false),
                     Population = table.Column<int>(type: "int", nullable: false),
+                    ProductionDeactivated = table.Column<bool>(type: "bit", nullable: false),
                     PlayerTownID = table.Column<int>(type: "int", nullable: false),
                     BuildingID = table.Column<int>(type: "int", nullable: false)
                 },

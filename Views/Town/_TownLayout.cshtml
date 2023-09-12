@@ -53,10 +53,28 @@
                                 <li class="nav-item nav-link">
                                     <div class="icon-container">
                                         <img src="@dataset.Ressource.Icon" title="@dataset.Ressource.RessourceName" />
-                                        <div class="text-below-icon">
-                                            @dataset.Amount.ToString("N0") /
-                                            @Model.Storage.ToString("N0")
-                                        </div>
+                                        @if (dataset.ProduceInTimestep < 0)
+                                        {
+                                            <div class="text-below-icon">
+                                                <span style="color:orangered">@dataset.Amount.ToString("N0")</span> /
+                                                @Model.Storage.ToString("N0")
+                                            </div>
+                                        }
+                                        else if (dataset.ProduceInTimestep > 0)
+                                        {
+                                            <div class="text-below-icon">
+                                                <span style="color:lightgreen">@dataset.Amount.ToString("N0")</span> /
+                                                @Model.Storage.ToString("N0")
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="text-below-icon">
+                                                @dataset.Amount.ToString("N0") /
+                                                @Model.Storage.ToString("N0")
+                                            </div>
+                                        }
+                                        @dataset.ProduceInTimestep.ToString("N5")
                                     </div>
                                 </li>
                             }

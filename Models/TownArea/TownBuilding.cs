@@ -14,6 +14,7 @@ namespace KingdomAdventure.Models.TownArea
         public int Level { get; set; } = 1;
         public int Storage { get; set; } = 0;
         public int Population { get; set; } = 0;
+        public bool ProductionDeactivated { get; set; }
 
         public List<TownBuildingDeactivatedRessourceProduction>? DeactivatedRessourceProductions { get; set; } = new List<TownBuildingDeactivatedRessourceProduction>();
 

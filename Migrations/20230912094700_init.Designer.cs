@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230912083616_init")]
+    [Migration("20230912094700_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -296,6 +296,9 @@ namespace KingdomAdventure.Migrations
 
                     b.Property<int>("Population")
                         .HasColumnType("int");
+
+                    b.Property<bool>("ProductionDeactivated")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Storage")
                         .HasColumnType("int");

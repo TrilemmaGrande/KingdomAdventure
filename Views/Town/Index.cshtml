@@ -96,23 +96,24 @@
                             if (dataset.Population > 0)
                             {
                                 <br />
-                                @:Creates Population: @dataset.Population.ToString("N0")
+                                @:Increases Population: @((dataset.Population).ToString("N0"))
                             }
                             if (dataset.Storage > 0)
                             {
                                 <br />
-                                @:Creates Storage: @dataset.Storage.ToString("N0")
+                                @:Increases Storage: @((dataset.Storage).ToString("N0"))
                             }
 
                             <br />
                             @:Produces:
+                            <br />
                             @if (dataset.Building.ProducingRessources.Count() > 0 || dataset.Building.ProducingSoldiers.Count() > 0)
                             {
 
                                 foreach (var productionRessource in dataset.Building.ProducingRessources)
                                 {
-                                    @: @productionRessource.ProduceInMinute.ToString("N0")
                                     <img src="@productionRessource.Ressource.Icon" title="@productionRessource.Ressource.RessourceName" />
+                                    @: @((productionRessource.ProduceInMinute * dataset.Workers).ToString("N0"))
                                     <br />
                                 }
                                 foreach (var productionSoldier in dataset.Building.ProducingSoldiers)
@@ -129,15 +130,23 @@
 
                             <br />
                             @:Consumes:
+                            <br />
                             if (dataset.Building.ConsumingRessources.Count > 0)
                             {
 
                                 foreach (var consumingRessources in dataset.Building.ConsumingRessources)
                                 {
-                                    @: @consumingRessources.ConsumeInMinute.ToString("N0")
                                     <img src="@consumingRessources.Ressource.Icon" title="@consumingRessources.Ressource.RessourceName" />
+                                    if (consumingRessources.ConsumeOnce)
+                                    {
+                                        @: @((consumingRessources.ConsumeInMinute * dataset.Level).ToString("N0"))
+                                    }
+                                    else
+                                    {
+                                        @: @((consumingRessources.ConsumeInMinute * dataset.Workers).ToString("N0"))
+                                    }
+                                    <br />
                                 }
-
                             }
                             else
                             {
@@ -147,21 +156,43 @@
 
                             <br />
                             @:Upgrade Cost:
+                            <br />
                             foreach (var ressourceCosts in dataset.Building.RessourceCost)
                             {
-                                @((int)Math.Floor(ressourceCosts.Amount * 0.75))
                                 <img src="@ressourceCosts.Ressource.Icon" title="@ressourceCosts.Ressource.RessourceName" />
+                                @((int)Math.Floor(ressourceCosts.Amount * 0.75))
                             }
 
                             <br />
-                            @:Workers:
-                            @:@dataset.Workers.ToString("N0") / @dataset.WorkersMax.ToString("N0");
+                            if (dataset.WorkersMax > 0)
+                            {
+                                if (dataset.Workers > 0)
+                                {
+                          
+                                    @:Workers:<span style="color:lightgreen"> @dataset.Workers.ToString("N0")</span> / @dataset.WorkersMax.ToString("N0")
+                                    <br />
+                                }
+                                else
+                                {
+                                    @:Workers: <span style="color:orangered"> @dataset.Workers.ToString("N0")</span> / @dataset.WorkersMax.ToString("N0")
+                                    <br />
+                                }
+
+                            }
                             foreach (var productionSoldier in dataset.Building.ProducingSoldiers)
                             {
-                                <a asp-action="AddSoldier" asp-route-id="@dataset.BuildingID">
-                                    <img src="@productionSoldier.Soldier.Icon" title="add @productionSoldier.Soldier.SoldierName" /> +
-                                </a>
-                                <br />
+                                if (dataset.ProductionDeactivated)
+                                {
+                                    <img src="@productionSoldier.Soldier.Icon" title="add @productionSoldier.Soldier.SoldierName" />@:x
+                                    <br />
+                                }
+                                else
+                                {
+                                    <a asp-action="AddSoldier" asp-route-id="@dataset.TownBuildingID">
+                                        <img src="@productionSoldier.Soldier.Icon" title="add @productionSoldier.Soldier.SoldierName" />
+                                    </a>@:+@dataset.Level
+                                    <br />
+                                }
                             }
                         @:</div>
                     }
@@ -192,45 +223,184 @@
                             if (buttonSwitch)
                             {
                                 <a asp-action="AddBuilding" asp-route-id="@dataset.BuildingID"><img class="icon" src="~/img/Symbols/plus.png" title="Build" /></a>
+                                <br />
                             }
 
                             if (dataset.PopulationMaxTemplate > 0)
                             {
-                                @:Creates Population: <p>@dataset.PopulationMaxTemplate.ToString("N0")</p>
+                                <br />
+                                @:Increases Population: @dataset.PopulationMaxTemplate.ToString("N0")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             }
                             if (dataset.StorageMaxTemplate > 0)
                             {
-                                @:Creates Storage: <p>@dataset.StorageMaxTemplate.ToString("N0")</p>
+                                <br />
+                                @:Increases Storage: @dataset.StorageMaxTemplate.ToString("N0")
                             }
-
+                            <br />
                             @:Produces:
+                            <br />
                             foreach (var productionRessource in dataset.ProducingRessources)
                             {
-                                @:<p>@productionRessource.ProduceInMinute.ToString("N0")</p>
                                 <img src="@productionRessource.Ressource.Icon" title="@productionRessource.Ressource.RessourceName" />
-
+                                @productionRessource.ProduceInMinute.ToString("N0")
+                                <br />
                             }
+                            <br />
                             @:Consumes:
+                            <br />
                             if (dataset.ConsumingRessources.Count > 0)
                             {
                                 foreach (var consumingRessources in dataset.ConsumingRessources)
                                 {
-                                    @:<p>@consumingRessources.ConsumeInMinute.ToString("N0")</p>
                                     <img src="@consumingRessources.Ressource.Icon" title="@consumingRessources.Ressource.RessourceName" />
+                                    @consumingRessources.ConsumeInMinute.ToString("N0")
+                                    <br />
                                 }
                             }
                             else
                             {
-                                @:<p>nothing</p>
+                                @:nothing
+                                <br />
                             }
+                            <br />
                             @:Ressources to Build:
+                            <br />
                             foreach (var ressourceCosts in dataset.RessourceCost)
                             {
-                                @:<p>@ressourceCosts.Amount.ToString("N0")</p>
                                 <img src="@ressourceCosts.Ressource.Icon" title="@ressourceCosts.Ressource.RessourceName" />
+                                @ressourceCosts.Amount.ToString("N0")
+                                <br />
                             }
-                            @:Workplaces:
-                            <p>@dataset.WorkersMaxTemplate.ToString("N0")</p>
+                            <br />
+                            @:Workplaces: @dataset.WorkersMaxTemplate.ToString("N0")
                         @:</div>
                     }
                 }

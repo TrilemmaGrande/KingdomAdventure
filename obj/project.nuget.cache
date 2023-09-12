@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2ugThN6Aj4WIlWMvDIjPGPHNQVNZJy7/3IFvdsdu01/qtmWxfTo9iiEpnlaVmGBjJZXFspn+oY41E8hCKw/avQ==",
+  "dgSpecHash": "nRO8gVknd8q42gcdLhqidNSV1fXTG6gp6Ku0tBgTvHoU0ZozQwAnakVayRG5R+vIwe1zQ9VGLC087hBkI0dE2w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\trilemma\\source\\repos\\TrilemmaGrande\\KingdomAdventure\\KingdomAdventure.csproj",
+  "projectFilePath": "C:\\Users\\trilemma\\Source\\Repos\\TrilemmaGrande\\KingdomAdventure\\KingdomAdventure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\trilemma\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\trilemma\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

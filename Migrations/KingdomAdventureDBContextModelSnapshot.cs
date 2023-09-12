@@ -74,6 +74,9 @@ namespace KingdomAdventure.Migrations
                     b.Property<double>("ConsumeInMinute")
                         .HasColumnType("float");
 
+                    b.Property<bool>("ConsumeOnce")
+                        .HasColumnType("bit");
+
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");
 

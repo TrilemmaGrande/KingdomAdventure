@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingdomAdventure.Migrations
 {
     [DbContext(typeof(KingdomAdventureDBContext))]
-    [Migration("20230911122734_init")]
+    [Migration("20230912083616_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -76,6 +76,9 @@ namespace KingdomAdventure.Migrations
 
                     b.Property<double>("ConsumeInMinute")
                         .HasColumnType("float");
+
+                    b.Property<bool>("ConsumeOnce")
+                        .HasColumnType("bit");
 
                     b.Property<int>("RessourceID")
                         .HasColumnType("int");

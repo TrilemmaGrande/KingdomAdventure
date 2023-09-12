@@ -73,9 +73,9 @@ namespace KingdomAdventure.Controllers
             repo.IncreaseTownStage(GetTown());
             return RedirectToAction("Index");
         }
-        public IActionResult AddSoldier(ESoldierName soldierName)
+        public IActionResult AddSoldier(int id)
         {
-            repo.AddSoldier(GetTown(), soldierName);
+            repo.AddSoldier(GetTown(), id);
             return RedirectToAction("Index");
         }
         private PlayerTown GetTown()

@@ -236,6 +236,7 @@ namespace KingdomAdventure.Migrations
                     BuildingRessourceConsumingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ConsumeInMinute = table.Column<double>(type: "float", nullable: false),
+                    ConsumeOnce = table.Column<bool>(type: "bit", nullable: false),
                     BuildingID = table.Column<int>(type: "int", nullable: false),
                     RessourceID = table.Column<int>(type: "int", nullable: false)
                 },

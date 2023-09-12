@@ -42,6 +42,6 @@ namespace KingdomAdventure.Models.Repository
         public void SubWorkerFromBuilding(PlayerTown town, int id);
         public void LevelUpBuilding(PlayerTown town, int id);
         public void IncreaseTownStage(PlayerTown town);
-        public void AddSoldier(PlayerTown town, ESoldierName soldierName);
+        public void AddSoldier(PlayerTown town, int id);
     }
 }

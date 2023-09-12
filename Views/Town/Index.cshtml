@@ -26,7 +26,7 @@
         })
         .catch(err => console.error(err));
 </script>
-<div class="container">
+<div class="container town-container">
     <div class="text-center">
         <h1 class="display-4">
             Welcome to
@@ -63,24 +63,25 @@
                             <p>
                                 <img class="icon" src="@levelIcon" title="Level" />
                             </p>
+                            <br />
 
-                        bool buttonSwitchUpgrade = false;
-                        foreach (var ressource in dataset.Building.RessourceCost)
-                        {
-                            if ((int)Math.Floor(ressource.Amount * 0.75) < Model.TownRessources.FirstOrDefault(i => i.RessourceID == ressource.RessourceID).Amount
-                            && dataset.Level < 3)
+                            bool buttonSwitchUpgrade = false;
+                            foreach (var buildingRessourceCost in dataset.Building.RessourceCost)
                             {
-                                buttonSwitchUpgrade = false;
-                                break;
+                                if ((int)Math.Floor(buildingRessourceCost.Amount * 0.75) > Model.TownRessources.FirstOrDefault(i => i.RessourceID == buildingRessourceCost.RessourceID).Amount
+                                || dataset.Level >= 3)
+                                {
+                                    buttonSwitchUpgrade = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    buttonSwitchUpgrade = true;
+                                }
                             }
-                            else
+                            if (buttonSwitchUpgrade)
                             {
-                                buttonSwitchUpgrade = true;
-                            }
-                        }
-                        if (buttonSwitchUpgrade)
-                        {
-                                <a asp-action="LevelUpBuilding" asp-route-id="@dataset.BuildingID"><img class="icon" src="~/img/Symbols/arrowUp.png" title="Level Up" /></a>
+                                <a asp-action="LevelUpBuilding" asp-route-id="@dataset.TownBuildingID"><img class="icon" src="~/img/Symbols/arrowUp.png" title="Level Up" /></a>
                             }
                             if (dataset.Workers < dataset.WorkersMax && Model.PopulationNotWorking > 0)
                             {
@@ -112,17 +113,18 @@
                                 {
                                     @: @productionRessource.ProduceInMinute.ToString("N0")
                                     <img src="@productionRessource.Ressource.Icon" title="@productionRessource.Ressource.RessourceName" />
+                                    <br />
                                 }
                                 foreach (var productionSoldier in dataset.Building.ProducingSoldiers)
                                 {
-                                    <a asp-action="AddSoldier" asp-route-soldierName="@dataset.Building.ProducingSoldiers.FirstOrDefault(i => i.BuildingID == dataset.BuildingID).Soldier.ESoldierName">
-                                        <img src="@productionSoldier.Soldier.Icon" title="add @productionSoldier.Soldier.SoldierName" />
-                                    </a>
+                                    <img src="@productionSoldier.Soldier.Icon" title="add @productionSoldier.Soldier.SoldierName" />
+                                    <br />
                                 }
                             }
                             else
                             {
                                 @:nothing
+                                <br />
                             }
 
                             <br />
@@ -140,6 +142,7 @@
                             else
                             {
                                 @:nothing
+                                <br />
                             }
 
                             <br />
@@ -153,6 +156,13 @@
                             <br />
                             @:Workers:
                             @:@dataset.Workers.ToString("N0") / @dataset.WorkersMax.ToString("N0");
+                            foreach (var productionSoldier in dataset.Building.ProducingSoldiers)
+                            {
+                                <a asp-action="AddSoldier" asp-route-id="@dataset.BuildingID">
+                                    <img src="@productionSoldier.Soldier.Icon" title="add @productionSoldier.Soldier.SoldierName" /> +
+                                </a>
+                                <br />
+                            }
                         @:</div>
                     }
                 }

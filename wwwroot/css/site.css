@@ -10,6 +10,9 @@ html {
   }
 }
 
+nav {
+    height: 90px;
+}
 
 header{
     background-color: lightgoldenrodyellow;
@@ -24,6 +27,9 @@ body {
     padding-top: 20px;
     background-color: lightgoldenrodyellow;
     text-align: center;
+}
+.town-container {
+    margin-top: 100px;
 }
 
 .text-center {

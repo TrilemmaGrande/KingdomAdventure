@@ -261,7 +261,7 @@ namespace KingdomAdventure.Models.Repository
         private void ActivateBuildingRessourceConsumption(PlayerTown town, TownBuilding townBuilding)
         {
             const double minuteToTenMilSeconds = 600.00;
-            foreach (var consumptionRessource in townBuilding.Building.ConsumingRessources)
+            foreach (var consumptionRessource in townBuilding.Building.ConsumingRessources.Where(i => i.ConsumeOnce is false))
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == consumptionRessource.RessourceID).ProduceInTimestep
                     -= consumptionRessource.ConsumeInMinute * townBuilding.Workers / minuteToTenMilSeconds;
@@ -306,7 +306,7 @@ namespace KingdomAdventure.Models.Repository
         private void DeactivateBuildingRessourceConsumption(PlayerTown town, TownBuilding townBuilding)
         {
             const double minuteToTenMilSeconds = 600.00;
-            foreach (var consumptionRessource in townBuilding.Building.ConsumingRessources)
+            foreach (var consumptionRessource in townBuilding.Building.ConsumingRessources.Where(i => i.ConsumeOnce is false))
             {
                 town.TownRessources.FirstOrDefault(i => i.RessourceID == consumptionRessource.RessourceID).ProduceInTimestep
                     += consumptionRessource.ConsumeInMinute * townBuilding.Workers / minuteToTenMilSeconds;
@@ -499,7 +499,7 @@ namespace KingdomAdventure.Models.Repository
 
         public void LevelUpBuilding(PlayerTown town, int id)
         {
-            var townBuilding = town.TownBuildings.FirstOrDefault(i => i.BuildingID == id);
+            var townBuilding = town.TownBuildings.FirstOrDefault(i => i.TownBuildingID == id);
             if (townBuilding.WorkersMax > 0)
             {
                 townBuilding.WorkersMax++;
@@ -557,33 +557,22 @@ namespace KingdomAdventure.Models.Repository
 
             ctx.SaveChanges();
         }
-        public void AddSoldier(PlayerTown town, ESoldierName soldierType)
+        public void AddSoldier(PlayerTown town, int id)
         {
-            var soldier = Soldiers.FirstOrDefault(i => i.ESoldierName == soldierType);
+            var building = town.TownBuildings.FirstOrDefault(i => i.BuildingID == id).Building;
+            var soldier = building.ProducingSoldiers.FirstOrDefault(i => i.BuildingID == id).Soldier;
             town.TownSoldiers.Add(
                        new TownSoldier
                        {
                            PlayerTownID = town.PlayerTownID,
-                           SoldierID = soldier.SoldierID,
+                           SoldierID = soldier.SoldierID,                           
                            CurrentLP = soldier.FullLP
                        });
-            switch (soldierType)
+            foreach (var consumingRessource in building.ConsumingRessources)
             {
-                case ESoldierName.Archer:
-                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.LeatherArmor).Amount--;
-                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Bow).Amount--;
-                    break;
-                case ESoldierName.Warrior:
-                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.IronArmor).Amount--;
-                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Sword).Amount--;
-                    break;
-                case ESoldierName.Mage:
-                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Robe).Amount--;
-                    town.TownRessources.FirstOrDefault(i => i.Ressource.ERessourceName == ERessourceName.Wand).Amount--;
-                    break;
-                default:
-                    break;
+                town.TownRessources.FirstOrDefault(i => i.RessourceID == consumingRessource.RessourceID).Amount--;
             }
+
             ctx.SaveChanges();
         }
     }

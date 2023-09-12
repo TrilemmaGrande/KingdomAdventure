@@ -51,6 +51,12 @@ button.accept-policy[b-jiwgmdtkj0] {
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+nav[b-z6sl27qdoi] {
+    position: fixed;
+    background-color:lightgoldenrodyellow;
+    width: 100%;
+}
+
 a.navbar-brand[b-z6sl27qdoi] {
   white-space: normal;
   text-align: center;
@@ -67,7 +73,7 @@ a[b-z6sl27qdoi] {
     align-items: center;
     text-align: center;
     border: 1px solid grey;
-    margin: 5px; /* Adjust the margin as needed */
+    background-color: white;
     padding: 5px; /* Adjust the padding as needed */
 }
 

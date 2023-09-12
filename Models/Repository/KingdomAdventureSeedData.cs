@@ -147,7 +147,7 @@ namespace KingdomAdventure.Models.Repository
                     BuildingName = "Mage Guild",
                     EBuildingName = EBuildingName.MageGuild,
                     AvailableInStage = 3,
-                    WorkersMaxTemplate = 1,
+                    WorkersMaxTemplate = 0,
                     Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
@@ -155,7 +155,7 @@ namespace KingdomAdventure.Models.Repository
                     BuildingName = "Barracks",
                     EBuildingName = EBuildingName.Barracks,
                     AvailableInStage = 2,
-                    WorkersMaxTemplate = 1,
+                    WorkersMaxTemplate = 0,
                     Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
@@ -163,7 +163,7 @@ namespace KingdomAdventure.Models.Repository
                     BuildingName = "Archery",
                     EBuildingName = EBuildingName.Archery,
                     AvailableInStage = 1,
-                    WorkersMaxTemplate = 1,
+                    WorkersMaxTemplate = 0,
                     Icon = "/img/Buildings/todo.png"
                 },
                 new Building()
@@ -608,12 +608,20 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.MageGuild),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Robe),
-                    ConsumeInMinute = 1
+                    ConsumeInMinute = 1,
+                    ConsumeOnce = true
                 }, new BuildingRessourceConsuming()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.MageGuild),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Wand),
-                    ConsumeInMinute = 1
+                    ConsumeInMinute = 1,
+                    ConsumeOnce = true
+                }, new BuildingRessourceConsuming()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.MageGuild),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
+                    ConsumeInMinute = 1,
+                    ConsumeOnce = true
                 },
 
             // Barracks
@@ -621,13 +629,21 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Barracks),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.IronArmor),
-                    ConsumeInMinute = 1
+                    ConsumeInMinute = 1,
+                    ConsumeOnce = true
                 },
                 new BuildingRessourceConsuming()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Barracks),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Sword),
-                    ConsumeInMinute = 1
+                    ConsumeInMinute = 1,
+                    ConsumeOnce = true
+                }, new BuildingRessourceConsuming()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Barracks),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
+                    ConsumeInMinute = 1,
+                    ConsumeOnce = true
                 },
 
             // Archery
@@ -635,18 +651,26 @@ namespace KingdomAdventure.Models.Repository
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Archery),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Bow),
-                    ConsumeInMinute = 1
+                    ConsumeInMinute = 1,
+                    ConsumeOnce = true
                 },
                 new BuildingRessourceConsuming()
                 {
                     Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Archery),
                     Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.LeatherArmor),
-                    ConsumeInMinute = 1
+                    ConsumeInMinute = 1,
+                    ConsumeOnce = true
+                }, new BuildingRessourceConsuming()
+                {
+                    Building = dbContext.Building.FirstOrDefault(n => n.EBuildingName == EBuildingName.Archery),
+                    Ressource = dbContext.Ressource.FirstOrDefault(r => r.ERessourceName == ERessourceName.Food),
+                    ConsumeInMinute = 1,
+                    ConsumeOnce = true
                 });
 
             dbContext.SaveChanges();
 
-            // SOLDIOERS PRODUCED BY BUILDINGS
+            // SOLDIERS PRODUCED BY BUILDINGS
 
             dbContext.BuildingSoldierProducing.AddRange(
 

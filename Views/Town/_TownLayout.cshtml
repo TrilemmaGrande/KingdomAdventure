@@ -56,14 +56,14 @@
                                         @if (dataset.ProduceInTimestep < 0)
                                         {
                                             <div class="text-below-icon">
-                                                <span style="color:orangered">@dataset.Amount.ToString("N0")</span> /
+                                                <span style="color:red">@dataset.Amount.ToString("N0")</span> /
                                                 @Model.Storage.ToString("N0")
                                             </div>
                                         }
                                         else if (dataset.ProduceInTimestep > 0)
                                         {
                                             <div class="text-below-icon">
-                                                <span style="color:lightgreen">@dataset.Amount.ToString("N0")</span> /
+                                                <span style="color:green">@dataset.Amount.ToString("N0")</span> /
                                                 @Model.Storage.ToString("N0")
                                             </div>
                                         }

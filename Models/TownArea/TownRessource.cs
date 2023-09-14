@@ -9,6 +9,8 @@ namespace KingdomAdventure.Models.TownArea
         public double Amount { get; set; }
         public double ProduceInTimestep { get; set; }
 
+        public List<Worker> Workers { get; set; } = new List<Worker>();
+
         // Foreign key
         public int PlayerTownID { get; set; }
 

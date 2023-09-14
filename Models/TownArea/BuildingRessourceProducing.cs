@@ -21,5 +21,11 @@ namespace KingdomAdventure.Models.TownArea
 
         // Navigation property
         public Ressource Ressource { get; set; }
+
+        // Foreign key
+        public int WorkerID { get; set; }
+
+        // Navigation property
+        public Worker Worker { get; set; }
     }
 }

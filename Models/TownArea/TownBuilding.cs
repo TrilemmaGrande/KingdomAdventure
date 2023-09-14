@@ -9,14 +9,11 @@ namespace KingdomAdventure.Models.TownArea
     public class TownBuilding
     {
         public int TownBuildingID { get; set; }
-        public int WorkersMax { get; set; }
-        public int Workers { get; set; } = 0;
         public int Level { get; set; } = 1;
         public int Storage { get; set; } = 0;
-        public int Population { get; set; } = 0;
-        public bool ProductionDeactivated { get; set; }
-
-        public List<TownBuildingDeactivatedRessourceProduction>? DeactivatedRessourceProductions { get; set; } = new List<TownBuildingDeactivatedRessourceProduction>();
+        public int PopulationMax { get; set; } = 0;
+        public int WorkersMax { get; set; }
+        public List<Worker>? Workers { get; set; } = new List<Worker>();
 
         // Foreign key
         public int PlayerTownID { get; set; }

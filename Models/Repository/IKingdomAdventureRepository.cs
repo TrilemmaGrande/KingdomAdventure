@@ -11,7 +11,7 @@ namespace KingdomAdventure.Models.Repository
         public IQueryable<BuildingRessourceCost> BuildingRessourceCosts { get; }
         public IQueryable<BuildingRessourceProducing> BuildingRessourceProducings { get; }
         public IQueryable<BuildingSoldierProducing> BuildingSoldierProducings { get; }
-        public IQueryable<TownBuildingDeactivatedRessourceProduction> TownBuildingDeactivatedRessourceProductions { get; }
+        public IQueryable<Worker> Workers { get; }
         public IQueryable<Ressource> Ressources { get; }
         public IQueryable<Soldier> Soldiers { get; }
         public IQueryable<PlayerTown> PlayerTowns { get; }

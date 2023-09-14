@@ -9,11 +9,11 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = KingdomAdventure
 build_property.RootNamespace = KingdomAdventure
-build_property.ProjectDir = C:\Users\trilemma\Source\Repos\TrilemmaGrande\KingdomAdventure\
+build_property.ProjectDir = C:\Users\trilemma\source\repos\TrilemmaGrande\KingdomAdventure\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\trilemma\Source\Repos\TrilemmaGrande\KingdomAdventure
+build_property.MSBuildProjectDirectory = C:\Users\trilemma\source\repos\TrilemmaGrande\KingdomAdventure
 build_property._RazorSourceGeneratorDebug = 
 
 [C:/Users/trilemma/Source/Repos/TrilemmaGrande/KingdomAdventure/Views/Home/CreateNewPlayer.cshtml]
